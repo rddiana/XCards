@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "636780964912",
+    "project_id": "xcards-26b91",
+    "storage_bucket": "xcards-26b91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636780964912:android:d11ed2212b60dd8e4011f5",
+        "android_client_info": {
+          "package_name": "com.example.xcards"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636780964912-dkm34c45mevaqhsevkic8tk49dht9jt1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfQvk3GdeUPaLO1vmqp5IiN7IT8MXqy44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "636780964912-dkm34c45mevaqhsevkic8tk49dht9jt1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
