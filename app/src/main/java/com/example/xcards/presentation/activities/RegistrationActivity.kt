@@ -30,7 +30,7 @@ class RegistrationActivity : AppCompatActivity() {
     }
 
     private fun signUp() {
-        val name = binding.editTextTextPersonName.text.toString()
+        val name = binding.editTextTextPersonName.text.toString() //в DataStore для дальнейшего использования
         val email = binding.editTextTextEmailAddress.text.toString()
         val password = binding.editTextNewPassword.text.toString()
         val confirmedPassword = binding.editTextConfirmedPassword.text.toString()

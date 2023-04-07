@@ -6,8 +6,6 @@ import android.os.Bundle
 import com.example.xcards.R
 import com.example.xcards.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -16,26 +14,29 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_login)
 
-        auth = Firebase.auth
+        auth = FirebaseAuth.getInstance()
 
         binding.materialButtonNext.setOnClickListener {
-            signUp()
+            login()
         }
 
         binding.materialButtonForBeginners.setOnClickListener {
             startActivity(Intent(this, RegistrationActivity::class.java))
+            finish()
         }
     }
 
-    private fun signUp() {
+    private fun login() {
         val email = binding.emailAddressEditText.text.toString()
-        val password = binding.editTextPassword.text.toString()
+        val pass = binding.editTextPassword.text.toString()
 
-        if (email.isBlank() || password.isBlank()) {
-            binding.textViewForMessage1.text = getString(R.string.invalid_data)
-            return
+        auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this) {
+            if (it.isSuccessful) {
+                startActivity(Intent(this, MainActivity::class.java))
+            } else
+                binding.textViewForMessage1.text = getString(R.string.authorization_problem)
         }
     }
 }

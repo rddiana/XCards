@@ -13,10 +13,11 @@
     <string name="welcome_back">С возвращением!</string>
     <string name="sign_in_to_access">войдите для доступа к учетной записи</string>
     <string name="next">Далее</string>
-    <string name="invalid_data">Заполните все ячейки</string>
-    <string name="no_matching_passwords">Пароль не подтверждён</string>
-    <string name="server_failed">Ошибка в регистрации, повторите попытку позже</string>
+    <string name="invalid_data">Заполните все ячейки.</string>
+    <string name="no_matching_passwords">Пароль не подтверждён.</string>
+    <string name="server_failed">Ошибка в регистрации, повторите попытку позже.</string>
     <string name="create_account">создайте новый аккаунт</string>
     <string name="full_name">Полное имя</string>
     <string name="have_not_account">У меня ещё нет аккаунта</string>
+    <string name="authorization_problem">Ошибка в авторизации, повторите попытку позже.</string>
 </resources>

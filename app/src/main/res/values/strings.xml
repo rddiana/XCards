@@ -23,6 +23,7 @@
     <string name="create_account">by creating an new account</string>
     <string name="full_name">Full name</string>
     <string name="have_not_account">I have not an account yet</string>
+    <string name="authorization_problem">Some problems with authorization. Ty again later, please.</string>
 
 
 </resources>
