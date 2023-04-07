@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OnboardingFragmentSecondPage">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/violetRectangleView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="128dp"
+            android:background="@drawable/violet_rectangle"
+            app:layout_constraintEnd_toStartOf="@+id/pinkRectangleView"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/lightBlueRectangleView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="40dp"
+            android:background="@drawable/light_blue_rectangle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/violetRectangleView" />
+
+        <View
+            android:id="@+id/lightGreenRectangleView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/light_green_rectangle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/lightBlueRectangleView"
+            app:layout_constraintTop_toBottomOf="@+id/violetRectangleView" />
+
+        <View
+            android:id="@+id/pinkRectangleView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/pink_rectangle"
+            app:layout_constraintBottom_toTopOf="@+id/lightGreenRectangleView"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView1"
+            style="@style/textStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="17"
+            app:layout_constraintEnd_toStartOf="@+id/imageView1"
+            app:layout_constraintTop_toTopOf="@id/violetRectangleView" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/mini_cards_icon"
+            app:layout_constraintEnd_toEndOf="@+id/violetRectangleView"
+            app:layout_constraintTop_toTopOf="@id/violetRectangleView" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/mini_cards_icon"
+            app:layout_constraintEnd_toEndOf="@+id/pinkRectangleView"
+            app:layout_constraintTop_toTopOf="@+id/pinkRectangleView" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/textStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="2dp"
+            android:text="21"
+            app:layout_constraintEnd_toStartOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/pinkRectangleView" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/mini_cards_icon"
+            app:layout_constraintEnd_toEndOf="@+id/lightGreenRectangleView"
+            app:layout_constraintTop_toTopOf="@+id/lightGreenRectangleView" />
+
+        <TextView
+            android:id="@+id/textView5"
+            style="@style/textStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="2dp"
+            android:text="26"
+            app:layout_constraintEnd_toStartOf="@+id/imageView5"
+            app:layout_constraintTop_toTopOf="@+id/lightGreenRectangleView" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/mini_cards_icon"
+            app:layout_constraintEnd_toEndOf="@+id/lightBlueRectangleView"
+            app:layout_constraintTop_toTopOf="@+id/lightBlueRectangleView" />
+
+        <TextView
+            android:id="@+id/textView6"
+            style="@style/textStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="2dp"
+            android:text="34"
+            app:layout_constraintEnd_toStartOf="@+id/imageView6"
+            app:layout_constraintTop_toTopOf="@+id/lightBlueRectangleView" />
+
+        <TextView
+            android:id="@+id/textView4"
+            style="@style/textStyle"
+            android:layout_width="282dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/create_flashcards"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lightGreenRectangleView" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
