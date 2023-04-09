@@ -5,7 +5,7 @@
     tools:viewBindingIgnore="false"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.activities.RegistrationActivity">
+    tools:context=".presentation.activities.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView12"

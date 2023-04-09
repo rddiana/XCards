@@ -5,11 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.xcards.R
 import com.example.xcards.databinding.ActivityRegistrationBinding
+import com.example.xcards.domain.repositories.RegistrationRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class RegistrationActivity : AppCompatActivity() {
+class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
     private lateinit var binding: ActivityRegistrationBinding
     private lateinit var auth: FirebaseAuth
 
@@ -26,10 +27,11 @@ class RegistrationActivity : AppCompatActivity() {
 
         binding.materialButtonForOwnersOfAccounts.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 
-    private fun signUp() {
+    override fun signUp() {
         val name = binding.editTextTextPersonName.text.toString() //в DataStore для дальнейшего использования
         val email = binding.editTextTextEmailAddress.text.toString()
         val password = binding.editTextNewPassword.text.toString()

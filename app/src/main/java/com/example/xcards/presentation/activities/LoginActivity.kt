@@ -5,9 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.xcards.R
 import com.example.xcards.databinding.ActivityLoginBinding
+import com.example.xcards.domain.repositories.LoginRepository
 import com.google.firebase.auth.FirebaseAuth
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), LoginRepository {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
 
@@ -28,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun login() {
+    override fun login() {
         val email = binding.emailAddressEditText.text.toString()
         val pass = binding.editTextPassword.text.toString()
 

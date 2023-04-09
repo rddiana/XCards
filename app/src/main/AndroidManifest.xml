@@ -11,29 +11,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.XCards"
         tools:targetApi="31">
-
         <activity
-            android:name="com.example.xcards.presentation.activities.MainActivity"
-            android:exported="true" >
+            android:name=".presentation.activities.OnboardingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.activities.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.example.xcards.presentation.activities.RegistrationActivity"
-            android:exported="false">
-        </activity>
-
+            android:name=".presentation.activities.RegistrationActivity"
+            android:exported="false"></activity>
         <activity
-            android:name="com.example.xcards.presentation.activities.LoginActivity"
+            android:name=".presentation.activities.LoginActivity"
             android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
     </application>
+
 </manifest>

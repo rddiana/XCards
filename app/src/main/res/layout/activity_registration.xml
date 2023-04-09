@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.activities.LoginActivityNew">
+    tools:context=".presentation.activities.RegistrationActivity">
 
     <TextView
         android:id="@+id/textView12"
@@ -42,7 +42,7 @@
         android:id="@+id/materialCardView3"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="50dp"
         android:backgroundTint="@color/light_gray"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,9 +61,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:ems="10"
+                android:hint="@string/full_name"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
-                android:text="@string/full_name"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
