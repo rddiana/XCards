@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/textView15"
-        style="@style/textStyle"
+        style="@style/blackTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_account"
@@ -43,7 +43,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
-        android:backgroundTint="@color/light_gray"
+        android:backgroundTint="@color/gray"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -55,8 +55,8 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
-                style="@style/textStyle"
+                android:id="@+id/editTextPersonName"
+                style="@style/blackTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -86,7 +86,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/light_gray"
+        android:backgroundTint="@color/gray"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -98,8 +98,8 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/editTextTextEmailAddress"
-                style="@style/textStyle"
+                android:id="@+id/editTextEmailAddress"
+                style="@style/blackTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -128,7 +128,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/light_gray"
+        android:backgroundTint="@color/gray"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -141,7 +141,7 @@
 
             <EditText
                 android:id="@+id/editTextNewPassword"
-                style="@style/textStyle"
+                style="@style/blackTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -170,7 +170,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="18dp"
-        android:backgroundTint="@color/light_gray"
+        android:backgroundTint="@color/gray"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -183,7 +183,7 @@
 
             <EditText
                 android:id="@+id/editTextConfirmedPassword"
-                style="@style/textStyle"
+                style="@style/blackTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -209,19 +209,20 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/materialButtonNext"
-        style="@style/textStyle"
+        style="@style/blackTextStyle"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:backgroundTint="@color/lavender"
         android:text="@string/next"
         app:cornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/materialButtonForOwnersOfAccounts"
+        app:layout_constraintBottom_toTopOf="@+id/buttonForOwnersOfAccounts"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:stateListAnimator="@null"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButtonForOwnersOfAccounts"
-        style="@style/textStyle"
+        android:id="@+id/buttonForOwnersOfAccounts"
+        style="@style/blackTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
@@ -230,7 +231,8 @@
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:stateListAnimator="@null"/>
 
     <TextView
         android:id="@+id/textViewForMessage2"

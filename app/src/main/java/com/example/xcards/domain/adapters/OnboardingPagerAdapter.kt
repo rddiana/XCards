@@ -7,26 +7,20 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.xcards.R
 
 class OnboardingPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
-    FragmentStateAdapter(
-        fragmentManager,
-        lifecycle
-    ) {
-    private val fragmentArray: Array<Fragment>
-        get() = TODO()
+    FragmentStateAdapter(fragmentManager, lifecycle) {
 
-    init {
-        fragmentArray.plus(Fragment(R.layout.fragment_onboarding_first_page))
-        fragmentArray.plus(Fragment(R.layout.fragment_onboarding_second_page))
-        fragmentArray.plus(Fragment(R.layout.fragment_onboarding_third_page))
-        fragmentArray.plus(Fragment(R.layout.fragment_onboarding_forth_page))
+    private val fragmentsArray = arrayOf(
+        Fragment(R.layout.fragment_onboarding_first_page),
+        Fragment(R.layout.fragment_onboarding_second_page),
+        Fragment(R.layout.fragment_onboarding_third_page),
+        Fragment(R.layout.fragment_onboarding_forth_page)
+    )
+
+    override fun createFragment(position: Int): Fragment {
+        return fragmentsArray[position]
     }
 
     override fun getItemCount(): Int {
-        return fragmentArray.size
-    }
-
-    override fun createFragment(position: Int): Fragment {
-        return fragmentArray[position]
+        return fragmentsArray.size
     }
 }
-

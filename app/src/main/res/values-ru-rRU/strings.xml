@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="start_training">Начать тренироваться</string>
-    <string name="for_owners_of_accounts">У меня уже есть аккаунт</string>
+    <string name="for_owners_of_accounts"><u>У меня уже есть аккаунт</u></string>
     <string name="create_flashcards">Создавайте карточки для удобного запоминания и повторения тем</string>
     <string name="date">сб, 20 ноября</string>
     <string name="motivation_phrase">Тебе осталось совсем чуть-чуть, чтобы достичь поставленной цели. Всё получится!</string>
@@ -18,6 +18,9 @@
     <string name="server_failed">Ошибка в регистрации, повторите попытку позже.</string>
     <string name="create_account">создайте новый аккаунт</string>
     <string name="full_name">Полное имя</string>
-    <string name="have_not_account">У меня ещё нет аккаунта</string>
+    <string name="have_not_account"><u>У меня ещё нет аккаунта</u></string>
     <string name="authorization_problem">Ошибка в авторизации, повторите попытку позже.</string>
+    <string name="statistic">Стат-ка</string>
+    <string name="home">Главная</string>
+    <string name="profile">Аккаунт</string>
 </resources>

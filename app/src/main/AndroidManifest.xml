@@ -27,7 +27,7 @@
             android:name=".presentation.activities.RegistrationActivity"
             android:exported="false"></activity>
         <activity
-            android:name=".presentation.activities.LoginActivity"
+            android:name=".presentation.activities.AuthorizationActivity"
             android:exported="false" />
 
         <meta-data

@@ -1,6 +1,6 @@
 package com.example.xcards.domain.repositories
 
-interface RegistrationRepository {
+interface AuthorizationRepository {
     fun validateData()
-    fun firebaseSignUp()
+    fun firebaseLogin()
 }

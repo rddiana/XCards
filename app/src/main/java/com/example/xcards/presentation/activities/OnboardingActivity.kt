@@ -1,8 +1,8 @@
 package com.example.xcards.presentation.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.xcards.data.Constants
 import com.example.xcards.databinding.ActivityOnboardingBinding
 import com.example.xcards.domain.adapters.OnboardingPagerAdapter
 
@@ -19,14 +19,14 @@ class OnboardingActivity : AppCompatActivity() {
 
         binding.ViewPager.adapter = onboardingPagerAdapter
 
-        getSharedPreferences("preferences", MODE_PRIVATE)
-            .edit()
-            .putBoolean(
-                Constants().isOnboardingPassedKey,
-                true
-            )
-            .apply()
+        binding.buttonStartTraining.setOnClickListener {
+            startActivity(Intent(this, RegistrationActivity::class.java))
+            finish()
+        }
 
-        finish()
+        binding.buttonForOwnersOfAccounts.setOnClickListener {
+            startActivity(Intent(this, AuthorizationActivity::class.java))
+            finish()
+        }
     }
 }
