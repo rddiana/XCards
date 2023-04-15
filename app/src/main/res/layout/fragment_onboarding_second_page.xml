@@ -52,7 +52,7 @@
 
         <TextView
             android:id="@+id/textView1"
-            style="@style/BigTextStyle"
+            style="@style/bigTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
@@ -83,7 +83,7 @@
 
         <TextView
             android:id="@+id/textView3"
-            style="@style/BigTextStyle"
+            style="@style/bigTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
@@ -104,7 +104,7 @@
 
         <TextView
             android:id="@+id/textView5"
-            style="@style/BigTextStyle"
+            style="@style/bigTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
@@ -125,7 +125,7 @@
 
         <TextView
             android:id="@+id/textView6"
-            style="@style/BigTextStyle"
+            style="@style/bigTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
@@ -136,7 +136,7 @@
 
         <TextView
             android:id="@+id/textView4"
-            style="@style/BigTextStyle"
+            style="@style/bigTextStyle"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
             android:text="@string/create_flashcards"

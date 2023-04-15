@@ -14,13 +14,13 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="MainTextStyle">
+    <style name="mainTextStyle">
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">44sp</item>
     </style>
 
-    <style name="HeaderTextStyle">
+    <style name="headerTextStyle">
         <item name="android:fontFamily">@font/montserrat_medium</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">22sp</item>
@@ -38,10 +38,10 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="BigTextStyle">
+    <style name="bigTextStyle">
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="error">
