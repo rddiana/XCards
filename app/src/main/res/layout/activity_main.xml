@@ -7,7 +7,7 @@
     tools:context=".presentation.activities.MainActivity">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView10"
+        android:id="@+id/navigationBottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/dark_blue"
@@ -130,18 +130,8 @@
         android:layout_width="wrap_content"
         android:layout_height="2dp"
         android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/materialCardView10"
+        app:layout_constraintBottom_toTopOf="@+id/navigationBottomBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Onboarding"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

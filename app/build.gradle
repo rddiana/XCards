@@ -71,4 +71,12 @@ dependencies {
     //coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+
+    //ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.6.1"
+    //LifeData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
+
+    //Preference Manager for SharedPreference
+    implementation "androidx.preference:preference-ktx:1.2.0"
 }

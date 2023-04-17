@@ -27,6 +27,7 @@
     <string name="statistic">Statistic</string>
     <string name="home">Home</string>
     <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
 
 
 </resources>

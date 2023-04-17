@@ -8,13 +8,18 @@ import android.text.TextUtils
 import android.util.Patterns
 import android.widget.Toast
 import com.example.xcards.R
+import com.example.xcards.data.User
 import com.example.xcards.databinding.ActivityRegistrationBinding
 import com.example.xcards.domain.repositories.RegistrationRepository
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
     private lateinit var binding: ActivityRegistrationBinding
+
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var database: DatabaseReference
 
     private lateinit var progressDialog: ProgressDialog
 
@@ -34,6 +39,7 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
         progressDialog.setCanceledOnTouchOutside(false)
 
         firebaseAuth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().getReference("Users")
 
         binding.materialButtonNext.setOnClickListener {
             validateData()
@@ -51,7 +57,7 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
         password = binding.editTextNewPassword.text.toString().trim()
         confirmedPassword = binding.editTextConfirmedPassword.text.toString().trim()
 
-        if (TextUtils.isEmpty(fullName)){
+        if (TextUtils.isEmpty(fullName)) {
             binding.editTextPersonName.error = "Please, enter your name"
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.editTextEmailAddress.error = "Invalid email format"
@@ -69,6 +75,9 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
     override fun firebaseSignUp() {
         progressDialog.show()
 
+        val user = User(fullName, email)
+        database.child(email).setValue(user)
+
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 progressDialog.dismiss()
@@ -79,9 +88,10 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
-            .addOnFailureListener{e ->
+            .addOnFailureListener { e ->
                 progressDialog.dismiss()
-                Toast.makeText(this, "Registration failed due to ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Registration failed due to ${e.message}", Toast.LENGTH_SHORT)
+                    .show()
             }
     }
 }

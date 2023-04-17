@@ -3,8 +3,6 @@ package com.example.xcards.presentation.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.xcards.R
-import com.example.xcards.data.Constants
 import com.example.xcards.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 

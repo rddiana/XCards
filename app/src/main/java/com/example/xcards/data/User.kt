@@ -2,8 +2,7 @@ package com.example.xcards.data
 
 import com.google.firebase.auth.EmailAuthProvider
 
-data class UserData(
+data class User(
     val fullName: String? = null,
-    val email: EmailAuthProvider? = null,
-    val password: String? = null
+    val email: String? = null
 )
