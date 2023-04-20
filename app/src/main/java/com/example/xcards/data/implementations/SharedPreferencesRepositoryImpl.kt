@@ -3,11 +3,10 @@ package com.example.xcards.data.implementations
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
-import com.example.xcards.ProfileFragment
 import com.example.xcards.data.Constants
 import com.example.xcards.domain.repositories.SharedPreferencesRepository
 
-class SharedPreferencesRepositoryImpl(context: ProfileFragment) : SharedPreferencesRepository {
+class SharedPreferencesRepositoryImpl(context: Context) : SharedPreferencesRepository {
     private val sharedPreferences: SharedPreferences
     private val sharedPreferencesEditor: Editor
 

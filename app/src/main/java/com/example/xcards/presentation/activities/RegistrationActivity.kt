@@ -2,21 +2,27 @@ package com.example.xcards.presentation.activities
 
 import android.app.ProgressDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.xcards.R
+import com.example.xcards.data.Constants
 import com.example.xcards.data.User
+import com.example.xcards.data.implementations.SharedPreferencesRepositoryImpl
 import com.example.xcards.databinding.ActivityRegistrationBinding
 import com.example.xcards.domain.repositories.RegistrationRepository
+import com.example.xcards.domain.repositories.SharedPreferencesRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
     private lateinit var binding: ActivityRegistrationBinding
+
+    private lateinit var sharedPreferencesRepository: SharedPreferencesRepository
+
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
@@ -84,6 +90,16 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
 
                 val firebaseUser = firebaseAuth.currentUser
                 val email = firebaseUser!!.email
+
+                sharedPreferencesRepository = SharedPreferencesRepositoryImpl(this)
+                sharedPreferencesRepository.saveString(
+                    Constants.NAME_KEY_PREF,
+                    binding.editTextPersonName.text.toString()
+                )
+                sharedPreferencesRepository.saveString(
+                    Constants.EMAIL_KEY_PREF,
+                    binding.editTextEmailAddress.text.toString()
+                )
 
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()

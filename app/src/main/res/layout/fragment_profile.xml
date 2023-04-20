@@ -5,7 +5,7 @@
     style="@style/blackTextStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ProfileFragment">
+    tools:context=".presentation.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

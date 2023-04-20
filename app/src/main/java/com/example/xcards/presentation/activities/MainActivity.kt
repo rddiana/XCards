@@ -19,14 +19,6 @@ class MainActivity : AppCompatActivity() {
 
         checkUser()
 
-        binding.button.setOnClickListener{
-            startActivity(Intent(this, OnboardingActivity::class.java))
-            finish()
-        }
-
-//        binding.materialCardView7.setOnClickListener {
-//            binding.materialCardView7.setCardBackgroundColor(getColor(R.color.light_blue))
-//        }
     }
 
     private fun checkUser() {
