@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/textView15"
-        style="@style/blackTextStyle"
+        style="@style/changeableTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_account"
@@ -56,7 +56,7 @@
 
             <EditText
                 android:id="@+id/editTextPersonName"
-                style="@style/blackTextStyle"
+                style="@style/changeableTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -99,7 +99,7 @@
 
             <EditText
                 android:id="@+id/editTextEmailAddress"
-                style="@style/blackTextStyle"
+                style="@style/changeableTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -141,7 +141,7 @@
 
             <EditText
                 android:id="@+id/editTextNewPassword"
-                style="@style/blackTextStyle"
+                style="@style/changeableTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -183,7 +183,7 @@
 
             <EditText
                 android:id="@+id/editTextConfirmedPassword"
-                style="@style/blackTextStyle"
+                style="@style/changeableTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -209,7 +209,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/materialButtonNext"
-        style="@style/blackTextStyle"
+        style="@style/changeableTextStyle"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:backgroundTint="@color/lavender"
@@ -222,7 +222,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonForOwnersOfAccounts"
-        style="@style/blackTextStyle"
+        style="@style/changeableTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
