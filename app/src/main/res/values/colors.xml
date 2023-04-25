@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="gray">#DBDBDB</color>
+    <color name="light_red">#FF5252</color>
     <color name="red">#B62929</color>
 
     <color name="light_lilac">#D0C9EA</color>
@@ -19,6 +20,8 @@
     <color name="pink">#FBC4E9</color>
 
     <color name="dark_blue">#0D1226</color>
+    <color name="azure">#2E4560</color>
+    <color name="blue">#5D7DA6</color>
     <color name="light_green">#739FAA</color>
     <color name="light_blue">#9BB3D5</color>
 

@@ -15,13 +15,70 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="changeableTextStyle">
+
+    <style name="imageOnMainScreen">
+        <item name="android:src">"@drawable/evening_landscape"</item>
+    </style>
+
+    <style name="editTextStyle">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:colorControlActivated">@color/black</item>
+    </style>
+
+    <style name="searchingViewStyle">
+        <item name="android:backgroundTint">@color/light_blue</item>
+    </style>
+
+    <style name="backgroundColor">
+        <item name="android:background">@color/dark_blue</item>
+    </style>
+
+    <style name="linedView">
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="mainTextStyle">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">44sp</item>
+    </style>
+
+    <style name="textStyle_h1">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="textStyle_h2">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="bigTextStyle">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="textStyle">
         <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="linedView">
-        <item name="android:background">@color/white</item>
+    <style name="miniTextStyle">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="radioButtonStyle">
+        <item name="android:buttonTint">@color/white</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>

@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:viewBindingIgnore="false"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.activities.AuthorizationActivity">
+    tools:context=".presentation.activities.AuthorizationActivity"
+    tools:viewBindingIgnore="false">
 
     <ImageView
         android:id="@+id/imageView12"
@@ -30,7 +30,7 @@
 
     <TextView
         android:id="@+id/textView14"
-        style="@style/changeableTextStyle"
+        style="@style/textStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_in_to_access"
@@ -55,7 +55,7 @@
 
             <EditText
                 android:id="@+id/emailAddressEditText"
-                style="@style/changeableTextStyle"
+                style="@style/textStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginStart="16dp"
@@ -74,7 +74,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/black_email" />
+                app:srcCompat="@drawable/icon_email" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
@@ -97,7 +97,7 @@
 
             <EditText
                 android:id="@+id/editTextPassword"
-                style="@style/changeableTextStyle"
+                style="@style/textStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -123,7 +123,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/materialButtonNext"
-        style="@style/changeableTextStyle"
+        style="@style/textStyle"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:backgroundTint="@color/lavender"
@@ -135,17 +135,16 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonForBeginners"
-        style="@style/changeableTextStyle"
+        style="@style/textStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
         android:backgroundTint="@color/cardview_light_background"
+        android:stateListAnimator="@null"
         android:text="@string/have_not_account"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:stateListAnimator="@null"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewForMessage1"
@@ -153,9 +152,16 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:stateListAnimator="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView2"
-        android:stateListAnimator="@null"/>
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.985" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

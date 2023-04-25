@@ -15,8 +15,27 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="imageOnMainScreen">
+        <item name="android:src">"@drawable/snow_covered_mountains"</item>
+    </style>
+
+    <style name="searchingViewStyle">
+        <item name="android:backgroundTint">@color/azure</item>
+    </style>
+
+    <style name="backgroundColor">
+        <item name="android:background">@color/blue</item>
+    </style>
+
     <style name="linedView">
         <item name="android:background">@color/black</item>
+    </style>
+
+    <style name="editTextStyle">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:colorControlActivated">@color/white</item>
     </style>
 
     <style name="mainTextStyle">
@@ -43,15 +62,28 @@
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="changeableTextStyle">
+    <style name="textStyle">
         <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="miniTextStyle">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="error">
         <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:textColor">@color/red</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="radioButtonStyle">
+        <item name="android:buttonTint">@color/black</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:textSize">16sp</item>
     </style>
 </resources>

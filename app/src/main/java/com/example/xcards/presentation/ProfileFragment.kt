@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.example.xcards.R
 import com.example.xcards.data.Constants
 import com.example.xcards.data.implementations.SharedPreferencesRepositoryImpl
@@ -27,7 +28,10 @@ class ProfileFragment : Fragment() {
         binding.textViewUserName.text = sharedPreferencesRepository.loadString(Constants.NAME_KEY_PREF)
         binding.textViewEmail.text = sharedPreferencesRepository.loadString(Constants.EMAIL_KEY_PREF)
 
+        binding.toSettingFragment.setOnClickListener {
+
+        }
+
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
-
 }

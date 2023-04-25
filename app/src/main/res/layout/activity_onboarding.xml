@@ -19,7 +19,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonStartTraining"
-        style="@style/changeableTextStyle"
+        style="@style/textStyle"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:backgroundTint="@color/lavender"
@@ -33,7 +33,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonForOwnersOfAccounts"
-        style="@style/changeableTextStyle"
+        style="@style/textStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"

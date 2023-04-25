@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.activities.RegistrationActivity">
@@ -20,7 +19,7 @@
 
     <TextView
         android:id="@+id/textView15"
-        style="@style/changeableTextStyle"
+        style="@style/textStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_account"
@@ -56,7 +55,7 @@
 
             <EditText
                 android:id="@+id/editTextPersonName"
-                style="@style/changeableTextStyle"
+                style="@style/textStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -76,7 +75,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/account_icon" />
+                app:srcCompat="@drawable/icon_account" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -99,7 +98,7 @@
 
             <EditText
                 android:id="@+id/editTextEmailAddress"
-                style="@style/changeableTextStyle"
+                style="@style/textStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -119,7 +118,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/black_email" />
+                app:srcCompat="@drawable/icon_email" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -141,7 +140,7 @@
 
             <EditText
                 android:id="@+id/editTextNewPassword"
-                style="@style/changeableTextStyle"
+                style="@style/textStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -183,7 +182,7 @@
 
             <EditText
                 android:id="@+id/editTextConfirmedPassword"
-                style="@style/changeableTextStyle"
+                style="@style/textStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -209,30 +208,29 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/materialButtonNext"
-        style="@style/changeableTextStyle"
+        style="@style/textStyle"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:backgroundTint="@color/lavender"
+        android:stateListAnimator="@null"
         android:text="@string/next"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonForOwnersOfAccounts"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:stateListAnimator="@null"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonForOwnersOfAccounts"
-        style="@style/changeableTextStyle"
+        style="@style/textStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
         android:backgroundTint="@color/cardview_light_background"
+        android:stateListAnimator="@null"
         android:text="@string/for_owners_of_accounts"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:stateListAnimator="@null"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewForMessage2"
@@ -242,6 +240,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.985" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

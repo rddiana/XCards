@@ -2,9 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/changeableTextStyle"
+    style="@style/textStyle"
+    android:id="@+id/profileFragment"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".presentation.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,7 +39,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:src="@drawable/account_icon" />
+                android:src="@drawable/icon_account" />
 
             <TextView
                 android:id="@+id/textViewUserName"
@@ -53,10 +54,10 @@
 
         <View
             android:id="@+id/view3"
+            style="@style/linedView"
             android:layout_width="350dp"
             android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/black"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -66,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +78,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:src="@drawable/black_email" />
+                android:src="@drawable/icon_email" />
 
             <TextView
                 android:id="@+id/textViewEmail"
@@ -91,20 +92,22 @@
 
         <View
             android:id="@+id/view4"
+            style="@style/linedView"
             android:layout_width="350dp"
             android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/black"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/CardViewSettings"
+            android:id="@+id/toSettingFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
+            android:stateListAnimator="@null"
+            app:cardElevation="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view4">
 
@@ -118,7 +121,7 @@
                     android:id="@+id/imageView24"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/setting_icon_black" />
+                    android:src="@drawable/icon_setting" />
 
                 <TextView
                     android:id="@+id/textView23"
@@ -130,6 +133,25 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/textStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="64dp"
+            android:backgroundTint="@color/transparent"
+            android:stateListAnimator="@null"
+            android:text="@string/exit"
+            android:textAllCaps="false"
+            app:cardElevation="0dp"
+            app:cornerRadius="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:strokeColor="@color/light_red"
+            app:strokeWidth="2dp">
+
+        </com.google.android.material.button.MaterialButton>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
