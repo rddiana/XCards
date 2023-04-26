@@ -1,13 +1,16 @@
 package com.example.xcards.presentation.activities
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.xcards.R
 import com.example.xcards.databinding.ActivityMainBinding
 import com.example.xcards.presentation.ChartFragment
+import com.example.xcards.presentation.HomeFragment
 import com.example.xcards.presentation.ProfileFragment
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.auth.FirebaseAuth
@@ -34,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.toHomeFragment.setOnClickListener {
-
+            changeFragmentWithButtonNav(binding.toHomeFragment)
         }
 
         binding.toProfileFragment.setOnClickListener {
@@ -43,14 +46,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun changeFragmentWithButtonNav(cardView: MaterialCardView) {
-        val fragment = ProfileFragment()
+        var fragment = Fragment()
+
+        when (cardView) {
+            binding.toChartFragment -> fragment = ChartFragment()
+            binding.toHomeFragment -> fragment = HomeFragment()
+            binding.toProfileFragment -> fragment = ProfileFragment()
+        }
+
         fragmentManager.beginTransaction().replace(R.id.main_activity, fragment).commit()
 
         if (cardView.cardBackgroundColor.equals(resources.getColor(R.color.light_blue))) {
-            cardView.setBackgroundColor(resources.getColor(R.color.transparent))
+//            cardView.setBackgroundColor(resources.getColor(R.color.transparent))
+            val cardColor = ContextCompat.getColor(this, R.color.transparent)
+            cardView.setCardBackgroundColor(cardColor)
         } else {
-            cardView.setBackgroundColor(resources.getColor(R.color.light_blue))
+//            cardView.setBackgroundColor(resources.getColor(R.color.light_blue))
+            val cardColor = ContextCompat.getColor(this, R.color.light_blue)
+            cardView.setCardBackgroundColor(cardColor)
         }
+
     }
 
     private fun checkUser() {

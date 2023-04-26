@@ -115,7 +115,7 @@
             android:layout_height="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="28dp"
-            android:src="@drawable/arrow_down"
+            android:src="@drawable/icon_arrow_down"
             app:layout_constraintStart_toEndOf="@+id/textView9"
             app:layout_constraintTop_toTopOf="@+id/view" />
 

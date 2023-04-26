@@ -49,14 +49,13 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    style="@style/editTextStyle">
+                    android:layout_height="match_parent">
 
                     <EditText
                         android:id="@+id/editTextTextPersonName"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_regular"
+                        style="@style/editTextStyle"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
@@ -73,7 +72,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginEnd="16dp"
-                        android:src="@drawable/"
+                        android:src="@drawable/icon_search"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

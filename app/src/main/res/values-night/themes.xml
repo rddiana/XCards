@@ -15,7 +15,6 @@
         <!-- Customize your theme here. -->
     </style>
 
-
     <style name="imageOnMainScreen">
         <item name="android:src">"@drawable/evening_landscape"</item>
     </style>

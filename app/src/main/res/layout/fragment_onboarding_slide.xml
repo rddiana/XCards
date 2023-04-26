@@ -49,7 +49,7 @@
             android:layout_marginEnd="24dp"
             android:background="@null"
             android:contentDescription="close_cross"
-            android:src="@drawable/close_cross"
+            android:src="@drawable/icon_close_cross"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="TouchTargetSizeCheck" />
