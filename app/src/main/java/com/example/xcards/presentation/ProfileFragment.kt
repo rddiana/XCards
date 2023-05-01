@@ -29,9 +29,10 @@ class ProfileFragment : Fragment() {
         binding.textViewEmail.text = sharedPreferencesRepository.loadString(Constants.EMAIL_KEY_PREF)
 
         binding.toSettingFragment.setOnClickListener {
-
+            parentFragmentManager.beginTransaction().add(R.id.fragmentContainer, SettingFragment())
+                .commit()
         }
 
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        return binding.root
     }
 }

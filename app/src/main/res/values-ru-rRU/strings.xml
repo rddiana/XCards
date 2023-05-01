@@ -38,4 +38,20 @@
     <string name="all_cards">Все карточки</string>
     <string name="recommended">Рекомендации</string>
     <string name="module_name">Название модуля</string>
+    <string name="study_room">Мои карточки</string>
+    <string name="activate_reminder">Включить напоминания</string>
+    <string name="reminders_explanation">Получайте напоминания о выполнении вашей ежедневной цели. Вы будете получать уведомления, если не достигнете своей ежедневной цели к установленному вами сроку.</string>
+    <string name="set_time">Установка времени</string>
+    <string name="set_time_explanation">Совет: установите напоминание об обучении не на то время, в которое вы хотите учиться, а скорее на тот случай, если в течение дня вы могли бы забыть.</string>
+    <string name="set_day">Выбор дней недели</string>
+    <string name="set_day_advice">Рекомендуется заниматься понемногу каждый день.</string>
+    <string name="monday">Пн</string>
+    <string name="tuesday">Вт</string>
+    <string name="wednesday">Ср</string>
+    <string name="thursday">Чт</string>
+    <string name="friday">Пт</string>
+    <string name="saturday">Сб</string>
+    <string name="sunday">Вс</string>
+    <string name="hours_for_week">часа за эту неделю</string>
+    <string name="correct_answers">Верные ответы</string>
 </resources>

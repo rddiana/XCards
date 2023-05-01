@@ -43,4 +43,20 @@
     <string name="all_cards">All cards</string>
     <string name="module_name">Module name</string>
     <string name="recommended">Recommended</string>
+    <string name="study_room">Study room</string>
+    <string name="activate_reminder">Activate reminder</string>
+    <string name="reminders_explanation">Get a reminder to complete your daily goal. You will receive notifications if you don’t achieve your daily goal by the time you’ve set.</string>
+    <string name="set_time">Set the time for the reminder</string>
+    <string name="set_time_explanation">Set your learning reminder not for the time you want to learn, but rather the is chance in the day you could learn if you have already forgotten to do so.</string>
+    <string name="set_day">Set the day for the reminder</string>
+    <string name="set_day_advice">It is recommended to study a little every day.</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="saturday">Sat</string>
+    <string name="sunday">Sun</string>
+    <string name="hours_for_week">hours for this week</string>
+    <string name="correct_answers">Correct answers</string>
 </resources>

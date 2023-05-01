@@ -1,9 +1,11 @@
 package com.example.xcards.presentation.activities
 
+import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -12,7 +14,6 @@ import com.example.xcards.databinding.ActivityMainBinding
 import com.example.xcards.presentation.ChartFragment
 import com.example.xcards.presentation.HomeFragment
 import com.example.xcards.presentation.ProfileFragment
-import com.google.android.material.card.MaterialCardView
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
@@ -28,24 +29,44 @@ class MainActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        checkUser()
+//        checkUser()
 
         fragmentManager = supportFragmentManager
+        turnButtonNavOn(binding.toHomeFragment)
 
         binding.toChartFragment.setOnClickListener {
-            changeFragmentWithButtonNav(binding.toChartFragment)
+            changeFragment(binding.toChartFragment)
+            turnButtonNavOn(binding.toChartFragment)
+            turnButtonNavOff(binding.toHomeFragment)
+            turnButtonNavOff(binding.toProfileFragment)
         }
 
         binding.toHomeFragment.setOnClickListener {
-            changeFragmentWithButtonNav(binding.toHomeFragment)
+            changeFragment(binding.toHomeFragment)
+            turnButtonNavOn(binding.toHomeFragment)
+            turnButtonNavOff(binding.toChartFragment)
+            turnButtonNavOff(binding.toProfileFragment)
         }
 
         binding.toProfileFragment.setOnClickListener {
-            changeFragmentWithButtonNav(binding.toProfileFragment)
+            changeFragment(binding.toProfileFragment)
+            turnButtonNavOn(binding.toProfileFragment)
+            turnButtonNavOff(binding.toHomeFragment)
+            turnButtonNavOff(binding.toChartFragment)
         }
     }
 
-    private fun changeFragmentWithButtonNav(cardView: MaterialCardView) {
+    private fun turnButtonNavOn(cardView: CardView) {
+        var cardColor = ContextCompat.getColor(this, R.color.light_blue)
+        cardView.setCardBackgroundColor(cardColor)
+    }
+
+    private fun turnButtonNavOff(cardView: CardView) {
+        var cardColor = ContextCompat.getColor(this, R.color.transparent)
+        cardView.setCardBackgroundColor(cardColor)
+    }
+
+    private fun changeFragment(cardView: CardView) {
         var fragment = Fragment()
 
         when (cardView) {
@@ -54,18 +75,7 @@ class MainActivity : AppCompatActivity() {
             binding.toProfileFragment -> fragment = ProfileFragment()
         }
 
-        fragmentManager.beginTransaction().replace(R.id.main_activity, fragment).commit()
-
-        if (cardView.cardBackgroundColor.equals(resources.getColor(R.color.light_blue))) {
-//            cardView.setBackgroundColor(resources.getColor(R.color.transparent))
-            val cardColor = ContextCompat.getColor(this, R.color.transparent)
-            cardView.setCardBackgroundColor(cardColor)
-        } else {
-//            cardView.setBackgroundColor(resources.getColor(R.color.light_blue))
-            val cardColor = ContextCompat.getColor(this, R.color.light_blue)
-            cardView.setCardBackgroundColor(cardColor)
-        }
-
+        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit()
     }
 
     private fun checkUser() {

@@ -21,13 +21,11 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/toChartFragment"
-                android:layout_width="75dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="2dp"
-                android:backgroundTint="@color/transparent"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="35dp"
                 android:stateListAnimator="@null"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp"
@@ -55,14 +53,13 @@
                         android:text="@string/chart_shortened" />
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/toHomeFragment"
-                android:layout_width="75dp"
-                android:layout_height="45dp"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="2dp"
-                android:backgroundTint="@color/transparent"
                 android:stateListAnimator="@null"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp"
@@ -91,15 +88,14 @@
                         android:text="@string/home" />
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/toProfileFragment"
-                android:layout_width="75dp"
-                android:layout_height="45dp"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="2dp"
-                android:layout_marginEnd="45dp"
-                android:backgroundTint="@color/transparent"
+                android:layout_marginEnd="35dp"
                 android:stateListAnimator="@null"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp"
@@ -127,7 +123,7 @@
                         android:text="@string/profile" />
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
@@ -140,5 +136,15 @@
         app:layout_constraintBottom_toTopOf="@+id/navigationBottomBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainer"
+        android:name="com.example.xcards.presentation.HomeFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

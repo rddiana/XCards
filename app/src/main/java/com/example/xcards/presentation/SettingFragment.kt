@@ -1,26 +1,65 @@
 package com.example.xcards.presentation
 
-import androidx.lifecycle.ViewModelProvider
+import android.content.res.Configuration
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.xcards.R
+import com.example.xcards.databinding.FragmentSettingBinding
+
 
 class SettingFragment : Fragment() {
+    private lateinit var binding: FragmentSettingBinding
+    private lateinit var viewModel: SettingViewModel
 
     companion object {
         fun newInstance() = SettingFragment()
     }
 
-    private lateinit var viewModel: SettingViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_setting, container, false)
+        binding = FragmentSettingBinding.inflate(layoutInflater)
+
+        binding.toPreviousFragment.setOnClickListener {
+            parentFragmentManager.beginTransaction().replace(R.id.fragmentContainer, ProfileFragment())
+                .commit()
+        }
+
+        binding.toRemindersFragment.setOnClickListener {
+            parentFragmentManager.beginTransaction().add(R.id.fragmentContainer, RemindersFragment())
+                .commit()
+        }
+
+//        val currentMode = resources.configuration.uiMode
+//        if (currentMode == Configuration.UI_MODE_NIGHT_NO) {
+//            binding.toLightTheme.isChecked = true
+//        } else {
+//            binding.toDarkTheme.isChecked = true
+//        }
+
+        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.toLightTheme -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+                R.id.toDarkTheme -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
+            }
+        }
+        return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

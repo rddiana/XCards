@@ -15,6 +15,17 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="timePickerStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/light_blue</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="background">
+        <item name="android:background">@color/white</item>
+    </style>
+
     <style name="imageOnMainScreen">
         <item name="android:src">"@drawable/snow_covered_mountains"</item>
     </style>
@@ -54,6 +65,12 @@
         <item name="android:fontFamily">@font/montserrat_medium</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="largeImmutableTextStyle">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">44sp</item>
     </style>
 
     <style name="bigTextStyle">
