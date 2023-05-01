@@ -53,15 +53,15 @@
 
                     <EditText
                         android:id="@+id/editTextTextPersonName"
+                        style="@style/editTextStyle"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        style="@style/editTextStyle"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
                         android:ems="10"
+                        android:hint="@string/searching_modules"
                         android:inputType="textShortMessage|textLongMessage|textPersonName"
-                        android:text="@string/searching_modules"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
