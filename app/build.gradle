@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.xcards"
-        minSdk 24
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -61,6 +61,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-database-ktx:20.0.4'
     implementation 'com.google.firebase:firebase-auth-ktx:21.3.0'
+    implementation 'com.google.firebase:firebase-messaging:20.0.1'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
 
     implementation 'com.google.code.gson:gson:2.10.1'
 
@@ -81,4 +83,5 @@ dependencies {
 
     //Preference Manager for SharedPreference
     implementation "androidx.preference:preference-ktx:1.2.0"
+
 }

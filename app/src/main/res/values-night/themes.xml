@@ -10,13 +10,13 @@
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/dark_blue</item>
-        <item name="android:background">@color/dark_blue</item>
+        <item name="android:statusBarColor">@color/dark_blue_for_bg</item>
+        <item name="android:background">@color/dark_blue_for_bg</item>
         <!-- Customize your theme here. -->
     </style>
 
     <style name="background">
-        <item name="android:background">@color/dark_blue</item>
+        <item name="android:background">@color/dark_blue_for_bg</item>
     </style>
 
     <style name="imageOnMainScreen">
@@ -26,17 +26,19 @@
     <style name="editTextStyle">
         <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textColorHint">@color/black</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:backgroundTint">@color/azure</item>
         <item name="android:colorControlActivated">@color/black</item>
+
     </style>
 
     <style name="searchingViewStyle">
-        <item name="android:backgroundTint">@color/light_blue</item>
+        <item name="android:backgroundTint">@color/sky_blue</item>
     </style>
 
     <style name="backgroundColor">
-        <item name="android:background">@color/dark_blue</item>
+        <item name="android:background">@color/dark_blue_for_bg</item>
     </style>
 
     <style name="linedView">

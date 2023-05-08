@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -21,12 +20,13 @@ class SettingFragment : Fragment() {
         fun newInstance() = SettingFragment()
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSettingBinding.inflate(layoutInflater)
+
+        setCheckedRadioButton()
 
         binding.toPreviousFragment.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(R.id.fragmentContainer, ProfileFragment())
@@ -38,13 +38,6 @@ class SettingFragment : Fragment() {
                 .commit()
         }
 
-//        val currentMode = resources.configuration.uiMode
-//        if (currentMode == Configuration.UI_MODE_NIGHT_NO) {
-//            binding.toLightTheme.isChecked = true
-//        } else {
-//            binding.toDarkTheme.isChecked = true
-//        }
-
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.toLightTheme -> {
@@ -55,11 +48,8 @@ class SettingFragment : Fragment() {
                 }
             }
         }
-        return binding.root
-    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -68,4 +58,11 @@ class SettingFragment : Fragment() {
         // TODO: Use the ViewModel
     }
 
+    //Закрашивает нужные кружочки в RadioButton, так как они не сохраняются после переходов
+    private fun setCheckedRadioButton() {
+        when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+            Configuration.UI_MODE_NIGHT_YES -> binding.toDarkTheme.isChecked = true
+            Configuration.UI_MODE_NIGHT_NO -> binding.toLightTheme.isChecked = true
+        }
+    }
 }

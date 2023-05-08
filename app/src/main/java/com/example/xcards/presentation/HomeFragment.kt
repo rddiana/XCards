@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.xcards.R
+import com.example.xcards.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
+    private lateinit var binding: FragmentHomeBinding
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -20,7 +22,14 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(layoutInflater)
+
+        binding.toStudyRoomFragment.setOnClickListener {
+            parentFragmentManager.beginTransaction().add(R.id.fragmentContainer, StudyRoomFragment())
+                .commit()
+        }
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

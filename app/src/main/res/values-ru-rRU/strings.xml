@@ -54,4 +54,12 @@
     <string name="sunday">Вс</string>
     <string name="hours_for_week">часа за эту неделю</string>
     <string name="correct_answers">Верные ответы</string>
+    <string-array name="Languages">
+        <item>Английский</item>
+        <item>Русский</item>
+    </string-array>
+    <string name="creating_new_cards">Создание новых карточек</string>
+    <string name="place_for_question">Место для вопроса?</string>
+    <string name="place_for_answer">Место для ответа.</string>
+    <string name="save">Сохранить</string>
 </resources>

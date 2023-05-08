@@ -59,4 +59,14 @@
     <string name="sunday">Sun</string>
     <string name="hours_for_week">hours for this week</string>
     <string name="correct_answers">Correct answers</string>
+    <string name="plus" translatable="false">+</string>
+    <string-array name="Languages">
+        <item>English</item>
+        <item>Russian</item>
+    </string-array>
+    <string name="creating_new_cards">Creating new cards</string>
+    <string name="card" translatable="false">Card</string>
+    <string name="place_for_question">Place for your question?</string>
+    <string name="place_for_answer">Place for your answer.</string>
+    <string name="save">Save</string>
 </resources>

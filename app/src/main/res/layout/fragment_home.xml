@@ -17,7 +17,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/imageView21"
+                android:id="@+id/miniCardsImage"
                 android:src="@drawable/image_header_landscape"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -34,11 +34,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/imageView21" />
+                app:layout_constraintTop_toBottomOf="@+id/miniCardsImage" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView2"
                 style="@style/searchingViewStyle"
+                app:cardBackgroundColor="@color/azure"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -52,8 +53,9 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/editTextTextPersonName"
+                        android:id="@+id/searchingModules"
                         style="@style/editTextStyle"
+
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -107,14 +109,15 @@
                 app:layout_constraintGuide_percent="0.95" />
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/toStudyRoomFragment"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/transparent"
+                app:cardElevation="0dp"
+                android:stateListAnimator="@null"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintTop_toBottomOf="@+id/cardView2"
-                android:elevation="0dp"
-                android:stateListAnimator="@null">
+                app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
                 <ImageView
                     android:id="@+id/imageView26"
@@ -124,7 +127,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <HorizontalScrollView
-                android:id="@+id/horizontalScrollView"
+                android:id="@+id/ScrollViewForAllCards"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="8dp"
@@ -147,9 +150,10 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/recommended"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+                app:layout_constraintTop_toBottomOf="@+id/ScrollViewForAllCards" />
 
             <HorizontalScrollView
+                android:id="@+id/scrollViewFroRecommendation"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="8dp"

@@ -8,12 +8,11 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.xcards.R
-import com.example.xcards.data.Constants
 import com.example.xcards.data.User
-import com.example.xcards.data.implementations.SharedPreferencesRepositoryImpl
 import com.example.xcards.databinding.ActivityRegistrationBinding
 import com.example.xcards.domain.repositories.RegistrationRepository
 import com.example.xcards.domain.repositories.SharedPreferencesRepository
+import com.example.xcards.domain.useCase.FirebaseUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -30,7 +29,7 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
     private lateinit var progressDialog: ProgressDialog
 
     private var fullName = ""
-    private var email = ""
+    private var userEmail = ""
     private var password = ""
     private var confirmedPassword = ""
 
@@ -59,13 +58,13 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
 
     override fun validateData() {
         fullName = binding.editTextPersonName.text.toString().trim()
-        email = binding.editTextEmailAddress.text.toString().trim()
+        userEmail = binding.editTextEmailAddress.text.toString().trim()
         password = binding.editTextNewPassword.text.toString().trim()
         confirmedPassword = binding.editTextConfirmedPassword.text.toString().trim()
 
         if (TextUtils.isEmpty(fullName)) {
             binding.editTextPersonName.error = "Please, enter your name"
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
             binding.editTextEmailAddress.error = "Invalid email format"
         } else if (TextUtils.isEmpty(password)) {
             binding.editTextNewPassword.error = "Please, enter password"
@@ -81,25 +80,40 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
     override fun firebaseSignUp() {
         progressDialog.show()
 
-        val user = User(fullName, email)
-        database.child(email).setValue(user)
+        val user = User(fullName, userEmail)
+//        database.child(userEmail).setValue(user)
 
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
+        firebaseAuth.createUserWithEmailAndPassword(userEmail, password)
             .addOnSuccessListener {
                 progressDialog.dismiss()
 
                 val firebaseUser = firebaseAuth.currentUser
                 val email = firebaseUser!!.email
 
-                sharedPreferencesRepository = SharedPreferencesRepositoryImpl(this)
-                sharedPreferencesRepository.saveString(
-                    Constants.NAME_KEY_PREF,
-                    binding.editTextPersonName.text.toString()
-                )
-                sharedPreferencesRepository.saveString(
-                    Constants.EMAIL_KEY_PREF,
-                    binding.editTextEmailAddress.text.toString()
-                )
+//                sharedPreferencesRepository = SharedPreferencesRepositoryImpl(this)
+//                sharedPreferencesRepository.saveString(
+//                    Constants.NAME_KEY_PREF,
+//                    binding.editTextPersonName.text.toString()
+//                )
+//                sharedPreferencesRepository.saveString(
+//                    Constants.EMAIL_KEY_PREF,
+//                    binding.editTextEmailAddress.text.toString()
+//                )
+
+//                val personalUserData = hashMapOf<String, Any>(
+//                    "name" to fullName,
+//                    "email" to userEmail
+//                )
+//
+//                FirebaseUtils().fireStoreDatabase.collection("users")
+//                    .document(userEmail)
+//                    .collection("data")
+//                    .add(personalUserData)
+//                    .addOnFailureListener {
+//                        progressDialog.dismiss()
+//                        Toast.makeText(this, "Sorry, registration failed", Toast.LENGTH_SHORT)
+//                            .show()
+//                    }
 
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()

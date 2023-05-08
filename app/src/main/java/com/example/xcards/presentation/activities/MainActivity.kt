@@ -1,9 +1,8 @@
 package com.example.xcards.presentation.activities
 
-import android.content.Context
+import android.content.BroadcastReceiver
 import android.content.Intent
 import android.os.Bundle
-import android.util.TypedValue
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -16,11 +15,14 @@ import com.example.xcards.presentation.HomeFragment
 import com.example.xcards.presentation.ProfileFragment
 import com.google.firebase.auth.FirebaseAuth
 
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var firebaseAuth: FirebaseAuth
 
     private lateinit var fragmentManager: FragmentManager
+
+    private lateinit var broadcastReceiver: BroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-//        checkUser()
+        checkUser()
 
         fragmentManager = supportFragmentManager
         turnButtonNavOn(binding.toHomeFragment)
@@ -57,7 +59,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun turnButtonNavOn(cardView: CardView) {
-        var cardColor = ContextCompat.getColor(this, R.color.light_blue)
+        var cardColor = ContextCompat.getColor(this, R.color.sky_blue)
         cardView.setCardBackgroundColor(cardColor)
     }
 
