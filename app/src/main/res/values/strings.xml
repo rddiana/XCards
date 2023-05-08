@@ -59,4 +59,5 @@
     <string name="sunday">Sun</string>
     <string name="hours_for_week">hours for this week</string>
     <string name="correct_answers">Correct answers</string>
+    <string name="plus" translatable="false">+</string>
 </resources>

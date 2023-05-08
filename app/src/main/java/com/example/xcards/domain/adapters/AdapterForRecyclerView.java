@@ -16,7 +16,7 @@ import com.example.xcards.data.CardData;
 import java.util.ArrayList;
 
 public class AdapterForRecyclerView extends RecyclerView.Adapter<AdapterForRecyclerView.ViewHolder> {
-    ArrayList<CardData> cardsArray;
+    ArrayList<CardView> cardsArray;
     Context context;
 
     public AdapterForRecyclerView(Context context, ArrayList images) {
@@ -39,9 +39,9 @@ public class AdapterForRecyclerView extends RecyclerView.Adapter<AdapterForRecyc
     @Override
     public void onBindViewHolder(@NonNull AdapterForRecyclerView.ViewHolder holder, int position) {
         // TypeCast Object to int type
-        CardData displayingCard = cardsArray.get(position);
-        holder.cardName.setText(displayingCard.getNameModule());
-        holder.cardsCount.setText(displayingCard.getCardsCount());
+        CardView displayingCard = cardsArray.get(position);
+//        holder.cardName.setText(displayingCard.getNameModule());
+//        holder.cardsCount.setText(displayingCard.getCardsCount());
     }
 
     @Override
