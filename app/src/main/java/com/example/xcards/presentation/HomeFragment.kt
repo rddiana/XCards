@@ -24,8 +24,8 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
-        binding.toStudyRoomFragment.setOnClickListener {
-            parentFragmentManager.beginTransaction().add(R.id.fragmentContainer, StudyRoomFragment())
+        binding.toStudyRoomCard.setOnClickListener {
+            parentFragmentManager.beginTransaction().add(R.id.mainFragmentContainer, StudyRoomFragment())
                 .commit()
         }
 

@@ -39,11 +39,10 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView2"
                 style="@style/searchingViewStyle"
-                app:cardBackgroundColor="@color/azure"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:cardCornerRadius="15dp"
+                app:cardCornerRadius="12dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/textView20">
@@ -55,7 +54,6 @@
                     <EditText
                         android:id="@+id/searchingModules"
                         style="@style/editTextStyle"
-
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -84,15 +82,39 @@
 
             </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/textView22"
-                style="@style/textStyle_h2"
-                android:layout_width="wrap_content"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/toStudyRoomCard"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/all_cards"
+                app:cardBackgroundColor="@color/transparent"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+                app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView22"
+                        style="@style/textStyle_h2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/all_cards"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView26"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/icon_next_arrow"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
@@ -108,24 +130,6 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.95" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/toStudyRoomFragment"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@color/transparent"
-                app:cardElevation="0dp"
-                android:stateListAnimator="@null"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintTop_toBottomOf="@+id/cardView2">
-
-                <ImageView
-                    android:id="@+id/imageView26"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_next_arrow" />
-            </com.google.android.material.card.MaterialCardView>
-
             <HorizontalScrollView
                 android:id="@+id/ScrollViewForAllCards"
                 android:layout_width="0dp"
@@ -133,10 +137,11 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/textView22"
+                app:layout_constraintTop_toBottomOf="@+id/toStudyRoomCard"
                 tools:ignore="SpeakableTextPresentCheck">
 
                 <LinearLayout
+                    android:id="@+id/layoutForAllCards"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical" />
@@ -163,6 +168,7 @@
                 tools:ignore="SpeakableTextPresentCheck">
 
                 <LinearLayout
+                    android:id="@+id/lauoutForRecommendedCards"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical" />

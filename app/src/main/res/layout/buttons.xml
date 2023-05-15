@@ -3,6 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginHorizontal="5dp"
+    android:layout_marginVertical="10dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:cardElevation="0dp">
@@ -26,8 +28,8 @@
 
                 <View
                     android:id="@+id/view9"
-                    android:layout_width="78dp"
-                    android:layout_height="78dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:background="@drawable/mini_blue_rectangle"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -66,8 +68,8 @@
 
                 <View
                     android:id="@+id/view10"
-                    android:layout_width="78dp"
-                    android:layout_height="78dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:background="@drawable/mini_blue_rectangle"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

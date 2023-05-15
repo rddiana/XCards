@@ -99,6 +99,10 @@ class RemindersFragment : Fragment() {
             showTimePicker()
         }
 
+        binding.toPreviousFragment3.setOnClickListener {
+            parentFragmentManager.beginTransaction().remove(this).commit()
+        }
+
         return binding.root
     }
 

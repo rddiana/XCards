@@ -157,6 +157,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/transparent"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/view5">
@@ -215,6 +216,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/transparent"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/viewLine1">

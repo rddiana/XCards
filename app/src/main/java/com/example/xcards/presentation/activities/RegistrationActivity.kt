@@ -73,6 +73,7 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
         } else if (password != confirmedPassword) {
             binding.textViewForMessage2.text = getString(R.string.no_matching_passwords)
         } else {
+            createDataBase()
             firebaseSignUp()
         }
     }
@@ -100,27 +101,27 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
 //                    binding.editTextEmailAddress.text.toString()
 //                )
 
-//                val personalUserData = hashMapOf<String, Any>(
-//                    "name" to fullName,
-//                    "email" to userEmail
-//                )
-//
-//                FirebaseUtils().fireStoreDatabase.collection("users")
-//                    .document(userEmail)
-//                    .collection("data")
-//                    .add(personalUserData)
-//                    .addOnFailureListener {
-//                        progressDialog.dismiss()
-//                        Toast.makeText(this, "Sorry, registration failed", Toast.LENGTH_SHORT)
-//                            .show()
-//                    }
-
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
             .addOnFailureListener { e ->
                 progressDialog.dismiss()
                 Toast.makeText(this, "Registration failed due to ${e.message}", Toast.LENGTH_SHORT)
+                    .show()
+            }
+    }
+
+    private fun createDataBase() {
+        val personalUserData = hashMapOf<String, Any>(
+                "name" to fullName,
+                "email" to userEmail
+            )
+
+        FirebaseUtils().fireStoreDatabase
+            .collection("users/${userEmail}/data")
+            .add(personalUserData)
+            .addOnFailureListener {
+                Toast.makeText(this, "Sorry, adding your data failed", Toast.LENGTH_SHORT)
                     .show()
             }
     }

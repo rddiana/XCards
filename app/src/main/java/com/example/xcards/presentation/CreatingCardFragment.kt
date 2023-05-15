@@ -1,12 +1,15 @@
 package com.example.xcards.presentation
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModelProvider
+import com.example.xcards.R
 import com.example.xcards.databinding.FragmentCreatingCardBinding
+
 
 class CreatingCardFragment : Fragment() {
 
@@ -25,11 +28,73 @@ class CreatingCardFragment : Fragment() {
     ): View? {
         binding = FragmentCreatingCardBinding.inflate(layoutInflater)
 
-        binding.addCardButton.setOnClickListener {
+        val firstFragment = CardForCreatingCardFragment()
+        val fragmentManager: FragmentManager? = fragmentManager
+        fragmentManager?.beginTransaction()
+            ?.add(R.id.containerForEditText, firstFragment)
+            ?.commit()
 
+        binding.toPreviousFragment2.setOnClickListener {
+            parentFragmentManager.beginTransaction().remove(this).commit()
+        }
+
+        binding.addCardButton.setOnClickListener {
+            val myFragment = CardForCreatingCardFragment()
+
+            fragmentManager?.beginTransaction()
+                ?.add(R.id.containerForEditText, CardForCreatingCardFragment())
+                ?.commit()
+        }
+
+        binding.redButton.setOnClickListener {
+            changeViewBgColor(R.color.light_red)
+        }
+
+        binding.orangeButton.setOnClickListener {
+            changeViewBgColor(R.color.orange)
+        }
+
+        binding.yellowButton.setOnClickListener {
+            changeViewBgColor(R.color.yellow)
+        }
+
+        binding.lightGreenButton.setOnClickListener {
+            changeViewBgColor(R.color.light_green)
+        }
+
+        binding.darkGreenButton.setOnClickListener {
+            changeViewBgColor(R.color.green)
+        }
+
+        binding.lightBlueButton.setOnClickListener {
+            changeViewBgColor(R.color.light_blue)
+        }
+
+        binding.darkBlueButton.setOnClickListener {
+            changeViewBgColor(R.color.dark_blue)
+        }
+
+        binding.purpleButton.setOnClickListener {
+            changeViewBgColor(R.color.purple)
+        }
+
+        binding.braunButton.setOnClickListener {
+            changeViewBgColor(R.color.braun)
+        }
+
+        binding.whiteButton.setOnClickListener {
+            changeViewBgColor(R.color.light_gray)
         }
 
         return binding.root
+    }
+
+    private fun removeItem(fragment: Fragment) {
+        fragmentManager?.beginTransaction()?.remove(fragment)?.commit()
+    }
+
+    private fun changeViewBgColor(color: Int) {
+        binding.saveCardView.setCardBackgroundColor(resources.getColor(color))
     }
 
     private fun uploadData() {

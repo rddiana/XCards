@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.CreatingNewCardFragment">
+    style="@style/background"
+    tools:context=".presentation.CreatingCardFragment">
 
     <TextView
-        android:id="@+id/textView33"
+        android:id="@+id/numberOfCard"
         style="@style/textStyle_h1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -43,13 +44,6 @@
         app:layout_constraintGuide_percent="0.9" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,10 +60,11 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline19"
         app:layout_constraintStart_toStartOf="@+id/guideline18"
-        app:layout_constraintTop_toTopOf="@+id/guideline17"
+        app:layout_constraintTop_toBottomOf="@+id/numberOfCard"
         tools:ignore="SpeakableTextPresentCheck">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -227,7 +222,7 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/imageView30"
+                        android:id="@+id/pencilIcomImg"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginTop="8dp"
@@ -252,12 +247,13 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView2"
+            <LinearLayout
+                android:id="@+id/containerForEditText"
                 android:name="com.example.xcards.presentation.CardForCreatingCardFragment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/purpleButton" />
@@ -269,10 +265,10 @@
                 android:background="@drawable/gray_ellipse"
                 android:backgroundTint="@color/gray"
                 android:textSize="30sp"
-                app:cardCornerRadius="50dp"
+                app:cardCornerRadius="33dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView2">
+                app:layout_constraintTop_toBottomOf="@+id/containerForEditText">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

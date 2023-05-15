@@ -31,7 +31,8 @@ class MainActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        checkUser()
+//        checkUser()
+
 
         fragmentManager = supportFragmentManager
         turnButtonNavOn(binding.toHomeFragment)
@@ -77,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             binding.toProfileFragment -> fragment = ProfileFragment()
         }
 
-        fragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit()
+        fragmentManager.beginTransaction().replace(R.id.mainFragmentContainer, fragment).commit()
     }
 
     private fun checkUser() {

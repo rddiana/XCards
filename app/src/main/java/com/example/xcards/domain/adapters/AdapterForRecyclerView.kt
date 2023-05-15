@@ -3,13 +3,21 @@ package com.example.xcards.domain.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xcards.R
 import com.example.xcards.data.CardData
+import com.google.android.material.card.MaterialCardView
 
-class AdapterForRecyclerView(var context: Context?, images: ArrayList<*>) :
+class AdapterForRecyclerView(
+    var context: Context?,
+    images: ArrayList<CardData>,
+    val onCardPressed: (CardData) -> Unit,
+    val onPlusPressed: () -> Unit,
+    val onStartPressed: () -> Unit
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var cardsArray: ArrayList<CardData>
 
@@ -36,10 +44,26 @@ class AdapterForRecyclerView(var context: Context?, images: ArrayList<*>) :
 
     // Binding data to the into specified position
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (position - 1 > 0) {
+        if (position - 1 >= 0) {
             val (nameModule, cardsCount) = cardsArray[position - 1]
             (holder as ViewHolder).cardName.text = nameModule
             holder.cardsCount.text = cardsCount.toString()
+
+            val card = holder.itemView as MaterialCardView
+            card.setCardBackgroundColor(cardsArray[position - 1].color)
+            holder.itemView.setOnClickListener {
+                onCardPressed(cardsArray[position - 1])
+            }
+        } else {
+            val holderAsButtonsHolder = holder as? ButtonsViewHolder
+
+            holderAsButtonsHolder?.plusButton?.setOnClickListener {
+                onPlusPressed()
+            }
+
+            holderAsButtonsHolder?.startButton?.setOnClickListener {
+                onStartPressed()
+            }
         }
     }
 
@@ -48,9 +72,15 @@ class AdapterForRecyclerView(var context: Context?, images: ArrayList<*>) :
         return cardsArray.size + 1
     }
 
-    inner class ButtonsViewHolder(view: View?) : RecyclerView.ViewHolder(
-        view!!
-    )
+    inner class ButtonsViewHolder(view: View) : RecyclerView.ViewHolder(view){
+        var plusButton: View
+        var startButton: View
+
+        init {
+            plusButton = view.findViewById(R.id.cardViewWithBtNewCards)
+            startButton = view.findViewById(R.id.cardViewWithBtStart)
+        }
+    }
 
     // Initializing the Views
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

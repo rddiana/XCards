@@ -38,21 +38,45 @@ class StudyRoomFragment : Fragment() {
         val newCard = inflater.inflate(R.layout.card, null) as CardView
 
         val cards: ArrayList<CardData> = List(3) {
-            CardData("Test", 3, Color.valueOf(resources.getColor(R.color.sky_blue)))
+            CardData("Test", 3, R.color.sky_blue)
         } as ArrayList<CardData>
 
         staggeredGridLayoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
         binding.recyclerView.layoutManager = staggeredGridLayoutManager
-        adapterForRecyclerView = AdapterForRecyclerView(context, cards)
+        adapterForRecyclerView =
+            AdapterForRecyclerView(
+                context,
+                cards,
+                { onCardPressed(it) },
+                { onPlusBtPressed() },
+                { onStartPressed() }
+            )
 
         view?.findViewById<CardView>(R.id.cardViewWithBtNewCards)?.setOnClickListener {
-            parentFragmentManager.beginTransaction().add(R.id.fragmentContainer, CreatingCardFragment())
+            parentFragmentManager.beginTransaction()
+                .add(R.id.mainFragmentContainer, CreatingCardFragment())
                 .commit()
         }
 
         binding.recyclerView.adapter = adapterForRecyclerView
 
         return binding.root
+    }
+
+    private fun onCardPressed(cardData: CardData) {
+        parentFragmentManager.beginTransaction()
+            .add(R.id.mainFragmentContainer, EditingCollectionFragment(cardData))
+            .commit()
+    }
+
+    private fun onPlusBtPressed() {
+        parentFragmentManager.beginTransaction()
+            .add(R.id.mainFragmentContainer, CreatingCardFragment())
+            .commit()
+    }
+
+    private fun onStartPressed() {
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

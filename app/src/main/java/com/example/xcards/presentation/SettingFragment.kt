@@ -29,12 +29,11 @@ class SettingFragment : Fragment() {
         setCheckedRadioButton()
 
         binding.toPreviousFragment.setOnClickListener {
-            parentFragmentManager.beginTransaction().replace(R.id.fragmentContainer, ProfileFragment())
-                .commit()
+            parentFragmentManager.beginTransaction().remove(this).commit()
         }
 
         binding.toRemindersFragment.setOnClickListener {
-            parentFragmentManager.beginTransaction().add(R.id.fragmentContainer, RemindersFragment())
+            parentFragmentManager.beginTransaction().add(R.id.mainFragmentContainer, RemindersFragment())
                 .commit()
         }
 

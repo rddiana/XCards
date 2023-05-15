@@ -18,11 +18,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/reminders"
-            app:layout_constraintStart_toEndOf="@+id/imageView28"
+            app:layout_constraintStart_toEndOf="@+id/toPreviousFragment3"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView28"
+            android:id="@+id/toPreviousFragment3"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginStart="24dp"
