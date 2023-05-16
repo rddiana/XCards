@@ -29,66 +29,49 @@ class RemindersFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentRemindersBinding.inflate(layoutInflater)
+
+        val gray = resources.getColor(R.color.gray)
+        val darkGray = resources.getColor(R.color.dark_gray)
+        val black = resources.getColor(R.color.black)
+        val lilac = resources.getColor(R.color.lilac)
 
         val currentNightMode = requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
 
+        val switchIsChecked = binding.switchForReminders.isChecked
+        if (switchIsChecked) {
+            possibilityOfChoiceDays()
+            coordinateColorBtWithSwitch(black, lilac)
+        } else {
+            coordinateColorBtWithSwitch(darkGray, gray)
+        }
+
         binding.switchForReminders.setOnCheckedChangeListener { _, isChecked ->
-            var newColorForText = resources.getColor(R.color.dark_gray)
-            var newColorForButtons = resources.getColor(R.color.gray)
+            var newColorForText = darkGray
+            var newColorForButtons = gray
             var isEnable = false
 
             if (isChecked) {
                 when (currentNightMode) {
                     Configuration.UI_MODE_NIGHT_NO -> {
-                        newColorForText = resources.getColor(R.color.black)
+                        newColorForText = black
                     }
                     Configuration.UI_MODE_NIGHT_YES -> {
-                        newColorForText = resources.getColor(R.color.white)
+                        newColorForText = resources.getColor(R.color.light_gray)
                     }
                 }
 
-                newColorForButtons = resources.getColor(R.color.lilac)
+                possibilityOfChoiceDays()
+
+                newColorForButtons = lilac
                 isEnable = true
             }
 
             binding.buttonViewHours.isEnabled = isEnable
             binding.buttonViewMinutes.isEnabled = isEnable
 
-            setBgColor(listOf(
-                binding.buttonViewHours,
-                binding.buttonViewMinutes,
-                binding.viewLine1,
-                binding.viewLine2
-            ), newColorForText)
-
-            setTextColor(listOf(
-                binding.settingTime,
-                binding.settingTimeAdvise,
-                binding.settingDaysOfWeek,
-                binding.settingDaysOfWeekAdvise
-            ), newColorForText)
-
-            setBgColor(listOf(
-                binding.textMonday,
-                binding.textTuesday,
-                binding.textWednesday,
-                binding.textThursday,
-                binding.textFriday,
-                binding.textSaturday,
-                binding.textSunday
-            ), newColorForButtons)
-
-            if (isChecked) {
-                binding.MondayCardView.setOnClickListener { chooseDayOfWeek(binding.textMonday) }
-                binding.TuesdayCardView.setOnClickListener { chooseDayOfWeek(binding.textTuesday) }
-                binding.WednesdayCardView.setOnClickListener { chooseDayOfWeek(binding.textWednesday) }
-                binding.ThursdayCardView.setOnClickListener { chooseDayOfWeek(binding.textThursday) }
-                binding.FridayCardView.setOnClickListener { chooseDayOfWeek(binding.textFriday) }
-                binding.SaturdayCardView.setOnClickListener { chooseDayOfWeek(binding.textSaturday) }
-                binding.SundayCardView.setOnClickListener { chooseDayOfWeek(binding.textSunday) }
-            }
+            coordinateColorBtWithSwitch(newColorForText, newColorForButtons)
         }
 
         binding.buttonViewHours.setOnClickListener {
@@ -106,13 +89,49 @@ class RemindersFragment : Fragment() {
         return binding.root
     }
 
+    private fun possibilityOfChoiceDays() {
+        binding.MondayCardView.setOnClickListener { chooseDayOfWeek(binding.textMonday) }
+        binding.TuesdayCardView.setOnClickListener { chooseDayOfWeek(binding.textTuesday) }
+        binding.WednesdayCardView.setOnClickListener { chooseDayOfWeek(binding.textWednesday) }
+        binding.ThursdayCardView.setOnClickListener { chooseDayOfWeek(binding.textThursday) }
+        binding.FridayCardView.setOnClickListener { chooseDayOfWeek(binding.textFriday) }
+        binding.SaturdayCardView.setOnClickListener { chooseDayOfWeek(binding.textSaturday) }
+        binding.SundayCardView.setOnClickListener { chooseDayOfWeek(binding.textSunday) }
+    }
+
+    private fun coordinateColorBtWithSwitch(newColorForText: Int, newColorForButtons: Int) {
+        setBgColor(listOf(
+            binding.viewLine1,
+            binding.viewLine2
+        ), newColorForText)
+
+        setTextColor(listOf(
+            binding.settingTime,
+            binding.settingTimeAdvise,
+            binding.settingDaysOfWeek,
+            binding.settingDaysOfWeekAdvise
+        ), newColorForText)
+
+        setBgColor(listOf(
+            binding.buttonViewHours,
+            binding.buttonViewMinutes,
+            binding.textMonday,
+            binding.textTuesday,
+            binding.textWednesday,
+            binding.textThursday,
+            binding.textFriday,
+            binding.textSaturday,
+            binding.textSunday
+        ), newColorForButtons)
+    }
+
     private fun chooseDayOfWeek(view: TextView) {
         if ((view.background as ColorDrawable).color == resources.getColor(R.color.gray)) {
             view.setBackgroundColor(resources.getColor(R.color.lilac))
-            daysOfWeekArray.add(view)
+//            daysOfWeekArray.add(view)
         } else {
             view.setBackgroundColor(resources.getColor(R.color.gray))
-            daysOfWeekArray.remove(view)
+//            daysOfWeekArray.remove(view)
         }
     }
 

@@ -29,6 +29,8 @@ class HomeFragment : Fragment() {
                 .commit()
         }
 
+
+
         return binding.root
     }
 
