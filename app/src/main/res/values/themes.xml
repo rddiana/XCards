@@ -116,6 +116,12 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="immutableMiniTextStyle">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="error">
         <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:textColor">@color/red</item>

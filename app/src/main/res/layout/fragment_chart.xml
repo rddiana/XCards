@@ -42,7 +42,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:id="@+id/view8"
+            android:id="@+id/gradientBackground"
             android:layout_width="160dp"
             android:layout_height="200dp"
             android:background="@drawable/gradient_rectangle"
@@ -51,18 +51,18 @@
             app:layout_constraintTop_toTopOf="@+id/guideline12" />
 
         <TextView
-            android:id="@+id/textView35"
+            android:id="@+id/spendingHoursText"
             style="@style/largeImmutableTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
             android:text="0"
             app:layout_constraintEnd_toStartOf="@+id/guideline11"
-            app:layout_constraintStart_toStartOf="@+id/view8"
+            app:layout_constraintStart_toStartOf="@+id/gradientBackground"
             app:layout_constraintTop_toTopOf="@+id/guideline12" />
 
         <TextView
-            android:id="@+id/textView36"
+            android:id="@+id/spendingHoursComment"
             style="@style/immutableTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -71,8 +71,8 @@
             android:text="@string/hours_for_week"
             android:textAlignment="center"
             app:layout_constraintEnd_toStartOf="@+id/guideline11"
-            app:layout_constraintStart_toStartOf="@+id/view8"
-            app:layout_constraintTop_toBottomOf="@+id/textView35" />
+            app:layout_constraintStart_toStartOf="@+id/gradientBackground"
+            app:layout_constraintTop_toBottomOf="@+id/spendingHoursText" />
 
         <View
             android:id="@+id/grayCardBackground"
