@@ -71,10 +71,6 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
             displayingData.add(NewCardData("test", "test"))
             adapterForNewCards.notifyItemInserted(displayingData.size - 1)
 
-            adapterForNewCards = AdapterForNewCards(
-                context,
-                displayingData)
-
         }
 
         setOnClickListenersForChangingColor()
