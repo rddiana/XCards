@@ -36,7 +36,7 @@
     <string name="dark">Dark</string>
     <string name="reminders">Reminders</string>
     <string name="reminder_explanation">Get a daily learing reminder so you never forget.</string>
-    <string name="hard_repetitions" translatable="false">Hard repetitions</string>
+    <string name="hard_repetitions">Hard repetitions</string>
     <string name="set_goal">Set a goal</string>
     <string name="chart">Chart</string>
     <string name="searching_modules">Find the study module...</string>
@@ -69,4 +69,9 @@
     <string name="place_for_question">Place for your question?</string>
     <string name="place_for_answer">Place for your answer.</string>
     <string name="save">Save</string>
+    <string name="activate_hard_repetitions">Activate hard repetitions</string>
+    <string name="explanation_hard_repetitions">The application window will take up the screen and you will need to pass the test you selected in order to continue using the phone. You can also close the app by clicking on the cross if the time is inconvenient.</string>
+    <string name="set_time_for_hard_repetitions">Set the time</string>
+    <string name="set_day_for_hard_repetitions">Set the day of week</string>
+    <string name="choose_training_module">Choose a training module</string>
 </resources>

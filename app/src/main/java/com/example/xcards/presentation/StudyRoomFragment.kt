@@ -32,9 +32,9 @@ class StudyRoomFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStudyRoomBinding.inflate(layoutInflater)
-
-        val buttonsAsCard = inflater.inflate(R.layout.buttons, null) as CardView
-        val newCard = inflater.inflate(R.layout.card, null) as CardView
+//
+//        val buttonsAsCard = inflater.inflate(R.layout.buttons, null) as CardView
+//        val newCard = inflater.inflate(R.layout.card, null) as CardView
 
         val cards: ArrayList<CardData> = List(3) {
             CardData("Test", 3, R.color.sky_blue)
@@ -53,7 +53,7 @@ class StudyRoomFragment : Fragment() {
 
         view?.findViewById<CardView>(R.id.cardViewWithBtNewCards)?.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .add(R.id.mainFragmentContainer, CreatingCardFragment())
+                .add(R.id.mainFragmentContainer, CreatingCardFragment(null))
                 .commit()
         }
 
@@ -70,7 +70,7 @@ class StudyRoomFragment : Fragment() {
 
     private fun onPlusBtPressed() {
         parentFragmentManager.beginTransaction()
-            .add(R.id.mainFragmentContainer, CreatingCardFragment())
+            .add(R.id.mainFragmentContainer, CreatingCardFragment(null))
             .commit()
     }
 

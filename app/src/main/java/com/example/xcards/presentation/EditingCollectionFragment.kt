@@ -36,7 +36,7 @@ class EditingCollectionFragment(private val cardData: CardData) : Fragment() {
 
         binding.editButton.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .add(R.id.mainFragmentContainer, CreatingCardFragment())
+                .add(R.id.mainFragmentContainer, CreatingCardFragment(binding.cardName.toString()))
                 .commit()
         }
 

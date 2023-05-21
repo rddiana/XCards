@@ -62,4 +62,10 @@
     <string name="place_for_question">Место для вопроса?</string>
     <string name="place_for_answer">Место для ответа.</string>
     <string name="save">Сохранить</string>
+    <string name="hard_repetitions">Упорное повторение</string>
+    <string name="activate_hard_repetitions">Включить функцию</string>
+    <string name="explanation_hard_repetitions">Окно приложения займет весь экран, и вам нужно будет пройти выбранный вами тест, чтобы продолжить пользоваться телефоном. Вы также всегда сможете закрыть приложение, нажав на крестик, если время неподходящее.</string>
+    <string name="set_time_for_hard_repetitions">Установка времени</string>
+    <string name="set_day_for_hard_repetitions">Выбор дней недели</string>
+    <string name="choose_training_module">Выберете модуль для повторения</string>
 </resources>

@@ -249,13 +249,12 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/containerForCreatingCardsFragments"
                 android:name="com.example.xcards.presentation.CardForCreatingCardFragment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/purpleButton" />
@@ -264,6 +263,7 @@
                 android:id="@+id/addCardButton"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/gray_ellipse"
                 android:backgroundTint="@color/gray"
                 android:textSize="30sp"

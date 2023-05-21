@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.xcards.R
 import com.example.xcards.data.NewCardData
 import com.example.xcards.databinding.FragmentCreatingCardBinding
@@ -19,12 +21,14 @@ import com.google.firebase.ktx.Firebase
 class CreatingCardFragment(val nameCollection: String?) : Fragment() {
 
     private lateinit var binding: FragmentCreatingCardBinding
-    private var newCardArray: ArrayList<NewCardData>  = ArrayList()
+    private var displayingData: ArrayList<NewCardData>  = ArrayList()
 
     private lateinit var database: DatabaseReference
-    private val userEmail = FirebaseAuth.getInstance().currentUser?.email.toString()
+    private val id = FirebaseAuth.getInstance().currentUser?.uid.toString()
 
     private lateinit var adapterForNewCards: AdapterForNewCards
+    private lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
+
 //
 //    companion object {
 //        fun newInstance() = CreatingCardFragment()
@@ -40,32 +44,37 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
 
         database = Firebase.database.reference
 
-        adapterForNewCards = AdapterForNewCards(
-            context,
-            newCardArray)
-
-        nameCollection?.let {
-            database.child(userEmail).child(it).get().addOnCompleteListener { snapshot ->
-                val displayingData = snapshot.result.value as? ArrayList<NewCardData>
-            } }
+//        nameCollection?.let {
+//            database.child(id).child(it).get().addOnCompleteListener { snapshot ->
+//                val displayingData = snapshot.result.value as? ArrayList<NewCardData>
+//            } }
 
         if (nameCollection != null) {
-//            adapterForNewCards = AdapterForNewCards(
-//                context,
-//                database.child(userEmail).child(nameCollection).get() as ArrayList<NewCardData>)
-        } else {
-
+            nameCollection?.let {
+                database.child(id).child(it).get().addOnCompleteListener { snapshot ->
+                    displayingData = (snapshot.result.value as? ArrayList<NewCardData>)!!
+                } }
         }
 
+        staggeredGridLayoutManager = StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)
+        binding.containerForCreatingCardsFragments.layoutManager = staggeredGridLayoutManager
 
+        adapterForNewCards = AdapterForNewCards(
+            context,
+            displayingData)
 
         binding.toPreviousFragment2.setOnClickListener {
             parentFragmentManager.beginTransaction().remove(this).commit()
         }
 
         binding.addCardButton.setOnClickListener {
-            newCardArray.add(NewCardData("test", "test"))
-            adapterForNewCards.notifyItemInserted(newCardArray.size - 1)
+            displayingData.add(NewCardData("test", "test"))
+            adapterForNewCards.notifyItemInserted(displayingData.size - 1)
+
+            adapterForNewCards = AdapterForNewCards(
+                context,
+                displayingData)
+
         }
 
         setOnClickListenersForChangingColor()
@@ -84,9 +93,7 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
     private fun uploadData() {
         binding.saveCardView.setOnClickListener {
 
-
-
-            database.child(userEmail).child(getCollectionName()).setValue(newCardArray)
+            database.child(id).child(getCollectionName()).setValue(displayingData)
         }
     }
 
