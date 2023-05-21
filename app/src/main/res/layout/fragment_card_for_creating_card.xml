@@ -40,7 +40,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
-                android:id="@+id/numberOfCard"
+                android:id="@+id/positionText"
                 style="@style/immutableTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
@@ -65,7 +65,7 @@
                 android:hint="@string/place_for_question"
                 android:inputType="textMultiLine"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/numberOfCard"
+                app:layout_constraintStart_toEndOf="@+id/positionText"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TouchTargetSizeCheck" />
 
@@ -85,7 +85,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/numberOfCard"
+                app:layout_constraintStart_toEndOf="@+id/positionText"
                 app:layout_constraintTop_toBottomOf="@+id/editTextForQuestion"
                 tools:ignore="TouchTargetSizeCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>

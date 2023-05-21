@@ -5,20 +5,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.example.xcards.R
+import com.example.xcards.data.NewCardData
 import com.example.xcards.databinding.FragmentCreatingCardBinding
+import com.example.xcards.domain.adapters.AdapterForNewCards
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 
-class CreatingCardFragment : Fragment() {
+class CreatingCardFragment(val nameCollection: String?) : Fragment() {
 
     private lateinit var binding: FragmentCreatingCardBinding
-    private lateinit var newModuleCardsData: HashMap<String, String>
+    private var newCardArray: ArrayList<NewCardData>  = ArrayList()
 
-    companion object {
-        fun newInstance() = CreatingCardFragment()
-    }
+    private lateinit var database: DatabaseReference
+    private val userEmail = FirebaseAuth.getInstance().currentUser?.email.toString()
+
+    private lateinit var adapterForNewCards: AdapterForNewCards
+//
+//    companion object {
+//        fun newInstance() = CreatingCardFragment()
+//    }
 
     private lateinit var viewModel: CreatingCardViewModel
 
@@ -28,24 +38,67 @@ class CreatingCardFragment : Fragment() {
     ): View? {
         binding = FragmentCreatingCardBinding.inflate(layoutInflater)
 
-        val firstFragment = CardForCreatingCardFragment()
-        val fragmentManager: FragmentManager? = fragmentManager
-        fragmentManager?.beginTransaction()
-            ?.add(R.id.containerForEditText, firstFragment)
-            ?.commit()
+        database = Firebase.database.reference
+
+        adapterForNewCards = AdapterForNewCards(
+            context,
+            newCardArray)
+
+        nameCollection?.let {
+            database.child(userEmail).child(it).get().addOnCompleteListener { snapshot ->
+                val displayingData = snapshot.result.value as? ArrayList<NewCardData>
+            } }
+
+        if (nameCollection != null) {
+//            adapterForNewCards = AdapterForNewCards(
+//                context,
+//                database.child(userEmail).child(nameCollection).get() as ArrayList<NewCardData>)
+        } else {
+
+        }
+
+
 
         binding.toPreviousFragment2.setOnClickListener {
             parentFragmentManager.beginTransaction().remove(this).commit()
         }
 
         binding.addCardButton.setOnClickListener {
-            val myFragment = CardForCreatingCardFragment()
-
-            fragmentManager?.beginTransaction()
-                ?.add(R.id.containerForEditText, CardForCreatingCardFragment())
-                ?.commit()
+            newCardArray.add(NewCardData("test", "test"))
+            adapterForNewCards.notifyItemInserted(newCardArray.size - 1)
         }
 
+        setOnClickListenersForChangingColor()
+
+        return binding.root
+    }
+
+    private fun removeItem(fragment: Fragment) {
+        fragmentManager?.beginTransaction()?.remove(fragment)?.commit()
+    }
+
+    private fun changeViewBgColor(color: Int) {
+        binding.saveCardView.setCardBackgroundColor(resources.getColor(color))
+    }
+
+    private fun uploadData() {
+        binding.saveCardView.setOnClickListener {
+
+
+
+            database.child(userEmail).child(getCollectionName()).setValue(newCardArray)
+        }
+    }
+
+    private fun getCardsInfo() {
+
+    }
+
+    private fun getCollectionName(): String {
+        return binding.newNameCollectionText.text.toString()
+    }
+
+    private fun setOnClickListenersForChangingColor() {
         binding.redButton.setOnClickListener {
             changeViewBgColor(R.color.light_red)
         }
@@ -86,35 +139,6 @@ class CreatingCardFragment : Fragment() {
             changeViewBgColor(R.color.light_gray)
         }
 
-        return binding.root
-    }
-
-    private fun removeItem(fragment: Fragment) {
-        fragmentManager?.beginTransaction()?.remove(fragment)?.commit()
-    }
-
-    private fun changeViewBgColor(color: Int) {
-        binding.saveCardView.setCardBackgroundColor(resources.getColor(color))
-    }
-
-    private fun uploadData() {
-        binding!!.saveCardView.setOnClickListener {
-//            newModuleCardsData = hashMapOf<String, String>(
-//                "name" to "John doe",
-//                "city" to "Nairobi"
-//            )
-
-//            FirebaseUtils().fireStoreDatabase.collection("users")
-//                .document(userEmail)
-//                .collection("cards")
-//                .add(newModuleCards)
-//                .addOnSuccessListener {
-//                    Log.d(TAG, "Added document with ID ${it.id}")
-//                }
-//                .addOnFailureListener {
-//                    Log.w(TAG, "Error with adding document")
-//                }
-        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

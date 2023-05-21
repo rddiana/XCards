@@ -5,10 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.xcards.R
 import com.example.xcards.databinding.FragmentCardForCreatingCardBinding
-import com.google.firebase.database.core.Context
+import com.google.android.material.card.MaterialCardView
 
 class CardForCreatingCardFragment() : Fragment() {
     private lateinit var binding: FragmentCardForCreatingCardBinding
@@ -25,5 +24,18 @@ class CardForCreatingCardFragment() : Fragment() {
 
         return binding.root
     }
+
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        view?.findViewById<MaterialCardView>(R.id.saveCardView)?.setOnClickListener {
+//            val bundleForQuestion = Bundle()
+//            bundleForQuestion.putString("question", binding.editTextForQuestion.text.toString())
+//
+//
+//            val bundleForAnswer = Bundle()
+//            bundleForAnswer.putString("answer", binding.editTextForAnswer.text.toString())
+//        }
+//    }
 
 }
