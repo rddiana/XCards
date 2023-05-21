@@ -55,7 +55,7 @@
 
             <TextView
                 android:id="@+id/textViewUserName"
-                style="@style/bigTextStyle"
+                style="@style/textStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -92,7 +92,7 @@
 
             <TextView
                 android:id="@+id/textViewEmail"
-                style="@style/bigTextStyle"
+                style="@style/textStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

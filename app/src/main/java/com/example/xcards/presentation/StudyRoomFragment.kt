@@ -13,13 +13,22 @@ import com.example.xcards.R
 import com.example.xcards.data.CardData
 import com.example.xcards.databinding.FragmentStudyRoomBinding
 import com.example.xcards.domain.adapters.AdapterForRecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class StudyRoomFragment : Fragment() {
     private lateinit var binding: FragmentStudyRoomBinding
     private lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
     private lateinit var adapterForRecyclerView: AdapterForRecyclerView
+
+    private lateinit var database: DatabaseReference
+    private lateinit var currentUser: FirebaseUser
 
     companion object {
         fun newInstance() = StudyRoomFragment()
@@ -32,13 +41,13 @@ class StudyRoomFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStudyRoomBinding.inflate(layoutInflater)
-//
-//        val buttonsAsCard = inflater.inflate(R.layout.buttons, null) as CardView
-//        val newCard = inflater.inflate(R.layout.card, null) as CardView
 
         val cards: ArrayList<CardData> = List(3) {
             CardData("Test", 3, R.color.sky_blue)
         } as ArrayList<CardData>
+
+        database = Firebase.database.reference
+        currentUser = FirebaseAuth.getInstance().currentUser!!
 
         staggeredGridLayoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
         binding.recyclerView.layoutManager = staggeredGridLayoutManager

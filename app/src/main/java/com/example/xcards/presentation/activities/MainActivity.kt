@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+        startActivity(Intent(this, OnboardingActivity::class.java))
+
 //        checkUser()
 
 

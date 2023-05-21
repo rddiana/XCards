@@ -8,20 +8,20 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.xcards.R
-import com.example.xcards.data.User
+import com.example.xcards.data.UserData
 import com.example.xcards.databinding.ActivityRegistrationBinding
 import com.example.xcards.domain.repositories.RegistrationRepository
 import com.example.xcards.domain.repositories.SharedPreferencesRepository
 import com.example.xcards.domain.useCase.FirebaseUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
     private lateinit var binding: ActivityRegistrationBinding
 
     private lateinit var sharedPreferencesRepository: SharedPreferencesRepository
-
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: DatabaseReference
@@ -44,7 +44,7 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
         progressDialog.setCanceledOnTouchOutside(false)
 
         firebaseAuth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance().getReference("Users")
+        database = Firebase.database.reference
 
         binding.materialButtonNext.setOnClickListener {
             validateData()
@@ -73,7 +73,6 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
         } else if (password != confirmedPassword) {
             binding.textViewForMessage2.text = getString(R.string.no_matching_passwords)
         } else {
-            createDataBase()
             firebaseSignUp()
         }
     }
@@ -81,15 +80,12 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
     override fun firebaseSignUp() {
         progressDialog.show()
 
-        val user = User(fullName, userEmail)
-//        database.child(userEmail).setValue(user)
-
         firebaseAuth.createUserWithEmailAndPassword(userEmail, password)
             .addOnSuccessListener {
                 progressDialog.dismiss()
-
-                val firebaseUser = firebaseAuth.currentUser
-                val email = firebaseUser!!.email
+//
+//                val firebaseUser = firebaseAuth.currentUser
+//                val email = firebaseUser!!.email
 
 //                sharedPreferencesRepository = SharedPreferencesRepositoryImpl(this)
 //                sharedPreferencesRepository.saveString(
@@ -100,6 +96,7 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
 //                    Constants.EMAIL_KEY_PREF,
 //                    binding.editTextEmailAddress.text.toString()
 //                )
+                createDataBase()
 
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
@@ -112,17 +109,11 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
     }
 
     private fun createDataBase() {
-        val personalUserData = hashMapOf<String, Any>(
-                "name" to fullName,
-                "email" to userEmail
-            )
+        val personalUserData = UserData(fullName, userEmail)
 
-        FirebaseUtils().fireStoreDatabase
-            .collection("users/${userEmail}/data")
-            .add(personalUserData)
-            .addOnFailureListener {
-                Toast.makeText(this, "Sorry, adding your data failed", Toast.LENGTH_SHORT)
-                    .show()
-            }
+        firebaseAuth.currentUser?.let {
+            database.child("usersPersonalData").child(it.uid).child("name").setValue(fullName)
+            database.child("usersPersonalData").child(it.uid).child("email").setValue(userEmail)
+        }
     }
 }

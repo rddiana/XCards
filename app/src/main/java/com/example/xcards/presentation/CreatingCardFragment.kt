@@ -29,7 +29,7 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
     private lateinit var adapterForNewCards: AdapterForNewCards
     private lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
 
-//
+
 //    companion object {
 //        fun newInstance() = CreatingCardFragment()
 //    }
@@ -67,12 +67,13 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
             parentFragmentManager.beginTransaction().remove(this).commit()
         }
 
-        binding.addCardButton.setOnClickListener {
-            displayingData.add(NewCardData("test", "test"))
-            adapterForNewCards.notifyItemInserted(displayingData.size - 1)
+//        binding.addCardButton.setOnClickListener {
+//            displayingData.add(NewCardData("test", "test"))
+//            adapterForNewCards.notifyItemInserted(displayingData.size - 1)
+//
+//        }
 
-        }
-
+        uploadData()
         setOnClickListenersForChangingColor()
 
         return binding.root
@@ -82,14 +83,20 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
         fragmentManager?.beginTransaction()?.remove(fragment)?.commit()
     }
 
-    private fun changeViewBgColor(color: Int) {
-        binding.saveCardView.setCardBackgroundColor(resources.getColor(color))
-    }
-
     private fun uploadData() {
         binding.saveCardView.setOnClickListener {
+            database
+                .child(id)
+                .child("cards")
+                .child(getCollectionName())
+                .setValue(displayingData)
 
-            database.child(id).child(getCollectionName()).setValue(displayingData)
+            database
+                .child(id)
+                .child("cards")
+                .child(getCollectionName())
+                .child("info")
+                .setValue(binding.saveCardView.cardBackgroundColor.defaultColor)
         }
     }
 
@@ -99,6 +106,10 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
 
     private fun getCollectionName(): String {
         return binding.newNameCollectionText.text.toString()
+    }
+
+    private fun changeViewBgColor(color: Int) {
+        binding.saveCardView.setCardBackgroundColor(resources.getColor(color))
     }
 
     private fun setOnClickListenersForChangingColor() {
@@ -141,7 +152,6 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
         binding.whiteButton.setOnClickListener {
             changeViewBgColor(R.color.light_gray)
         }
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
