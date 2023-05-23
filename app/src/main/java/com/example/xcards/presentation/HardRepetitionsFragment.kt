@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.xcards.R
+import com.example.xcards.databinding.FragmentHardRepetitionsBinding
 
 class HardRepetitionsFragment : Fragment() {
+    private lateinit var binding: FragmentHardRepetitionsBinding
 
     companion object {
         fun newInstance() = HardRepetitionsFragment()
@@ -20,7 +22,8 @@ class HardRepetitionsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_hard_repetitions, container, false)
+        binding = FragmentHardRepetitionsBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

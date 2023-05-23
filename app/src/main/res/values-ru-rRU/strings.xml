@@ -59,7 +59,7 @@
         <item>Русский</item>
     </string-array>
     <string name="creating_new_cards">Создание новых карточек</string>
-    <string name="place_for_question">Место для вопроса?</string>
+    <string name="place_for_question_with_mark">Место для вопроса?</string>
     <string name="place_for_answer">Место для ответа.</string>
     <string name="save">Сохранить</string>
     <string name="hard_repetitions">Упорное повторение</string>
@@ -68,4 +68,9 @@
     <string name="set_time_for_hard_repetitions">Установка времени</string>
     <string name="set_day_for_hard_repetitions">Выбор дней недели</string>
     <string name="choose_training_module">Выберете модуль для повторения</string>
+    <string name="place_for_question">Тут будут наши воросы.</string>
+    <string name="instruction">Если вы помните ответ, проведите пальцем вправо. Иначе - влево.</string>
+    <string name="answer_honestly">Отвечайте честно, пожалуйста.</string>
+    <string name="place_for_fact">Факт о вас или что-нибудь еще для напоминания.</string>
+    <string name="other_side_with_answer">Другая сторона с ответом</string>
 </resources>

@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.xcards.R
-import com.example.xcards.data.NewCardData
+import com.example.xcards.data.CardContentData
 import com.example.xcards.databinding.FragmentCreatingCardBinding
 import com.example.xcards.domain.adapters.AdapterForNewCards
+import com.example.xcards.domain.useCase.SharedPreference
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -21,14 +23,15 @@ import com.google.firebase.ktx.Firebase
 class CreatingCardFragment(val nameCollection: String?) : Fragment() {
 
     private lateinit var binding: FragmentCreatingCardBinding
-    private var displayingData: ArrayList<NewCardData>  = ArrayList()
+    private var displayingData: ArrayList<CardContentData>  = ArrayList()
 
     private lateinit var database: DatabaseReference
-    private val id = FirebaseAuth.getInstance().currentUser?.uid.toString()
+    private lateinit var sharedPreference: SharedPreference
+
+    private lateinit var id: String
 
     private lateinit var adapterForNewCards: AdapterForNewCards
-    private lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
-
+    private lateinit var gridLayoutManager: GridLayoutManager
 
 //    companion object {
 //        fun newInstance() = CreatingCardFragment()
@@ -43,35 +46,39 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
         binding = FragmentCreatingCardBinding.inflate(layoutInflater)
 
         database = Firebase.database.reference
+        sharedPreference = SharedPreference(requireContext().applicationContext)
+        id = sharedPreference.getValueString("uid").toString()
+
 
 //        nameCollection?.let {
 //            database.child(id).child(it).get().addOnCompleteListener { snapshot ->
 //                val displayingData = snapshot.result.value as? ArrayList<NewCardData>
 //            } }
 
-        if (nameCollection != null) {
-            nameCollection?.let {
-                database.child(id).child(it).get().addOnCompleteListener { snapshot ->
-                    displayingData = (snapshot.result.value as? ArrayList<NewCardData>)!!
-                } }
+        nameCollection?.let {
+            database.child(id).child("cardCollection").child(it).child("cards")
+                .get().addOnCompleteListener { snapshot ->
+                displayingData = (snapshot.result.value as? ArrayList<CardContentData>)!!
+            }
         }
-
-        staggeredGridLayoutManager = StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)
-        binding.containerForCreatingCardsFragments.layoutManager = staggeredGridLayoutManager
 
         adapterForNewCards = AdapterForNewCards(
             context,
-            displayingData)
+            displayingData
+        )
+
+        gridLayoutManager = GridLayoutManager(context, 1)
+        binding.containerForCreatingCardsFragments.layoutManager = gridLayoutManager
+        binding.containerForCreatingCardsFragments.adapter = adapterForNewCards
 
         binding.toPreviousFragment2.setOnClickListener {
             parentFragmentManager.beginTransaction().remove(this).commit()
         }
 
-//        binding.addCardButton.setOnClickListener {
-//            displayingData.add(NewCardData("test", "test"))
-//            adapterForNewCards.notifyItemInserted(displayingData.size - 1)
-//
-//        }
+        binding.addCardButton.setOnClickListener {
+            displayingData.add(CardContentData("", ""))
+            adapterForNewCards.notifyItemInserted(displayingData.size - 1)
+        }
 
         uploadData()
         setOnClickListenersForChangingColor()
@@ -87,8 +94,9 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
         binding.saveCardView.setOnClickListener {
             database
                 .child(id)
-                .child("cards")
+                .child("cardCollection")
                 .child(getCollectionName())
+                .child("cards")
                 .setValue(displayingData)
 
             database
@@ -96,16 +104,65 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
                 .child("cards")
                 .child(getCollectionName())
                 .child("info")
+                .child("color")
                 .setValue(binding.saveCardView.cardBackgroundColor.defaultColor)
+
+            database
+                .child(id)
+                .child("cards")
+                .child(getCollectionName())
+                .child("info")
+                .child("cardsCount")
+                .setValue(displayingData.size)
+
+            var confirmedNameCollection = nameCollection.toString()
+            val newNameCollection = binding.newNameCollectionText.text.toString()
+
+            var cardsRef = database.child(id).child("cardCollections")
+
+            if (!confirmedNameCollection.isNullOrEmpty() &&
+                ((confirmedNameCollection == newNameCollection || newNameCollection.isNullOrEmpty()))
+            ) {
+                /*
+                Сохранение изменений, если:
+                - Имя коллекции существовало (1) и не изменилось. (2.1)
+                - Новое введенное имя из EditText пустое и null, а уже существующее значение - нет.
+                 */
+                cardsRef.child(confirmedNameCollection).child("cards").setValue(displayingData)
+            }else if(confirmedNameCollection.isNullOrBlank() && !newNameCollection.isNullOrEmpty()) {
+                /*
+                Создание коллекции в базе, если:
+                - Коллекции до этого не существовало, а новое введенное имя из EditText не пустое и не null
+                 */
+                cardsRef.child(newNameCollection).child("cards").setValue(displayingData)
+            } else if (!newNameCollection.isNullOrEmpty()) {
+                /*
+                Удаление старой ветви и создание новой с измененным названием, если:
+                - имя изменено, причем новое введенное имя из EditText не пустое и не null
+                 */
+                cardsRef.child(nameCollection.toString()).removeValue()
+                cardsRef.child(newNameCollection).child("cards").setValue(displayingData)
+            } else {
+                /*
+                Ошибка, если
+                - И старое, и новое название пустые или null
+                 */
+            }
+
+            /*
+            Также нужна проверка на:
+            - Коллекций с одинаковыми именами не должно быть в базе
+             */
         }
-    }
-
-    private fun getCardsInfo() {
-
     }
 
     private fun getCollectionName(): String {
         return binding.newNameCollectionText.text.toString()
+    }
+
+    private fun onCardDeletion(displayingCardsArray: ArrayList<CardContentData>, position: Int) {
+        displayingCardsArray.removeAt(position)
+        adapterForNewCards.notifyItemInserted(position)
     }
 
     private fun changeViewBgColor(color: Int) {

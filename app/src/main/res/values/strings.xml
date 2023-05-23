@@ -66,7 +66,7 @@
     </string-array>
     <string name="creating_new_cards">Creating new cards</string>
     <string name="card" translatable="false">Card</string>
-    <string name="place_for_question">Place for your question?</string>
+    <string name="place_for_question_with_mark">Place for your question?</string>
     <string name="place_for_answer">Place for your answer.</string>
     <string name="save">Save</string>
     <string name="activate_hard_repetitions">Activate hard repetitions</string>
@@ -74,4 +74,9 @@
     <string name="set_time_for_hard_repetitions">Set the time</string>
     <string name="set_day_for_hard_repetitions">Set the day of week</string>
     <string name="choose_training_module">Choose a training module</string>
+    <string name="place_for_question">This is the place for a question.</string>
+    <string name="instruction">If you remember the answer, swipe right. Otherwise - left.</string>
+    <string name="answer_honestly">Answer honestly, please.</string>
+    <string name="place_for_fact">A fact about you or something else for flashback.</string>
+    <string name="other_side_with_answer">The other side with answer</string>
 </resources>

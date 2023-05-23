@@ -37,6 +37,11 @@ class SettingFragment : Fragment() {
                 .commit()
         }
 
+        binding.toHardRepetionsFragment.setOnClickListener {
+            parentFragmentManager.beginTransaction().add(R.id.mainFragmentContainer, HardRepetitionsFragment())
+                .commit()
+        }
+
         binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.toLightTheme -> {

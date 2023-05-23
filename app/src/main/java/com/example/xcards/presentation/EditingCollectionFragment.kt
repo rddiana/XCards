@@ -41,7 +41,9 @@ class EditingCollectionFragment(private val cardData: CardData) : Fragment() {
         }
 
         binding.mainCard.setOnClickListener {
-
+            parentFragmentManager.beginTransaction()
+                .add(R.id.mainFragmentContainer, DisplayingCardsPreviewFragment())
+                .commit()
         }
 
         return binding.root

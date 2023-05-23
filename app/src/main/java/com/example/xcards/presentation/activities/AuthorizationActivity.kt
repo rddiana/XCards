@@ -9,15 +9,20 @@ import android.util.Patterns
 import android.widget.Toast
 import com.example.xcards.databinding.ActivityAuthorizationBinding
 import com.example.xcards.domain.repositories.AuthorizationRepository
+import com.example.xcards.domain.useCase.SharedPreference
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 
 class AuthorizationActivity : AppCompatActivity(), AuthorizationRepository {
     private lateinit var binding: ActivityAuthorizationBinding
+
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var sharedPreference: SharedPreference
+    private lateinit var database: DatabaseReference
 
     private lateinit var progressDialog: ProgressDialog
 
-    private var email = ""
+    private var userEmail = ""
     private var password = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +36,7 @@ class AuthorizationActivity : AppCompatActivity(), AuthorizationRepository {
         progressDialog.setCanceledOnTouchOutside(false)
 
         firebaseAuth = FirebaseAuth.getInstance()
-
+        sharedPreference = SharedPreference(applicationContext)
 
         binding.materialButtonNext.setOnClickListener {
             validateData()
@@ -44,14 +49,15 @@ class AuthorizationActivity : AppCompatActivity(), AuthorizationRepository {
     }
 
     override fun validateData() {
-        email = binding.emailAddressEditText.text.toString().trim()
+        userEmail = binding.emailAddressEditText.text.toString().trim()
         password = binding.editTextPassword.text.toString().trim()
 
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if(!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()){
             binding.emailAddressEditText.error = "Invalid email format"
         } else if (TextUtils.isEmpty(password)) {
             binding.editTextPassword.error = "Please, enter password"
         } else {
+            initDataBase()
             firebaseLogin()
         }
     }
@@ -59,7 +65,7 @@ class AuthorizationActivity : AppCompatActivity(), AuthorizationRepository {
     override fun firebaseLogin() {
         progressDialog.show()
 
-        firebaseAuth.signInWithEmailAndPassword(email, password)
+        firebaseAuth.signInWithEmailAndPassword(userEmail, password)
             .addOnSuccessListener {
                 val firebaseUser = firebaseAuth.currentUser
                 val email = firebaseUser!!.email
@@ -71,5 +77,24 @@ class AuthorizationActivity : AppCompatActivity(), AuthorizationRepository {
                 progressDialog.dismiss()
                 Toast.makeText(this, "Authorization failed due to ${e.message}", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun initDataBase() {
+        firebaseAuth.currentUser?.let {
+            val fullName = database
+                .child("usersPersonalData")
+                .child(it.uid).child("name")
+                .get().toString()
+
+            val userEmail = database
+                .child("usersPersonalData")
+                .child(it.uid)
+                .child("email")
+                .get().toString()
+
+            sharedPreference.save("uid", it.uid)
+            sharedPreference.save("email", userEmail)
+            sharedPreference.save("userName", fullName)
+        }
     }
 }

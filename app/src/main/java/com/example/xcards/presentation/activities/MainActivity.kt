@@ -31,10 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        startActivity(Intent(this, OnboardingActivity::class.java))
-
-//        checkUser()
-
+        checkUser()
 
         fragmentManager = supportFragmentManager
         turnButtonNavOn(binding.toHomeFragment)

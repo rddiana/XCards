@@ -11,74 +11,43 @@ import androidx.cardview.widget.CardView
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xcards.R
-import com.example.xcards.data.NewCardData
+import com.example.xcards.data.CardContentData
 
 class AdapterForNewCards(
     var context: Context?,
-    var displayingCardsArray: ArrayList<NewCardData>,
-    var onCardDeletion: ((NewCardData) -> Unit)? = null
-) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == 0){
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.plus_round_button, parent, false)
-            return ButtonViewHolder(view)
-        } else {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_card_for_creating_card, parent, false)
-            return ViewHolder(view)
-        }
+    var newCardsArray: ArrayList<CardContentData>,
+    var onCardDeletion: ((CardContentData) -> Unit)? = null
+): RecyclerView.Adapter<AdapterForNewCards.ViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterForNewCards.ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_card_for_creating_card, parent, false)
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (position == displayingCardsArray.size || displayingCardsArray.size == 0) {
-            val holderAsButtonsHolder = holder as? AdapterForRecyclerView.ButtonsViewHolder
+    @SuppressLint("SetTextI18n")
+    override fun onBindViewHolder(holder: AdapterForNewCards.ViewHolder, position: Int) {
+        val displayingCard = newCardsArray[position]
+        holder.answer.setText(displayingCard.answer)
+        holder.question.setText(displayingCard.question)
+        holder.positionNumberText.text = (position + 1).toString()
 
-            holderAsButtonsHolder?.plusButton?.setOnClickListener {
-                displayingCardsArray.add(NewCardData("test", "test"))
-            }
-
-        } else {
-            val displayingCard = displayingCardsArray[position]
-
-            (holder as ViewHolder).answer.setText(displayingCard.answer)
-            holder.question.setText(displayingCard.question)
-            holder.positionNumberText.text = (position + 1).toString()
-
-            holder.deletionCard.setOnClickListener {
-                onCardDeletion?.invoke(displayingCard)
-            }
-
-            holder.answer.doOnTextChanged { text, _, _, _ ->
-                displayingCardsArray[position] =
-                    displayingCardsArray[position].copy(answer = text as String)
-            }
-
-            holder.question.doOnTextChanged { text, _, _, _ ->
-                displayingCardsArray[position] =
-                    displayingCardsArray[position].copy(question = text as String)
-            }
+        holder.answer.doOnTextChanged { _, _, _, _ ->
+            val newText = holder.answer.text.toString()
+            newCardsArray[position] = newCardsArray[position].copy(answer = newText)
         }
-    }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (position == displayingCardsArray.size || displayingCardsArray.size == 0) 0 else 1
-        /*
-            0 - plus round button
-            1 - card for creating card
-         */
+        holder.question.doOnTextChanged { _, _, _, _ ->
+            val newText = holder.question.text.toString()
+            newCardsArray[position] = newCardsArray[position].copy(question = newText)
+        }
+
+        holder.deletionCard.setOnClickListener {
+            newCardsArray.removeAt(position)
+            this.notifyDataSetChanged()
+        }
     }
 
     override fun getItemCount(): Int {
-        return displayingCardsArray.size
-    }
-
-    inner class ButtonViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var plusButton: View
-
-        init {
-            plusButton = view.findViewById(R.id.plusRoundButton)
-        }
+        return newCardsArray.size
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
