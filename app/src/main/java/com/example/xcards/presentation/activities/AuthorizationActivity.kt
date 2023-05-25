@@ -9,6 +9,7 @@ import android.util.Patterns
 import android.widget.Toast
 import com.example.xcards.databinding.ActivityAuthorizationBinding
 import com.example.xcards.domain.repositories.AuthorizationRepository
+import com.example.xcards.domain.useCase.FirebaseDatabase
 import com.example.xcards.domain.useCase.SharedPreference
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -18,7 +19,7 @@ class AuthorizationActivity : AppCompatActivity(), AuthorizationRepository {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var sharedPreference: SharedPreference
-    private lateinit var database: DatabaseReference
+    private lateinit var database: FirebaseDatabase
 
     private lateinit var progressDialog: ProgressDialog
 
@@ -37,6 +38,7 @@ class AuthorizationActivity : AppCompatActivity(), AuthorizationRepository {
 
         firebaseAuth = FirebaseAuth.getInstance()
         sharedPreference = SharedPreference(applicationContext)
+        database = FirebaseDatabase()
 
         binding.materialButtonNext.setOnClickListener {
             validateData()
@@ -80,21 +82,10 @@ class AuthorizationActivity : AppCompatActivity(), AuthorizationRepository {
     }
 
     private fun initDataBase() {
-        firebaseAuth.currentUser?.let {
-            val fullName = database
-                .child("usersPersonalData")
-                .child(it.uid).child("name")
-                .get().toString()
+        val userName = database.getPersonalData("name")
+        val userEmail = database.getPersonalData("email")
 
-            val userEmail = database
-                .child("usersPersonalData")
-                .child(it.uid)
-                .child("email")
-                .get().toString()
-
-            sharedPreference.save("uid", it.uid)
-            sharedPreference.save("email", userEmail)
-            sharedPreference.save("userName", fullName)
-        }
+        sharedPreference.save("name", userName)
+        sharedPreference.save("email", userEmail)
     }
 }

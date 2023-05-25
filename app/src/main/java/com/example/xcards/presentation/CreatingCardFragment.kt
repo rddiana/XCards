@@ -24,7 +24,7 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
     private lateinit var binding: FragmentCreatingCardBinding
     private var displayingData: ArrayList<CardContentData> = ArrayList()
 
-    private lateinit var database: DatabaseReference
+    private var database = com.example.xcards.domain.useCase.FirebaseDatabase()
     private lateinit var sharedPreference: SharedPreference
 
     private lateinit var id: String
@@ -44,25 +44,22 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
     ): View {
         binding = FragmentCreatingCardBinding.inflate(layoutInflater)
 
-        database = Firebase.database.reference
         sharedPreference = SharedPreference(requireContext().applicationContext)
         id = sharedPreference.getValueString("uid").toString()
-
-
-//        nameCollection?.let {
-//            database.child(id).child(it).get().addOnCompleteListener { snapshot ->
-//                val displayingData = snapshot.result.value as? ArrayList<NewCardData>
-//            } }
 
         if (!nameCollection.isNullOrEmpty()) {
             binding.newNameCollectionText.setText(nameCollection)
         }
 
-        nameCollection?.let {
-            database.child(id).child("cardCollection").child(it).child("cards")
-                .get().addOnCompleteListener { snapshot ->
-                    displayingData = (snapshot.result.value as? ArrayList<CardContentData>)!!
-                }
+//        nameCollection?.let {
+//            database.child(id).child("cardCollection").child(it).child("cards")
+//                .get().addOnCompleteListener { snapshot ->
+//                    displayingData = (snapshot.result.value as? ArrayList<CardContentData>)!!
+//                }
+//        }
+
+        if (nameCollection != null) {
+            displayingData = database.getCardsCollection(nameCollection)
         }
 
         adapterForNewCards = AdapterForNewCards(
@@ -94,82 +91,46 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
 
     private fun uploadData() {
         val newNameCollection = getCollectionName()
-        val confirmedNameCollection = nameCollection.toString()
 
-        database
-            .child(id)
-            .child("cardCollection")
-            .child(getCollectionName())
-            .child("cards")
-            .setValue(displayingData)
+        if (nameCollection == null) {
+            if (newNameCollection.isNullOrEmpty() || newNameCollection.isBlank()) {
+                Toast.makeText(context, R.string.error_collection_name_is_empty, Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                database.saveNewCollectionInfo(
+                    newNameCollection,
+                    binding.saveCardView.cardBackgroundColor.defaultColor,
+                    adapterForNewCards.newCardsArray.size
+                )
 
-        database
-            .child(id)
-            .child("cards")
-            .child(getCollectionName())
-            .child("info")
-            .child("color")
-            .setValue(binding.saveCardView.cardBackgroundColor.defaultColor)
-
-        database
-            .child(id)
-            .child("cards")
-            .child(getCollectionName())
-            .child("info")
-            .child("cardsCount")
-            .setValue(displayingData.size)
-
-        val cardsRef = database.child(id).child("cardCollections")
-
-        if (newNameCollection.isNullOrEmpty()) {
-            Toast.makeText(context, R.string.error_collection_name_is_empty, Toast.LENGTH_SHORT)
-                .show()
-        } else if (!confirmedNameCollection.isNullOrEmpty() && confirmedNameCollection == newNameCollection
-        ) {
-//            Сохранение изменений, если имя коллекции существовало и не изменилось.
-
-            cardsRef.child(confirmedNameCollection).child("cards").setValue(displayingData)
-                .addOnSuccessListener {
-                    Toast.makeText(context, R.string.updates_saved_successfully, Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(context, R.string.save_updates_failed, Toast.LENGTH_SHORT).show()
-                }
-
-//                closeThisFragment()
-        } else if (confirmedNameCollection.isNullOrEmpty()) {
-            /*
-            Создание коллекции в базе, если:
-            - Коллекции до этого не существовало, а новое введенное имя из EditText не пустое и не null.
-             */
-
-            cardsRef.child(newNameCollection).child("cards").setValue(displayingData)
-                .addOnSuccessListener {
-                    Toast.makeText(context, R.string.on_successful_creation_collection, Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(context, R.string.on_collection_creation_failed, Toast.LENGTH_SHORT).show()
-                }
-
-//                closeThisFragment()
-        } else if (!newNameCollection.equals(confirmedNameCollection) && newNameCollection.isNullOrEmpty()) {
-            /*
-            Удаление старой ветви и создание новой с измененным названием, если:
-            - имя изменено, причем новое введенное имя из EditText не пустое и не null.
-             */
-
-            cardsRef.child(confirmedNameCollection).removeValue()
-            cardsRef.child(newNameCollection).child("cards").setValue(displayingData)
-                .addOnSuccessListener {
-                    Toast.makeText(context, R.string.on_successful_creation_collection, Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(context, R.string.on_collection_creation_failed, Toast.LENGTH_SHORT).show()
-                }
-
-//                closeThisFragment()
+                database.saveNewCardsData(
+                    requireContext(),
+                    newNameCollection,
+                    adapterForNewCards.newCardsArray
+                )
+            }
         } else {
-            Toast.makeText(context, "Нерассмотренный случай", Toast.LENGTH_SHORT).show()
+            if (!nameCollection.toString().equals(newNameCollection)) {
+                database.updateCollectionName(nameCollection, newNameCollection)
+            }
+
+            database.updateCollectionInfo(
+                newNameCollection,
+                "color",
+                binding.saveCardView.cardBackgroundColor.defaultColor
+            )
+
+            database.updateCollectionInfo(
+                newNameCollection,
+                "cardsCount",
+                adapterForNewCards.newCardsArray.size
+            )
+
+            database.updateCardsData(
+                requireContext(),
+                newNameCollection,
+                adapterForNewCards.newCardsArray
+            )
         }
 
         /*

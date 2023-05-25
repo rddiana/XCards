@@ -2,21 +2,17 @@ package com.example.xcards.presentation.activities
 
 import android.app.ProgressDialog
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.xcards.R
-import com.example.xcards.data.UserData
 import com.example.xcards.databinding.ActivityRegistrationBinding
 import com.example.xcards.domain.repositories.RegistrationRepository
+import com.example.xcards.domain.useCase.FirebaseDatabase
 import com.example.xcards.domain.useCase.SharedPreference
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 
 class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
     private lateinit var binding: ActivityRegistrationBinding
@@ -24,7 +20,7 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
     private lateinit var sharedPreference: SharedPreference
 
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var database: DatabaseReference
+    private lateinit var database: FirebaseDatabase
 
     private lateinit var progressDialog: ProgressDialog
 
@@ -44,8 +40,8 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
         progressDialog.setCanceledOnTouchOutside(false)
 
         firebaseAuth = FirebaseAuth.getInstance()
-        database = Firebase.database.reference
         sharedPreference = SharedPreference(applicationContext)
+        database = FirebaseDatabase()
 
         binding.materialButtonNext.setOnClickListener {
             validateData()
@@ -84,19 +80,7 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
         firebaseAuth.createUserWithEmailAndPassword(userEmail, password)
             .addOnSuccessListener {
                 progressDialog.dismiss()
-//
-//                val firebaseUser = firebaseAuth.currentUser
-//                val email = firebaseUser!!.email
 
-//                sharedPreferencesRepository = SharedPreferencesRepositoryImpl(this)
-//                sharedPreferencesRepository.saveString(
-//                    Constants.NAME_KEY_PREF,
-//                    binding.editTextPersonName.text.toString()
-//                )
-//                sharedPreferencesRepository.saveString(
-//                    Constants.EMAIL_KEY_PREF,
-//                    binding.editTextEmailAddress.text.toString()
-//                )
                 createDataBase()
 
                 startActivity(Intent(this, MainActivity::class.java))
@@ -114,8 +98,9 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
             sharedPreference.save("uid", it.uid)
             sharedPreference.save("email", userEmail)
             sharedPreference.save("userName", fullName)
-            database.child("usersPersonalData").child(it.uid).child("name").setValue(fullName)
-            database.child("usersPersonalData").child(it.uid).child("email").setValue(userEmail)
+
+            database.savePersonalData("email", userEmail)
+            database.savePersonalData("name", fullName)
         }
     }
 }
