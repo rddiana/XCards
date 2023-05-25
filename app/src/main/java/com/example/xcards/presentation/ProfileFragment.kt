@@ -1,5 +1,6 @@
 package com.example.xcards.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.xcards.R
 import com.example.xcards.databinding.FragmentProfileBinding
 import com.example.xcards.domain.useCase.SharedPreference
+import com.example.xcards.presentation.activities.OnboardingActivity
 import com.example.xcards.presentation.activities.RegistrationActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -40,6 +42,15 @@ class ProfileFragment : Fragment() {
                 .commit()
         }
 
+        binding.signOutButton.setOnClickListener {
+            signOut()
+        }
+
         return binding.root
+    }
+
+    private fun signOut() {
+        firebaseAuth.signOut()
+        startActivity(Intent(context, OnboardingActivity::class.java))
     }
 }

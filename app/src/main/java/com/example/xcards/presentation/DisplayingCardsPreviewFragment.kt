@@ -11,15 +11,15 @@ import com.example.xcards.databinding.FragmentDisplayingCardsPreviewBinding
 class DisplayingCardsPreviewFragment : Fragment() {
     private lateinit var binding: FragmentDisplayingCardsPreviewBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDisplayingCardsPreviewBinding.inflate(layoutInflater)
+
+        binding.toEditingCollection.setOnClickListener {
+            parentFragmentManager.beginTransaction().remove(this).commit()
+        }
 
         binding.continueButton.setOnClickListener {
             parentFragmentManager.beginTransaction()

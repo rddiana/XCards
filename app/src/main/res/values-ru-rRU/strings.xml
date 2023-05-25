@@ -73,4 +73,9 @@
     <string name="answer_honestly">Отвечайте честно, пожалуйста.</string>
     <string name="place_for_fact">Факт о вас или что-нибудь еще для напоминания.</string>
     <string name="other_side_with_answer">Другая сторона с ответом</string>
+    <string name="on_collection_creation_failed">Collection creation failed</string>
+    <string name="on_successful_creation_collection">"Коллекция успешно создана и сохранена "</string>
+    <string name="updates_saved_successfully">"Обновления успешно сохранены "</string>
+    <string name="save_updates_failed">Не удалось сохранить обновления</string>
+    <string name="error_collection_name_is_empty">Название коллекции не может быть пустым</string>
 </resources>

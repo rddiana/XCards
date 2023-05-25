@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.xcards.R
 import com.example.xcards.data.CardData
@@ -24,7 +25,7 @@ class EditingCollectionFragment(private val cardData: CardData) : Fragment() {
 
         binding.cardName.text = cardData.nameModule
         binding.cardsCount.text = cardData.cardsCount.toString()
-        binding.mainCard.setCardBackgroundColor(resources.getColor(cardData.color))
+        binding.mainCard.setCardBackgroundColor(ContextCompat.getColor(requireContext(), cardData.color))
 
         binding.backArrow.setOnClickListener {
             parentFragmentManager.beginTransaction().remove(this).commit()
@@ -36,7 +37,7 @@ class EditingCollectionFragment(private val cardData: CardData) : Fragment() {
 
         binding.editButton.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .add(R.id.mainFragmentContainer, CreatingCardFragment(binding.cardName.toString()))
+                .add(R.id.mainFragmentContainer, CreatingCardFragment(cardData.nameModule))
                 .commit()
         }
 

@@ -73,10 +73,15 @@
     <string name="explanation_hard_repetitions">The application window will take up the screen and you will need to pass the test you selected in order to continue using the phone. You can also close the app by clicking on the cross if the time is inconvenient.</string>
     <string name="set_time_for_hard_repetitions">Set the time</string>
     <string name="set_day_for_hard_repetitions">Set the day of week</string>
-    <string name="choose_training_module">Choose a training module</string>
+    <string name="choose_training_module">Choice a training module</string>
     <string name="place_for_question">This is the place for a question.</string>
     <string name="instruction">If you remember the answer, swipe right. Otherwise - left.</string>
     <string name="answer_honestly">Answer honestly, please.</string>
     <string name="place_for_fact">A fact about you or something else for flashback.</string>
     <string name="other_side_with_answer">The other side with answer</string>
+    <string name="on_successful_creation_collection">The collection was successfully created and saved</string>
+    <string name="on_collection_creation_failed">Collection creation failed</string>
+    <string name="updates_saved_successfully">Updates saved successfully</string>
+    <string name="save_updates_failed">Save updates failed</string>
+    <string name="error_collection_name_is_empty">Collection name cannot be empty</string>
 </resources>

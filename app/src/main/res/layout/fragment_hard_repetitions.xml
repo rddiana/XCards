@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/background"
     tools:context=".presentation.HardRepetitionsFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -21,7 +22,7 @@
         app:layout_constraintGuide_percent="0.1" />
 
     <ImageView
-        android:id="@+id/imageView28"
+        android:id="@+id/turnBackButton"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginStart="24dp"
@@ -32,13 +33,13 @@
 
     <TextView
         android:id="@+id/textView33"
-        style="@style/textStyle_h1"
+        style="@style/textStyle_h2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="24dp"
         android:text="@string/hard_repetitions"
-        app:layout_constraintStart_toEndOf="@+id/imageView28"
+        app:layout_constraintStart_toEndOf="@+id/turnBackButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -318,7 +319,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
     <TextView
-        android:id="@+id/textView38"
+        android:id="@+id/choiceTrainingModule"
         style="@style/grayTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -334,5 +335,5 @@
         android:layout_marginTop="12dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/textView38" />
+        app:layout_constraintTop_toBottomOf="@+id/choiceTrainingModule" />
 </androidx.constraintlayout.widget.ConstraintLayout>

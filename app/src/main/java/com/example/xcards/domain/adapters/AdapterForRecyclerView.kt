@@ -1,11 +1,14 @@
 package com.example.xcards.domain.adapters
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.IntegerRes
+import androidx.core.content.ContextCompat
+import androidx.core.view.ContentInfoCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xcards.R
 import com.example.xcards.data.CardData
@@ -50,7 +53,8 @@ class AdapterForRecyclerView(
             holder.cardsCount.text = cardsCount.toString()
 
             val card = holder.itemView as MaterialCardView
-            card.setCardBackgroundColor(cardsArray[position - 1].color)
+            card.setCardBackgroundColor(ContextCompat.getColor(context!!, cardsArray[position - 1].color))
+
             holder.itemView.setOnClickListener {
                 onCardPressed(cardsArray[position - 1])
             }
