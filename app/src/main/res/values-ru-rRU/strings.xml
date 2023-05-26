@@ -54,7 +54,7 @@
     <string name="sunday">Вс</string>
     <string name="hours_for_week">часа за эту неделю</string>
     <string name="correct_answers">Верные ответы</string>
-    <string-array name="Languages">
+    <string-array name="languages">
         <item>Английский</item>
         <item>Русский</item>
     </string-array>

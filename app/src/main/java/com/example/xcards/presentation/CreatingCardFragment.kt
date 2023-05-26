@@ -13,10 +13,8 @@ import com.example.xcards.R
 import com.example.xcards.data.CardContentData
 import com.example.xcards.databinding.FragmentCreatingCardBinding
 import com.example.xcards.domain.adapters.AdapterForNewCards
+import com.example.xcards.domain.useCase.FirebaseDatabase
 import com.example.xcards.domain.useCase.SharedPreference
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 
 
 class CreatingCardFragment(val nameCollection: String?) : Fragment() {
@@ -24,7 +22,7 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
     private lateinit var binding: FragmentCreatingCardBinding
     private var displayingData: ArrayList<CardContentData> = ArrayList()
 
-    private var database = com.example.xcards.domain.useCase.FirebaseDatabase()
+    private lateinit var database: FirebaseDatabase
     private lateinit var sharedPreference: SharedPreference
 
     private lateinit var id: String
@@ -44,6 +42,7 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
     ): View {
         binding = FragmentCreatingCardBinding.inflate(layoutInflater)
 
+        database = FirebaseDatabase(requireContext().applicationContext)
         sharedPreference = SharedPreference(requireContext().applicationContext)
         id = sharedPreference.getValueString("uid").toString()
 

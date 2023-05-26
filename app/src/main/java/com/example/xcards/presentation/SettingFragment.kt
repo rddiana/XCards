@@ -14,7 +14,6 @@ import com.example.xcards.databinding.FragmentSettingBinding
 
 class SettingFragment : Fragment() {
     private lateinit var binding: FragmentSettingBinding
-    private lateinit var viewModel: SettingViewModel
 
     companion object {
         fun newInstance() = SettingFragment()
@@ -54,12 +53,6 @@ class SettingFragment : Fragment() {
         }
 
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[SettingViewModel::class.java]
-        // TODO: Use the ViewModel
     }
 
     //Закрашивает нужные кружочки в RadioButton, так как они не сохраняются после переходов

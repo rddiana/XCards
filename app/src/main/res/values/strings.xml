@@ -60,7 +60,7 @@
     <string name="hours_for_week">hours for this week</string>
     <string name="correct_answers">Correct answers</string>
     <string name="plus" translatable="false">+</string>
-    <string-array name="Languages">
+    <string-array name="languages">
         <item>English</item>
         <item>Russian</item>
     </string-array>

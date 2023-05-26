@@ -2,6 +2,7 @@ package com.example.xcards.domain.useCase
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.gson.Gson
 
 class SharedPreference(val context: Context) {
     private val PREFS_NAME = "sharedPref"
@@ -10,7 +11,7 @@ class SharedPreference(val context: Context) {
     fun save(KEY_NAME: String, text: String) {
         val editor: SharedPreferences.Editor = sharedPref.edit()
         editor.putString(KEY_NAME, text)
-        editor!!.commit()
+        editor.commit()
     }
 
     fun save(KEY_NAME: String, value: Int) {

@@ -4,12 +4,15 @@ import android.content.Context
 import android.widget.Toast
 import com.example.xcards.R
 import com.example.xcards.data.CardContentData
+import com.example.xcards.data.CardData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 
-
-class FirebaseDatabase {
-    private var database: FirebaseDatabase = FirebaseDatabase.getInstance()
+class FirebaseDatabase(val applicationContext: Context) {
+    private var database: FirebaseDatabase = Firebase.database("https://xcards-26b91-default-rtdb.asia-southeast1.firebasedatabase.app")
     val uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
 
     fun savePersonalData(key: String, data: String) {
@@ -23,6 +26,25 @@ class FirebaseDatabase {
     fun getCardsCollection(nameCollection: String): ArrayList<CardContentData> {
         return database.getReference("${uid}/cardCollections/${nameCollection}")
             .child("cards").get() as ArrayList<CardContentData>
+    }
+
+    data class CardInfo(
+        val cards: Array<CardContentData> = arrayOf(),
+        val info: CardData = CardData("", 0, "")
+    )
+
+    fun getAllCards() {
+        database.reference.child("${uid}/cardCollections")
+            .get().addOnSuccessListener {
+                val receivedValues = it.getValue<HashMap<String, CardInfo>>()
+
+                receivedValues?.forEach { entry ->
+                    print(entry.key)
+                    print(entry.value)
+
+                    receivedValues[entry.key] = entry.value
+                }
+            }
     }
 
     fun saveNewCollectionInfo(nameCollection: String, color: Int, cardsCount: Int) {

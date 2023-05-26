@@ -41,7 +41,7 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
 
         firebaseAuth = FirebaseAuth.getInstance()
         sharedPreference = SharedPreference(applicationContext)
-        database = FirebaseDatabase()
+        database = FirebaseDatabase(applicationContext)
 
         binding.materialButtonNext.setOnClickListener {
             validateData()
@@ -94,13 +94,10 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
     }
 
     private fun createDataBase() {
-        firebaseAuth.currentUser?.let {
-            sharedPreference.save("uid", it.uid)
-            sharedPreference.save("email", userEmail)
-            sharedPreference.save("userName", fullName)
+        sharedPreference.save("email", userEmail)
+        sharedPreference.save("userName", fullName)
 
-            database.savePersonalData("email", userEmail)
-            database.savePersonalData("name", fullName)
-        }
+        database.savePersonalData("email", userEmail)
+        database.savePersonalData("name", fullName)
     }
 }

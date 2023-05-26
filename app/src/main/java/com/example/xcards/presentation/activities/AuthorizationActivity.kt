@@ -12,7 +12,6 @@ import com.example.xcards.domain.repositories.AuthorizationRepository
 import com.example.xcards.domain.useCase.FirebaseDatabase
 import com.example.xcards.domain.useCase.SharedPreference
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 
 class AuthorizationActivity : AppCompatActivity(), AuthorizationRepository {
     private lateinit var binding: ActivityAuthorizationBinding
@@ -38,7 +37,7 @@ class AuthorizationActivity : AppCompatActivity(), AuthorizationRepository {
 
         firebaseAuth = FirebaseAuth.getInstance()
         sharedPreference = SharedPreference(applicationContext)
-        database = FirebaseDatabase()
+        database = FirebaseDatabase(applicationContext)
 
         binding.materialButtonNext.setOnClickListener {
             validateData()
@@ -59,7 +58,6 @@ class AuthorizationActivity : AppCompatActivity(), AuthorizationRepository {
         } else if (TextUtils.isEmpty(password)) {
             binding.editTextPassword.error = "Please, enter password"
         } else {
-            initDataBase()
             firebaseLogin()
         }
     }
@@ -72,6 +70,8 @@ class AuthorizationActivity : AppCompatActivity(), AuthorizationRepository {
                 val firebaseUser = firebaseAuth.currentUser
                 val email = firebaseUser!!.email
 
+                initDataBase()
+
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
@@ -82,10 +82,12 @@ class AuthorizationActivity : AppCompatActivity(), AuthorizationRepository {
     }
 
     private fun initDataBase() {
-        val userName = database.getPersonalData("name")
-        val userEmail = database.getPersonalData("email")
+        firebaseAuth.currentUser?.let {
+            val userName = database.getPersonalData("name")
+            val userEmail = database.getPersonalData("email")
 
-        sharedPreference.save("name", userName)
-        sharedPreference.save("email", userEmail)
+            sharedPreference.save("name", userName)
+            sharedPreference.save("email", userEmail)
+        }
     }
 }

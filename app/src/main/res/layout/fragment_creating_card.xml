@@ -212,7 +212,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
-                app:cardBackgroundColor="@color/light_green"
+                app:cardBackgroundColor="@color/light_gray"
                 app:cardCornerRadius="15dp"
                 app:layout_constraintBottom_toBottomOf="@+id/whiteButton"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.xcards.R
 import com.example.xcards.data.CardData
 import com.example.xcards.databinding.FragmentEditingCollectionBinding
+import java.lang.Long.parseLong
 
 class EditingCollectionFragment(private val cardData: CardData) : Fragment() {
     private lateinit var binding: FragmentEditingCollectionBinding
@@ -25,7 +26,7 @@ class EditingCollectionFragment(private val cardData: CardData) : Fragment() {
 
         binding.cardName.text = cardData.nameModule
         binding.cardsCount.text = cardData.cardsCount.toString()
-        binding.mainCard.setCardBackgroundColor(ContextCompat.getColor(requireContext(), cardData.color))
+        binding.mainCard.setCardBackgroundColor(parseLong(cardData.color, 16).toInt())
 
         binding.backArrow.setOnClickListener {
             parentFragmentManager.beginTransaction().remove(this).commit()

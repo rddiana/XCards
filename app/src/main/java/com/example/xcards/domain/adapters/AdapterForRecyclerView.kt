@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.xcards.R
 import com.example.xcards.data.CardData
 import com.google.android.material.card.MaterialCardView
+import java.lang.Long.parseLong
 
 class AdapterForRecyclerView(
     var context: Context?,
@@ -53,7 +54,10 @@ class AdapterForRecyclerView(
             holder.cardsCount.text = cardsCount.toString()
 
             val card = holder.itemView as MaterialCardView
-            card.setCardBackgroundColor(ContextCompat.getColor(context!!, cardsArray[position - 1].color))
+            card.setCardBackgroundColor(ContextCompat.getColor(
+                    context!!,
+                parseLong(cardsArray[position - 1].color, 16).toInt()
+            ))
 
             holder.itemView.setOnClickListener {
                 onCardPressed(cardsArray[position - 1])
