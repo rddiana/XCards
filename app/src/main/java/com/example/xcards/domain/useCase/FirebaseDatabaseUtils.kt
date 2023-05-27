@@ -26,25 +26,29 @@ class FirebaseDatabaseUtils(val applicationContext: Context) {
         return database.getReference("${uid}/personalData").child(key).get().toString()
     }
 
-    fun getCardsCollection(nameCollection: String): ArrayList<CardContentData> {
-        return database.getReference("${uid}/cardCollections/${nameCollection}")
-            .child("cards").get() as ArrayList<CardContentData>
+    fun getCardsCollection(
+        nameCollection: String,
+        onDataLoaded: (List<CardContentData>) -> Unit
+    ) {
+        database.getReference("${uid}/cardCollections/${nameCollection}")
+            .child("cards").get().addOnSuccessListener {
+                val receivedValues = it.getValue<List<CardContentData>>()
+
+                receivedValues?.let { list ->
+                    ArrayList<CardContentData>(list)
+                }?.let { arrayList ->
+                    onDataLoaded(arrayList)
+                }
+            }
     }
 
     fun getAllCardsInfo(onDataLoaded: (List<CardData>) -> Unit) {
-        val cardDataList = listOf<CardData>()
-
         database.getReference(uid).child("cardCollections")
             .get().addOnSuccessListener {
                 val receivedValues = it.getValue<HashMap<String, CardInfo>>()
 
-                receivedValues?.forEach { entry ->
-                    cardDataList.plus(entry.value.info)
-                    receivedValues[entry.key] = entry.value
-                }
-
                 receivedValues?.map { value ->
-                    value.value.info
+                    CardData(value.key, value.value.info.cardsCount, value.value.info.color)
                 }?.let { collectedData ->
                     onDataLoaded(collectedData)
                 }
@@ -52,9 +56,6 @@ class FirebaseDatabaseUtils(val applicationContext: Context) {
     }
 
     fun saveNewCollectionInfo(nameCollection: String, color: Long, cardsCount: Int) {
-        database.getReference("${uid}/cardCollections/${nameCollection}/info")
-            .child("name").setValue(nameCollection)
-
         database.getReference("${uid}/cardCollections/${nameCollection}/info")
             .child("color").setValue(color)
 

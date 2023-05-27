@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -46,32 +47,27 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
         sharedPreference = SharedPreference(requireContext().applicationContext)
         id = sharedPreference.getValueString("uid").toString()
 
-        if (!nameCollection.isNullOrEmpty()) {
-            binding.newNameCollectionText.setText(nameCollection)
-        }
-
-//        nameCollection?.let {
-//            database.child(id).child("cardCollection").child(it).child("cards")
-//                .get().addOnCompleteListener { snapshot ->
-//                    displayingData = (snapshot.result.value as? ArrayList<CardContentData>)!!
-//                }
-//        }
-
-        if (nameCollection != null) {
-            displayingData = database.getCardsCollection(nameCollection)
-        }
-
-        adapterForNewCards = AdapterForNewCards(
-            context,
-            displayingData
-        )
-
         gridLayoutManager = GridLayoutManager(context, 1)
         binding.containerForCreatingCardsFragments.layoutManager = gridLayoutManager
-        binding.containerForCreatingCardsFragments.adapter = adapterForNewCards
+
+        if (nameCollection != null) {
+            binding.newNameCollectionText.setText(nameCollection)
+
+            database.getCardsCollection (nameCollection) {
+                binding.containerForCreatingCardsFragments.adapter = AdapterForNewCards(
+                    context,
+                    ArrayList(it)
+                )
+            }
+        } else {
+            binding.containerForCreatingCardsFragments.adapter = AdapterForNewCards(
+                context,
+                displayingData
+            )
+        }
 
         binding.toPreviousFragment2.setOnClickListener {
-            parentFragmentManager.beginTransaction().remove(this).commit()
+            parentFragmentManager.beginTransaction().replace(R.id.mainFragmentContainer, StudyRoomFragment()).commit()
         }
 
         binding.addCardButton.setOnClickListener {
