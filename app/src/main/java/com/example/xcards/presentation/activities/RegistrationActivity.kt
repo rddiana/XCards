@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.xcards.R
 import com.example.xcards.databinding.ActivityRegistrationBinding
 import com.example.xcards.domain.repositories.RegistrationRepository
-import com.example.xcards.domain.useCase.FirebaseDatabase
+import com.example.xcards.domain.useCase.FirebaseDatabaseUtils
 import com.example.xcards.domain.useCase.SharedPreference
 import com.google.firebase.auth.FirebaseAuth
 
@@ -20,7 +20,7 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
     private lateinit var sharedPreference: SharedPreference
 
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var database: FirebaseDatabase
+    private lateinit var database: FirebaseDatabaseUtils
 
     private lateinit var progressDialog: ProgressDialog
 
@@ -41,7 +41,7 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
 
         firebaseAuth = FirebaseAuth.getInstance()
         sharedPreference = SharedPreference(applicationContext)
-        database = FirebaseDatabase(applicationContext)
+        database = FirebaseDatabaseUtils(applicationContext)
 
         binding.materialButtonNext.setOnClickListener {
             validateData()

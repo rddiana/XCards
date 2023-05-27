@@ -5,15 +5,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.xcards.R
 import com.example.xcards.databinding.FragmentSettingBinding
+import com.google.android.material.slider.Slider
 
 
 class SettingFragment : Fragment() {
     private lateinit var binding: FragmentSettingBinding
+
+    private lateinit var currentLanguage: String
+    private lateinit var languages: Array<String>
 
     companion object {
         fun newInstance() = SettingFragment()
@@ -51,6 +58,76 @@ class SettingFragment : Fragment() {
                 }
             }
         }
+
+        val en = resources.getString(R.string.english)
+        val ru = resources.getString(R.string.russian)
+        languages = arrayOf(en, ru)
+
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.spinner_right_aligned, languages)
+        binding.spinner.adapter = arrayAdapter
+
+        binding.spinner.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                Toast.makeText(requireContext(), languages[position], Toast.LENGTH_SHORT).show()
+
+                var newLanguage = ""
+                when (position) {
+                    0 -> newLanguage = "en"
+                    1 -> newLanguage = "ru"
+                }
+
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
+//        ArrayAdapter.createFromResource(
+//            requireContext(),
+//            R.array.languages,
+//            android.R.layout.simple_spinner_item
+//        ).also { adapter ->
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//            binding.spinner.adapter = adapter
+//        }
+//
+//        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: View?,
+//                position: Int,
+//                id: Long
+//            ) {
+//                Log.d("spinner", )
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?) {
+//                TODO("Not yet implemented")
+//            }
+//        }
+
+        binding.changeGoalSlider.addOnSliderTouchListener(object : Slider.OnChangeListener,
+            Slider.OnSliderTouchListener {
+            override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
+
+            }
+
+            override fun onStartTrackingTouch(slider: Slider) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onStopTrackingTouch(slider: Slider) {
+                TODO("Not yet implemented")
+            }
+        })
 
         return binding.root
     }

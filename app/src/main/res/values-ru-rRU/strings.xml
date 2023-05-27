@@ -78,4 +78,6 @@
     <string name="updates_saved_successfully">"Обновления успешно сохранены "</string>
     <string name="save_updates_failed">Не удалось сохранить обновления</string>
     <string name="error_collection_name_is_empty">Название коллекции не может быть пустым</string>
+    <string name="russian">Русский</string>
+    <string name="english">Английский</string>
 </resources>

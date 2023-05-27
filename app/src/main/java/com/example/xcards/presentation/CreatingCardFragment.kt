@@ -13,7 +13,7 @@ import com.example.xcards.R
 import com.example.xcards.data.CardContentData
 import com.example.xcards.databinding.FragmentCreatingCardBinding
 import com.example.xcards.domain.adapters.AdapterForNewCards
-import com.example.xcards.domain.useCase.FirebaseDatabase
+import com.example.xcards.domain.useCase.FirebaseDatabaseUtils
 import com.example.xcards.domain.useCase.SharedPreference
 
 
@@ -22,7 +22,7 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
     private lateinit var binding: FragmentCreatingCardBinding
     private var displayingData: ArrayList<CardContentData> = ArrayList()
 
-    private lateinit var database: FirebaseDatabase
+    private lateinit var database: FirebaseDatabaseUtils
     private lateinit var sharedPreference: SharedPreference
 
     private lateinit var id: String
@@ -42,7 +42,7 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
     ): View {
         binding = FragmentCreatingCardBinding.inflate(layoutInflater)
 
-        database = FirebaseDatabase(requireContext().applicationContext)
+        database = FirebaseDatabaseUtils(requireContext().applicationContext)
         sharedPreference = SharedPreference(requireContext().applicationContext)
         id = sharedPreference.getValueString("uid").toString()
 
@@ -98,7 +98,7 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
             } else {
                 database.saveNewCollectionInfo(
                     newNameCollection,
-                    binding.saveCardView.cardBackgroundColor.defaultColor,
+                    Integer.toHexString(binding.saveCardView.cardBackgroundColor.defaultColor),
                     adapterForNewCards.newCardsArray.size
                 )
 

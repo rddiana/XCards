@@ -11,9 +11,10 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
-class FirebaseDatabase(val applicationContext: Context) {
+class FirebaseDatabaseUtils(val applicationContext: Context) {
     private var database: FirebaseDatabase = Firebase.database("https://xcards-26b91-default-rtdb.asia-southeast1.firebasedatabase.app")
-    val uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
+    val uid: String
+        get() = FirebaseAuth.getInstance().currentUser?.uid.toString()
 
     fun savePersonalData(key: String, data: String) {
         database.getReference("${uid}/personalData").child(key).setValue(data)
@@ -29,25 +30,30 @@ class FirebaseDatabase(val applicationContext: Context) {
     }
 
     data class CardInfo(
-        val cards: Array<CardContentData> = arrayOf(),
+        val cards: List<CardContentData> = listOf(),
         val info: CardData = CardData("", 0, "")
     )
 
-    fun getAllCards() {
-        database.reference.child("${uid}/cardCollections")
+    fun getAllCardsInfo() : ArrayList<CardData> {
+        val cardDataList = listOf<CardData>()
+
+        database.getReference(uid).child("cardCollections")
             .get().addOnSuccessListener {
                 val receivedValues = it.getValue<HashMap<String, CardInfo>>()
 
                 receivedValues?.forEach { entry ->
-                    print(entry.key)
-                    print(entry.value)
-
+                    cardDataList.plus(entry.value.info)
                     receivedValues[entry.key] = entry.value
                 }
             }
+
+        return ArrayList(cardDataList)
     }
 
-    fun saveNewCollectionInfo(nameCollection: String, color: Int, cardsCount: Int) {
+    fun saveNewCollectionInfo(nameCollection: String, color: String, cardsCount: Int) {
+        database.getReference("${uid}/cardCollections/${nameCollection}/info")
+            .child("name").setValue(nameCollection)
+
         database.getReference("${uid}/cardCollections/${nameCollection}/info")
             .child("color").setValue(color)
 

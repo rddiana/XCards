@@ -84,4 +84,6 @@
     <string name="updates_saved_successfully">Updates saved successfully</string>
     <string name="save_updates_failed">Save updates failed</string>
     <string name="error_collection_name_is_empty">Collection name cannot be empty</string>
+    <string name="russian">Russian</string>
+    <string name="english">English</string>
 </resources>

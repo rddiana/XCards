@@ -9,7 +9,7 @@ import android.util.Patterns
 import android.widget.Toast
 import com.example.xcards.databinding.ActivityAuthorizationBinding
 import com.example.xcards.domain.repositories.AuthorizationRepository
-import com.example.xcards.domain.useCase.FirebaseDatabase
+import com.example.xcards.domain.useCase.FirebaseDatabaseUtils
 import com.example.xcards.domain.useCase.SharedPreference
 import com.google.firebase.auth.FirebaseAuth
 
@@ -18,7 +18,7 @@ class AuthorizationActivity : AppCompatActivity(), AuthorizationRepository {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var sharedPreference: SharedPreference
-    private lateinit var database: FirebaseDatabase
+    private lateinit var database: FirebaseDatabaseUtils
 
     private lateinit var progressDialog: ProgressDialog
 
@@ -37,7 +37,7 @@ class AuthorizationActivity : AppCompatActivity(), AuthorizationRepository {
 
         firebaseAuth = FirebaseAuth.getInstance()
         sharedPreference = SharedPreference(applicationContext)
-        database = FirebaseDatabase(applicationContext)
+        database = FirebaseDatabaseUtils(applicationContext)
 
         binding.materialButtonNext.setOnClickListener {
             validateData()
