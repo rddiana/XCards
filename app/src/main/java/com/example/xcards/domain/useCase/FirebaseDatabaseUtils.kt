@@ -5,6 +5,7 @@ import android.widget.Toast
 import com.example.xcards.R
 import com.example.xcards.data.CardContentData
 import com.example.xcards.data.CardData
+import com.example.xcards.data.CardInfo
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
@@ -12,7 +13,8 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 class FirebaseDatabaseUtils(val applicationContext: Context) {
-    private var database: FirebaseDatabase = Firebase.database("https://xcards-26b91-default-rtdb.asia-southeast1.firebasedatabase.app")
+    private var database: FirebaseDatabase =
+        Firebase.database("https://xcards-26b91-default-rtdb.asia-southeast1.firebasedatabase.app")
     val uid: String
         get() = FirebaseAuth.getInstance().currentUser?.uid.toString()
 
@@ -29,12 +31,7 @@ class FirebaseDatabaseUtils(val applicationContext: Context) {
             .child("cards").get() as ArrayList<CardContentData>
     }
 
-    data class CardInfo(
-        val cards: List<CardContentData> = listOf(),
-        val info: CardData = CardData("", 0, "")
-    )
-
-    fun getAllCardsInfo() : ArrayList<CardData> {
+    fun getAllCardsInfo(onDataLoaded: (List<CardData>) -> Unit) {
         val cardDataList = listOf<CardData>()
 
         database.getReference(uid).child("cardCollections")
@@ -45,12 +42,16 @@ class FirebaseDatabaseUtils(val applicationContext: Context) {
                     cardDataList.plus(entry.value.info)
                     receivedValues[entry.key] = entry.value
                 }
-            }
 
-        return ArrayList(cardDataList)
+                receivedValues?.map { value ->
+                    value.value.info
+                }?.let { collectedData ->
+                    onDataLoaded(collectedData)
+                }
+            }
     }
 
-    fun saveNewCollectionInfo(nameCollection: String, color: String, cardsCount: Int) {
+    fun saveNewCollectionInfo(nameCollection: String, color: Long, cardsCount: Int) {
         database.getReference("${uid}/cardCollections/${nameCollection}/info")
             .child("name").setValue(nameCollection)
 
@@ -61,19 +62,29 @@ class FirebaseDatabaseUtils(val applicationContext: Context) {
             .child("cardsCount").setValue(cardsCount)
     }
 
-    fun saveNewCardsData(context: Context, nameCollection: String, data: ArrayList<CardContentData>) {
+    fun saveNewCardsData(
+        context: Context,
+        nameCollection: String,
+        data: ArrayList<CardContentData>
+    ) {
         database.getReference("${uid}/cardCollections/${nameCollection}")
             .child("cards").setValue(data)
             .addOnFailureListener {
-                Toast.makeText(context, R.string.on_collection_creation_failed, Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.on_collection_creation_failed, Toast.LENGTH_SHORT)
+                    .show()
             }
             .addOnSuccessListener {
-                Toast.makeText(context, R.string.on_successful_creation_collection, Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    R.string.on_successful_creation_collection,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
     }
 
     fun updateCollectionInfo(nameCollection: String, key: String, newData: Int): Boolean {
-        val databaseRef = database.getReference("${uid}/cardCollections/${nameCollection}/info").child(key)
+        val databaseRef =
+            database.getReference("${uid}/cardCollections/${nameCollection}/info").child(key)
         val updates = mapOf<String, Int>(Pair(key, newData))
         var listener = false
 
@@ -92,8 +103,13 @@ class FirebaseDatabaseUtils(val applicationContext: Context) {
         database.getReference("${uid}/cardCollections/${newNameCollection}").setValue(data)
     }
 
-    fun updateCardsData(context: Context, nameCollection: String, data: ArrayList<CardContentData>) {
-        val databaseRef = database.getReference("${uid}/cardCollections/${nameCollection}").child("cards")
+    fun updateCardsData(
+        context: Context,
+        nameCollection: String,
+        data: ArrayList<CardContentData>
+    ) {
+        val databaseRef =
+            database.getReference("${uid}/cardCollections/${nameCollection}").child("cards")
         val updates = mapOf<String, String>()
 
         for (i in data) {
@@ -106,7 +122,8 @@ class FirebaseDatabaseUtils(val applicationContext: Context) {
                 Toast.makeText(context, R.string.save_updates_failed, Toast.LENGTH_SHORT).show()
             }
             .addOnSuccessListener {
-                Toast.makeText(context, R.string.updates_saved_successfully, Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.updates_saved_successfully, Toast.LENGTH_SHORT)
+                    .show()
             }
     }
 }

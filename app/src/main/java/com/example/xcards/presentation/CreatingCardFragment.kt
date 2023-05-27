@@ -98,7 +98,7 @@ class CreatingCardFragment(val nameCollection: String?) : Fragment() {
             } else {
                 database.saveNewCollectionInfo(
                     newNameCollection,
-                    Integer.toHexString(binding.saveCardView.cardBackgroundColor.defaultColor),
+                    (binding.saveCardView.cardBackgroundColor.defaultColor).toLong(),
                     adapterForNewCards.newCardsArray.size
                 )
 

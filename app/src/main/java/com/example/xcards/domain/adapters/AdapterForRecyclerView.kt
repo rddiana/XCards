@@ -1,23 +1,18 @@
 package com.example.xcards.domain.adapters
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.IntegerRes
-import androidx.core.content.ContextCompat
-import androidx.core.view.ContentInfoCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xcards.R
 import com.example.xcards.data.CardData
 import com.google.android.material.card.MaterialCardView
-import java.lang.Long.parseLong
 
 class AdapterForRecyclerView(
     var context: Context?,
-    images: ArrayList<CardData>,
+    data: ArrayList<CardData>,
     val onCardPressed: (CardData) -> Unit,
     val onPlusPressed: () -> Unit,
     val onStartPressed: () -> Unit
@@ -26,7 +21,7 @@ class AdapterForRecyclerView(
     var cardsArray: ArrayList<CardData>
 
     init {
-        cardsArray = images as ArrayList<CardData>
+        cardsArray = data as ArrayList<CardData>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -49,15 +44,11 @@ class AdapterForRecyclerView(
     // Binding data to the into specified position
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (position - 1 >= 0) {
-            val (nameModule, cardsCount) = cardsArray[position - 1]
-            (holder as ViewHolder).cardName.text = nameModule
-            holder.cardsCount.text = cardsCount.toString()
+            (holder as ViewHolder).cardName.text = cardsArray[position-1].nameModule
+            holder.cardsCount.text = cardsArray[position-1].cardsCount.toString()
 
             val card = holder.itemView as MaterialCardView
-            card.setCardBackgroundColor(ContextCompat.getColor(
-                    context!!,
-                parseLong(cardsArray[position - 1].color, 16).toInt()
-            ))
+            card.setCardBackgroundColor(cardsArray[position - 1].color.toInt())
 
             holder.itemView.setOnClickListener {
                 onCardPressed(cardsArray[position - 1])

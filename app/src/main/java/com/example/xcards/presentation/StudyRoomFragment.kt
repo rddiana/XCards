@@ -19,13 +19,12 @@ import com.google.firebase.auth.FirebaseUser
 import kotlin.collections.ArrayList
 
 
-class StudyRoomFragment : Fragment() {
+class StudyRoomFragment() : Fragment() {
     private lateinit var binding: FragmentStudyRoomBinding
     private lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
     private lateinit var adapterForRecyclerView: AdapterForRecyclerView
 
     private lateinit var database: FirebaseDatabaseUtils
-    private lateinit var currentUser: FirebaseUser
 
     companion object {
         fun newInstance() = StudyRoomFragment()
@@ -41,12 +40,31 @@ class StudyRoomFragment : Fragment() {
 
         database = FirebaseDatabaseUtils(requireContext().applicationContext)
 
-        currentUser = FirebaseAuth.getInstance().currentUser!!
-
-        val cards = database.getAllCardsInfo() as ArrayList<CardData>
-
         staggeredGridLayoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
         binding.recyclerView.layoutManager = staggeredGridLayoutManager
+
+        database.getAllCardsInfo {
+            binding.recyclerView.adapter = AdapterForRecyclerView(
+                context,
+                ArrayList(it),
+                { card ->
+                    onCardPressed(card)
+                },
+                { onPlusBtPressed() },
+                { onStartPressed() }
+            )
+        }
+
+        view?.findViewById<CardView>(R.id.cardViewWithBtNewCards)?.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .add(R.id.mainFragmentContainer, CreatingCardFragment(null))
+                .commit()
+        }
+
+        return binding.root
+    }
+
+    fun onSuccess(cards: ArrayList<CardData>) {
         adapterForRecyclerView =
             AdapterForRecyclerView(
                 context,
@@ -55,16 +73,6 @@ class StudyRoomFragment : Fragment() {
                 { onPlusBtPressed() },
                 { onStartPressed() }
             )
-
-        view?.findViewById<CardView>(R.id.cardViewWithBtNewCards)?.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .add(R.id.mainFragmentContainer, CreatingCardFragment(null))
-                .commit()
-        }
-
-        binding.recyclerView.adapter = adapterForRecyclerView
-
-        return binding.root
     }
 
     private fun onCardPressed(cardData: CardData) {
