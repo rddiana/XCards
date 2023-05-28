@@ -12,6 +12,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xcards.R
 import com.example.xcards.data.CardContentData
+import com.google.android.material.card.MaterialCardView
 
 class AdapterForNewCards(
     var context: Context?,

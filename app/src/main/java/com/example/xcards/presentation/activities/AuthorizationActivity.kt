@@ -88,6 +88,8 @@ class AuthorizationActivity : AppCompatActivity(), AuthorizationRepository {
 
             sharedPreference.save("name", userName)
             sharedPreference.save("email", userEmail)
+            sharedPreference.save("time", "0")
+            sharedPreference.save("goal", "0")
         }
     }
 }

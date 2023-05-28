@@ -53,12 +53,6 @@ class CreatingCardFragment(val cardData: CardData) : Fragment() {
         gridLayoutManager = GridLayoutManager(context, 1)
         binding.containerForCreatingCardsFragments.layoutManager = gridLayoutManager
 
-        adapterForNewCards = AdapterForNewCards(
-            context,
-            displayingData
-        )
-        binding.containerForCreatingCardsFragments.adapter = adapterForNewCards
-
         if (cardData.nameModule.isNotEmpty()) {
             binding.newNameCollectionText.setText(cardData.nameModule)
 
@@ -68,20 +62,30 @@ class CreatingCardFragment(val cardData: CardData) : Fragment() {
                     ArrayList(it)
                 )
                 binding.containerForCreatingCardsFragments.adapter = adapterForNewCards
+
+                binding.addCardButton.setOnClickListener {
+                    displayingData.add(CardContentData("", ""))
+                    adapterForNewCards.notifyItemInserted(displayingData.size - 1)
+                }
             }
 
             binding.saveCardView.setCardBackgroundColor(cardData.color.toLong(radix = 16).toInt())
-        }
+        } else {
+            adapterForNewCards = AdapterForNewCards(
+                context,
+                displayingData
+            )
+            binding.containerForCreatingCardsFragments.adapter = adapterForNewCards
 
-        binding.addCardButton.setOnClickListener {
-            displayingData.add(CardContentData("", ""))
-            adapterForNewCards.notifyItemInserted(displayingData.size - 1)
+            binding.addCardButton.setOnClickListener {
+                displayingData.add(CardContentData("", ""))
+                adapterForNewCards.notifyItemInserted(displayingData.size - 1)
+            }
         }
 
         binding.toPreviousFragment2.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(R.id.mainFragmentContainer, StudyRoomFragment()).commit()
         }
-
 
         binding.saveCardView.setOnClickListener {
             uploadData()

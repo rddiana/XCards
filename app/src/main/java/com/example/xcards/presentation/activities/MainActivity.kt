@@ -9,21 +9,41 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.xcards.R
 import com.example.xcards.databinding.ActivityMainBinding
+import com.example.xcards.domain.useCase.SharedPreference
 import com.example.xcards.presentation.ChartFragment
 import com.example.xcards.presentation.HomeFragment
 import com.example.xcards.presentation.ProfileFragment
+import com.example.xcards.presentation.SettingFragment
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var sharedPreference: SharedPreference
 
     private lateinit var fragmentManager: FragmentManager
 
     private lateinit var broadcastReceiver: BroadcastReceiver
+
+    private val _secondsUpTime = MutableLiveData<Int>()
+    val secondsUpTime: LiveData<Int> = _secondsUpTime
+
+    private var startTime = -1L
+    private var counterJob: Job? = null
+
+    override fun onStart() {
+        super.onStart()
+
+        startTime = System.currentTimeMillis()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
+        sharedPreference = SharedPreference(applicationContext)
 
         checkUser()
 
@@ -58,6 +79,15 @@ class MainActivity : AppCompatActivity() {
             turnButtonNavOff(binding.toChartFragment)
         }
     }
+
+    override fun onStop() {
+        super.onStop()
+
+        val timeBefore = (sharedPreference.getValueString("time")?.toFloat()?: "0").toString().toFloat()
+        val resultTimeMinutes = ((System.currentTimeMillis() - startTime) / 1000 / 60).toInt() + timeBefore
+        sharedPreference.save("time", resultTimeMinutes.toString())
+    }
+
 
     private fun turnButtonNavOn(cardView: CardView) {
         var cardColor = ContextCompat.getColor(this, R.color.sky_blue)

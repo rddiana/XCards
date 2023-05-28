@@ -3,6 +3,7 @@ package com.example.xcards.presentation
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.example.xcards.R
 import com.example.xcards.databinding.FragmentSettingBinding
+import com.example.xcards.domain.useCase.SharedPreference
 import com.example.xcards.presentation.activities.MainActivity
 import com.google.android.material.slider.Slider
 import java.util.*
@@ -21,10 +23,13 @@ import java.util.*
 
 class SettingFragment : Fragment() {
     private lateinit var binding: FragmentSettingBinding
+    private lateinit var sharedPreference: SharedPreference
 
     private lateinit var currentLanguage: String
     private lateinit var languages: Array<String>
 
+    init {
+    }
     companion object {
         fun newInstance() = SettingFragment()
     }
@@ -34,6 +39,8 @@ class SettingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSettingBinding.inflate(layoutInflater)
+
+        sharedPreference = SharedPreference(requireContext().applicationContext)
 
         setCheckedRadioButton()
 
@@ -72,7 +79,7 @@ class SettingFragment : Fragment() {
         binding.spinner.adapter = arrayAdapter
 
         binding.spinner.onItemSelectedListener = object : OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 when (position) {
                     0 -> setLocale("en")
                     1 -> setLocale("ru")
@@ -106,23 +113,17 @@ class SettingFragment : Fragment() {
 //            }
 //        }
 
-        binding.changeGoalSlider.addOnSliderTouchListener(object : Slider.OnChangeListener,
-            Slider.OnSliderTouchListener {
-            override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
+        binding.goalTextView.text = sharedPreference.getValueString("goal")?:"0"
+        binding.changeGoalSlider.value = sharedPreference.getValueString("goal")?.toFloat() ?: 0f
 
-            }
-
-            override fun onStartTrackingTouch(slider: Slider) {
-
-            }
-
-            override fun onStopTrackingTouch(slider: Slider) {
-
-            }
-        })
+        binding.changeGoalSlider.addOnChangeListener { _, value, _ ->
+            binding.goalTextView.text = value.toInt().toString()
+            sharedPreference.updateStringValue("goal", binding.goalTextView.text.toString())
+        }
 
         return binding.root
     }
+
 
     private fun setLocale(localeName: String) {
         if (localeName != currentLanguage) {

@@ -34,6 +34,7 @@
     <color name="blue">#5D7DA6</color>
     <color name="gray_green">#739FAA</color>
     <color name="sky_blue">#9BB3D5</color>
+    <color name="pale_blue">#809BB3D5</color>
 
     <color name="transparent">#00000000</color>
 </resources>
