@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xcards.R
 import com.example.xcards.data.CardData
@@ -21,7 +22,7 @@ class AdapterForRecyclerView(
     var cardsArray: ArrayList<CardData>
 
     init {
-        cardsArray = data as ArrayList<CardData>
+        cardsArray = data
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -44,11 +45,11 @@ class AdapterForRecyclerView(
     // Binding data to the into specified position
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (position - 1 >= 0) {
-            (holder as ViewHolder).cardName.text = cardsArray[position-1].nameModule
-            holder.cardsCount.text = cardsArray[position-1].cardsCount.toString()
+            (holder as ViewHolder).cardName.text = cardsArray[position - 1].nameModule
+            holder.cardsCount.text = cardsArray[position - 1].cardsCount.toString()
 
             val card = holder.itemView as MaterialCardView
-            card.setCardBackgroundColor(cardsArray[position - 1].color.toInt())
+            card.setCardBackgroundColor((cardsArray[position - 1].color).toLong(radix = 16).toInt())
 
             holder.itemView.setOnClickListener {
                 onCardPressed(cardsArray[position - 1])
@@ -71,7 +72,7 @@ class AdapterForRecyclerView(
         return cardsArray.size + 1
     }
 
-    inner class ButtonsViewHolder(view: View) : RecyclerView.ViewHolder(view){
+    inner class ButtonsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var plusButton: View
         var startButton: View
 

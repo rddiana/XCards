@@ -26,7 +26,7 @@ class EditingCollectionFragment(private val cardData: CardData) : Fragment() {
 
         binding.cardName.text = cardData.nameModule
         binding.cardsCount.text = cardData.cardsCount.toString()
-        binding.mainCard.setCardBackgroundColor(parseLong(cardData.color.toString(), 16).toInt())
+        binding.mainCard.setCardBackgroundColor(cardData.color.toLong(radix = 16).toInt())
 
         binding.backArrow.setOnClickListener {
             parentFragmentManager.beginTransaction().remove(this).commit()
@@ -38,7 +38,7 @@ class EditingCollectionFragment(private val cardData: CardData) : Fragment() {
 
         binding.editButton.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .add(R.id.mainFragmentContainer, CreatingCardFragment(cardData.nameModule))
+                .add(R.id.mainFragmentContainer, CreatingCardFragment(cardData))
                 .commit()
         }
 

@@ -46,6 +46,7 @@
             android:id="@+id/spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/spinner_background"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toTopOf="@+id/guideline5"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
@@ -81,8 +82,8 @@
 
             <ImageView
                 android:id="@+id/imageView25"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
                 android:src="@drawable/icon_arrow_down" />
         </com.google.android.material.card.MaterialCardView>
 

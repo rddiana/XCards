@@ -1,5 +1,6 @@
 package com.example.xcards.presentation
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +14,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.example.xcards.R
 import com.example.xcards.databinding.FragmentSettingBinding
+import com.example.xcards.presentation.activities.MainActivity
 import com.google.android.material.slider.Slider
+import java.util.*
 
 
 class SettingFragment : Fragment() {
@@ -59,6 +62,8 @@ class SettingFragment : Fragment() {
             }
         }
 
+        currentLanguage = Locale.getDefault().displayLanguage.toString()
+
         val en = resources.getString(R.string.english)
         val ru = resources.getString(R.string.russian)
         languages = arrayOf(en, ru)
@@ -67,27 +72,14 @@ class SettingFragment : Fragment() {
         binding.spinner.adapter = arrayAdapter
 
         binding.spinner.onItemSelectedListener = object : OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                Toast.makeText(requireContext(), languages[position], Toast.LENGTH_SHORT).show()
-
-                var newLanguage = ""
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 when (position) {
-                    0 -> newLanguage = "en"
-                    1 -> newLanguage = "ru"
+                    0 -> setLocale("en")
+                    1 -> setLocale("ru")
                 }
-
-
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
 //        ArrayAdapter.createFromResource(
@@ -110,7 +102,7 @@ class SettingFragment : Fragment() {
 //            }
 //
 //            override fun onNothingSelected(parent: AdapterView<*>?) {
-//                TODO("Not yet implemented")
+//
 //            }
 //        }
 
@@ -121,15 +113,30 @@ class SettingFragment : Fragment() {
             }
 
             override fun onStartTrackingTouch(slider: Slider) {
-                TODO("Not yet implemented")
+
             }
 
             override fun onStopTrackingTouch(slider: Slider) {
-                TODO("Not yet implemented")
+
             }
         })
 
         return binding.root
+    }
+
+    private fun setLocale(localeName: String) {
+        if (localeName != currentLanguage) {
+            val locale = Locale(localeName)
+            val res = resources
+            val dm = res.displayMetrics
+            val conf = res.configuration
+            conf.locale = locale
+            res.updateConfiguration(conf, dm)
+
+//            parentFragmentManager.beginTransaction().replace(R.id.mainFragmentContainer, SettingFragment()).commit()
+
+//            startActivity(Intent(context, MainActivity::class.java).putExtra(currentLanguage, localeName))
+        }
     }
 
     //Закрашивает нужные кружочки в RadioButton, так как они не сохраняются после переходов

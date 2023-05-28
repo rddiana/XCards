@@ -44,6 +44,16 @@ class StudyRoomFragment() : Fragment() {
         staggeredGridLayoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
         binding.recyclerView.layoutManager = staggeredGridLayoutManager
 
+        binding.recyclerView.adapter = AdapterForRecyclerView(
+            context,
+            ArrayList(),
+            { card ->
+                onCardPressed(card)
+            },
+            { onPlusBtPressed() },
+            { onStartPressed() }
+        )
+
         database.getAllCardsInfo {
             binding.recyclerView.adapter = AdapterForRecyclerView(
                 context,
@@ -58,7 +68,7 @@ class StudyRoomFragment() : Fragment() {
 
         view?.findViewById<CardView>(R.id.cardViewWithBtNewCards)?.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.mainFragmentContainer, CreatingCardFragment(null))
+                .replace(R.id.mainFragmentContainer, CreatingCardFragment(CardData("", 0, "")))
                 .commit()
         }
 
@@ -84,7 +94,7 @@ class StudyRoomFragment() : Fragment() {
 
     private fun onPlusBtPressed() {
         parentFragmentManager.beginTransaction()
-            .add(R.id.mainFragmentContainer, CreatingCardFragment(null))
+            .add(R.id.mainFragmentContainer, CreatingCardFragment(CardData("", 0, "")))
             .commit()
     }
 

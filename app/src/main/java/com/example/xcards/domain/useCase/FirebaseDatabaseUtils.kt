@@ -32,12 +32,8 @@ class FirebaseDatabaseUtils(val applicationContext: Context) {
     ) {
         database.getReference("${uid}/cardCollections/${nameCollection}")
             .child("cards").get().addOnSuccessListener {
-                val receivedValues = it.getValue<List<CardContentData>>()
-
-                receivedValues?.let { list ->
-                    ArrayList<CardContentData>(list)
-                }?.let { arrayList ->
-                    onDataLoaded(arrayList)
+                it.getValue<List<CardContentData>>()?.let { loadedData ->
+                    onDataLoaded(loadedData)
                 }
             }
     }
@@ -55,12 +51,9 @@ class FirebaseDatabaseUtils(val applicationContext: Context) {
             }
     }
 
-    fun saveNewCollectionInfo(nameCollection: String, color: Long, cardsCount: Int) {
-        database.getReference("${uid}/cardCollections/${nameCollection}/info")
-            .child("color").setValue(color)
-
-        database.getReference("${uid}/cardCollections/${nameCollection}/info")
-            .child("cardsCount").setValue(cardsCount)
+    fun saveNewCollectionInfo(cardData: CardData) {
+        database.getReference("${uid}/cardCollections/${cardData.nameModule}")
+            .child("info").setValue(cardData)
     }
 
     fun saveNewCardsData(
@@ -83,18 +76,16 @@ class FirebaseDatabaseUtils(val applicationContext: Context) {
             }
     }
 
-    fun updateCollectionInfo(nameCollection: String, key: String, newData: Int): Boolean {
-        val databaseRef =
-            database.getReference("${uid}/cardCollections/${nameCollection}/info").child(key)
-        val updates = mapOf<String, Int>(Pair(key, newData))
-        var listener = false
-
-        databaseRef.updateChildren(updates)
+    fun updateCollectionInfo(cardData: CardData) {
+        val databaseRef = database.getReference("${uid}/cardCollections/${cardData.nameModule}").child("info")
+        databaseRef.removeValue()
+        databaseRef.setValue(cardData)
             .addOnSuccessListener {
-                listener = true
+                Toast.makeText(applicationContext, R.string.updates_saved_successfully, Toast.LENGTH_SHORT).show()
             }
-
-        return listener
+            .addOnFailureListener {
+                Toast.makeText(applicationContext, R.string.save_updates_failed, Toast.LENGTH_SHORT).show()
+            }
     }
 
     fun updateCollectionName(nameCollection: String, newNameCollection: String) {

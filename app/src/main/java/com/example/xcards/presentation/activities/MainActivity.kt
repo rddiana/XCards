@@ -3,6 +3,7 @@ package com.example.xcards.presentation.activities
 import android.content.BroadcastReceiver
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -86,5 +87,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, OnboardingActivity::class.java))
             finish()
         }
+    }
+
+    private fun itemSelectedListenerForSpinner() {
+
     }
 }
