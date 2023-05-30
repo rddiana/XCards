@@ -86,4 +86,6 @@
     <string name="error_collection_name_is_empty">Collection name cannot be empty</string>
     <string name="russian">Russian</string>
     <string name="english">English</string>
+    <string name="nothing_found">Nothing found</string>
+    <string name="notification_title">Reminder from XCards</string>
 </resources>

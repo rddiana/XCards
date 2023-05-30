@@ -75,12 +75,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/activate_hard_repetitions"
-                app:layout_constraintEnd_toStartOf="@+id/switchForReminders"
+                app:layout_constraintEnd_toStartOf="@+id/switchForHardRepetitions"
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
                 app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
             <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switchForReminders"
+                android:id="@+id/switchForHardRepetitions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="48dp"

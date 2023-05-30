@@ -2,15 +2,12 @@ package com.example.xcards.presentation
 //!!
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.xcards.R
 import com.example.xcards.data.CardContentData
@@ -29,10 +26,7 @@ class CreatingCardFragment(val cardData: CardData) : Fragment() {
     private lateinit var database: FirebaseDatabaseUtils
     private lateinit var sharedPreference: SharedPreference
 
-    private lateinit var id: String
-
     private lateinit var adapterForNewCards: AdapterForNewCards
-    private lateinit var gridLayoutManager: GridLayoutManager
 
 //    companion object {
 //        fun newInstance() = CreatingCardFragment()
@@ -48,25 +42,28 @@ class CreatingCardFragment(val cardData: CardData) : Fragment() {
 
         database = FirebaseDatabaseUtils(requireContext().applicationContext)
         sharedPreference = SharedPreference(requireContext().applicationContext)
-        id = sharedPreference.getValueString("uid").toString()
 
-        gridLayoutManager = GridLayoutManager(context, 1)
-        binding.containerForCreatingCardsFragments.layoutManager = gridLayoutManager
+        binding.containerForCreatingCardsFragments.layoutManager =
+            LinearLayoutManager(requireContext())
+
+        binding.addCardButton.setOnClickListener {
+            displayingData.add(CardContentData("", ""))
+            adapterForNewCards = AdapterForNewCards(requireContext(), displayingData)
+            binding.containerForCreatingCardsFragments.adapter = adapterForNewCards
+        }
 
         if (cardData.nameModule.isNotEmpty()) {
             binding.newNameCollectionText.setText(cardData.nameModule)
 
-            database.getCardsCollection (cardData.nameModule) {
-                 adapterForNewCards = AdapterForNewCards(
-                    context,
-                    ArrayList(it)
-                )
-                binding.containerForCreatingCardsFragments.adapter = adapterForNewCards
+            database.getCardsCollection(cardData.nameModule) {
+                displayingData = ArrayList(it)
 
-                binding.addCardButton.setOnClickListener {
-                    displayingData.add(CardContentData("", ""))
-                    adapterForNewCards.notifyItemInserted(displayingData.size - 1)
-                }
+                adapterForNewCards = AdapterForNewCards(
+                    context,
+                    displayingData
+                )
+
+                binding.containerForCreatingCardsFragments.adapter = adapterForNewCards
             }
 
             binding.saveCardView.setCardBackgroundColor(cardData.color.toLong(radix = 16).toInt())
@@ -76,15 +73,11 @@ class CreatingCardFragment(val cardData: CardData) : Fragment() {
                 displayingData
             )
             binding.containerForCreatingCardsFragments.adapter = adapterForNewCards
-
-            binding.addCardButton.setOnClickListener {
-                displayingData.add(CardContentData("", ""))
-                adapterForNewCards.notifyItemInserted(displayingData.size - 1)
-            }
         }
 
         binding.toPreviousFragment2.setOnClickListener {
-            parentFragmentManager.beginTransaction().replace(R.id.mainFragmentContainer, StudyRoomFragment()).commit()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.mainFragmentContainer, StudyRoomFragment()).commit()
         }
 
         binding.saveCardView.setOnClickListener {

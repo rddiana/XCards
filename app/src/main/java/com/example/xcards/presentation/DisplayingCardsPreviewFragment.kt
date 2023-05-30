@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import com.example.xcards.R
 import com.example.xcards.databinding.FragmentDisplayingCardsPreviewBinding
 
-class DisplayingCardsPreviewFragment : Fragment() {
+class DisplayingCardsPreviewFragment(
+    nameModule: String
+) : Fragment() {
     private lateinit var binding: FragmentDisplayingCardsPreviewBinding
 
     override fun onCreateView(

@@ -1,28 +1,32 @@
 package com.example.xcards.presentation.activities
 
+import android.app.AlarmManager
+import android.app.AlertDialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.xcards.R
 import com.example.xcards.databinding.ActivityMainBinding
-import com.example.xcards.domain.useCase.SharedPreference
+import com.example.xcards.domain.useCase.*
 import com.example.xcards.presentation.ChartFragment
 import com.example.xcards.presentation.HomeFragment
 import com.example.xcards.presentation.ProfileFragment
-import com.example.xcards.presentation.SettingFragment
+import com.example.xcards.presentation.RemindersFragment
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
+import java.text.SimpleDateFormat
+import java.time.DayOfWeek
 import java.util.*
-
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -33,11 +37,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var broadcastReceiver: BroadcastReceiver
 
-    private val _secondsUpTime = MutableLiveData<Int>()
-    val secondsUpTime: LiveData<Int> = _secondsUpTime
-
     private var startTime = -1L
-    private var counterJob: Job? = null
+
+    var daysOfWeekArray = arrayListOf<Int>()
 
     override fun onStart() {
         super.onStart()
@@ -78,24 +80,102 @@ class MainActivity : AppCompatActivity() {
             turnButtonNavOff(binding.toHomeFragment)
             turnButtonNavOff(binding.toChartFragment)
         }
+
+        if (sharedPreference.getValueBoolean("isNotificationTurnOn", false)) {
+            daysOfWeekArray.forEach { dayOfWeek ->
+                createNotificationChannel()
+                scheduleNotification(dayOfWeek)
+            }
+        }
+    }
+
+    private fun scheduleNotification(dayOfWeek: Int) {
+        val intent = Intent(applicationContext, NotificationUtils::class.java)
+        val title = "title"
+        val message = "message"
+
+        intent.putExtra(titleExtra, title)
+        intent.putExtra(messageExtra, message)
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            applicationContext,
+            NOTIFICATION_ID,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val time = getTime(dayOfWeek)
+
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            time,
+            pendingIntent
+        )
+//        showAlert(time, title, message)
+    }
+
+//    private fun showAlert(time: Long, title: String, message: String) {
+//        val date = Date(time)
+//        val dateFormat = android.text.format.DateFormat.getLongDateFormat(applicationContext)
+//        val timeFormat = android.text.format.DateFormat.getTimeFormat(applicationContext)
+//
+//        AlertDialog.Builder(this)
+//            .setTitle(R.string.notification_title)
+//            .setMessage(R.string.motivation_phrase)
+//            .setPositiveButton("Okay") {_, _ ->}
+//            .show()
+//    }
+
+    //!!
+    private fun getTime(dayOfWeek: Int): Long {
+        val hours = findViewById<MaterialButton>(R.id.buttonViewHours).text.toString().toInt()
+        val minutes = findViewById<MaterialButton>(R.id.buttonViewMinutes).text.toString().toInt()
+        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+        val currentDate = sdf.format(Date())
+
+        val calendar = Calendar.getInstance()
+        calendar.set(
+            currentDate.substring(5, 9).toInt(),
+            currentDate.substring(3, 4).toInt(),
+            currentDate.substring(0, 3).toInt(),
+            hours,
+            minutes
+        )
+        calendar.setWeekDate(
+            52,
+            Calendar.WEEK_OF_YEAR,
+            dayOfWeek
+        )
+        return calendar.timeInMillis
+    }
+
+    private fun createNotificationChannel() {
+        val name = "Notif channel"
+        val desc = "A Description of the channel"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channel = NotificationChannel(CHANNEL_ID, name,importance)
+        channel.description = desc
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
     }
 
     override fun onStop() {
         super.onStop()
 
-        val timeBefore = (sharedPreference.getValueString("time")?.toFloat()?: "0").toString().toFloat()
-        val resultTimeMinutes = ((System.currentTimeMillis() - startTime) / 1000 / 60).toInt() + timeBefore
-        sharedPreference.save("time", resultTimeMinutes.toString())
+//        val timeBefore = sharedPreference.getValueFloat("time")
+//        val resultTimeMinutes = ((System.currentTimeMillis() - startTime).toFloat() / 1000 / 60).toInt() + timeBefore
+//        sharedPreference.updateFloatValue("time", resultTimeMinutes)
     }
 
 
     private fun turnButtonNavOn(cardView: CardView) {
-        var cardColor = ContextCompat.getColor(this, R.color.sky_blue)
+        val cardColor = ContextCompat.getColor(this, R.color.sky_blue)
         cardView.setCardBackgroundColor(cardColor)
     }
 
     private fun turnButtonNavOff(cardView: CardView) {
-        var cardColor = ContextCompat.getColor(this, R.color.transparent)
+        val cardColor = ContextCompat.getColor(this, R.color.transparent)
         cardView.setCardBackgroundColor(cardColor)
     }
 
@@ -117,9 +197,5 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, OnboardingActivity::class.java))
             finish()
         }
-    }
-
-    private fun itemSelectedListenerForSpinner() {
-
     }
 }

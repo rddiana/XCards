@@ -2,6 +2,7 @@ package com.example.xcards.presentation
 
 import android.app.TimePickerDialog
 import android.content.res.Configuration
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,19 +13,23 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.xcards.R
 import com.example.xcards.databinding.FragmentRemindersBinding
+import com.example.xcards.domain.useCase.SharedPreference
+import com.example.xcards.presentation.activities.MainActivity
 import java.util.*
 import kotlin.collections.ArrayList
 
-
 class RemindersFragment : Fragment() {
     private lateinit var binding: FragmentRemindersBinding
-    private lateinit var daysOfWeekArray: ArrayList<TextView>
+//    var daysOfWeekArray: ArrayList<Int> = arrayListOf()
+    private lateinit var sharedPreference: SharedPreference
+
+    private var currentNightMode: Int = 0
+
+    private lateinit var viewModel: RemindersViewModel
 
     companion object {
         fun newInstance() = RemindersFragment()
     }
-
-    private lateinit var viewModel: RemindersViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,46 +37,36 @@ class RemindersFragment : Fragment() {
     ): View {
         binding = FragmentRemindersBinding.inflate(layoutInflater)
 
+        sharedPreference = SharedPreference(requireContext())
+
+        currentNightMode = requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
+        binding.switchForReminders.isChecked = sharedPreference.getValueBoolean("isNotificationTurnOn", false)
+
         val gray = resources.getColor(R.color.gray)
         val darkGray = resources.getColor(R.color.dark_gray)
         val black = resources.getColor(R.color.black)
         val lilac = resources.getColor(R.color.lilac)
 
-        val currentNightMode = requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-
         val switchIsChecked = binding.switchForReminders.isChecked
         if (switchIsChecked) {
-            possibilityOfChoiceDays()
-            coordinateColorBtWithSwitch(black, lilac)
+            whenIsChecked(switchIsChecked)
+
+            MainActivity().daysOfWeekArray = arrayListOf(
+                Calendar.MONDAY,
+                Calendar.TUESDAY,
+                Calendar.WEDNESDAY,
+                Calendar.THURSDAY,
+                Calendar.FRIDAY,
+                Calendar.SATURDAY,
+                Calendar.SUNDAY
+            )
         } else {
             coordinateColorBtWithSwitch(darkGray, gray)
         }
 
         binding.switchForReminders.setOnCheckedChangeListener { _, isChecked ->
-            var newColorForText = darkGray
-            var newColorForButtons = gray
-            var isEnable = false
-
-            if (isChecked) {
-                when (currentNightMode) {
-                    Configuration.UI_MODE_NIGHT_NO -> {
-                        newColorForText = black
-                    }
-                    Configuration.UI_MODE_NIGHT_YES -> {
-                        newColorForText = resources.getColor(R.color.light_gray)
-                    }
-                }
-
-                possibilityOfChoiceDays()
-
-                newColorForButtons = lilac
-                isEnable = true
-            }
-
-            binding.buttonViewHours.isEnabled = isEnable
-            binding.buttonViewMinutes.isEnabled = isEnable
-
-            coordinateColorBtWithSwitch(newColorForText, newColorForButtons)
+            whenIsChecked(isChecked)
         }
 
         binding.buttonViewHours.setOnClickListener {
@@ -83,10 +78,56 @@ class RemindersFragment : Fragment() {
         }
 
         binding.toPreviousFragment3.setOnClickListener {
-            parentFragmentManager.beginTransaction().remove(this).commit()
+            parentFragmentManager.beginTransaction().replace(R.id.mainFragmentContainer, SettingFragment()).commit()
         }
 
         return binding.root
+    }
+
+    private fun whenIsChecked(isChecked: Boolean) {
+        val gray = resources.getColor(R.color.gray)
+        val darkGray = resources.getColor(R.color.dark_gray)
+        val black = resources.getColor(R.color.black)
+        val lilac = resources.getColor(R.color.lilac)
+
+        var newColorForText = darkGray
+        var newColorForButtons = gray
+        var isEnable = false
+
+        sharedPreference.updateBooleanValue("isNotificationTurnOn", isChecked)
+
+        if (isChecked) {
+            MainActivity().daysOfWeekArray = arrayListOf(
+                Calendar.MONDAY,
+                Calendar.TUESDAY,
+                Calendar.WEDNESDAY,
+                Calendar.THURSDAY,
+                Calendar.FRIDAY,
+                Calendar.SATURDAY,
+                Calendar.SUNDAY
+            )
+
+            when (currentNightMode) {
+                Configuration.UI_MODE_NIGHT_NO -> {
+                    newColorForText = black
+                }
+                Configuration.UI_MODE_NIGHT_YES -> {
+                    newColorForText = resources.getColor(R.color.light_gray)
+                }
+            }
+
+            possibilityOfChoiceDays()
+
+            newColorForButtons = lilac
+            isEnable = true
+        } else {
+            MainActivity().daysOfWeekArray.clear()
+        }
+
+        binding.buttonViewHours.isEnabled = isEnable
+        binding.buttonViewMinutes.isEnabled = isEnable
+
+        coordinateColorBtWithSwitch(newColorForText, newColorForButtons)
     }
 
     private fun possibilityOfChoiceDays() {
@@ -126,12 +167,23 @@ class RemindersFragment : Fragment() {
     }
 
     private fun chooseDayOfWeek(view: TextView) {
+        var currentDate = 0
+        when (view.text) {
+            resources.getString(R.string.monday) -> currentDate = Calendar.MONDAY
+            resources.getString(R.string.tuesday) -> currentDate = Calendar.TUESDAY
+            resources.getString(R.string.wednesday) -> currentDate = Calendar.WEDNESDAY
+            resources.getString(R.string.thursday) -> currentDate = Calendar.THURSDAY
+            resources.getString(R.string.friday) -> currentDate = Calendar.FRIDAY
+            resources.getString(R.string.saturday) -> currentDate = Calendar.SATURDAY
+            resources.getString(R.string.sunday) -> currentDate = Calendar.SUNDAY
+        }
+
         if ((view.background as ColorDrawable).color == resources.getColor(R.color.gray)) {
             view.setBackgroundColor(resources.getColor(R.color.lilac))
-//            daysOfWeekArray.add(view)
+            MainActivity().daysOfWeekArray.add(currentDate)
         } else {
             view.setBackgroundColor(resources.getColor(R.color.gray))
-//            daysOfWeekArray.remove(view)
+            MainActivity().daysOfWeekArray.remove(currentDate)
         }
     }
 
@@ -152,19 +204,27 @@ class RemindersFragment : Fragment() {
         val hours = calender.get(Calendar.HOUR_OF_DAY)
         val minutes = calender.get(Calendar.MINUTE)
 
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+            binding.buttonViewHours.text = hour.toString()
+            binding.buttonViewMinutes.text = minute.toString()
+        }
+
         val timePickerDialog = TimePickerDialog(
             context,
             R.style.timePickerStyle,
-            { _, hourOfDay, minute ->
-                binding.buttonViewHours.text = hourOfDay.toString()
-                binding.buttonViewMinutes.text = minute.toString()
-            },
+            timeSetListener,
             hours,
             minutes,
-            false
+            true
         )
 
         timePickerDialog.show()
+//
+//        timePickerDialog.getButton(TimePickerDialog.BUTTON_NEGATIVE)
+//            .setBackgroundColor(Color.BLACK)
+//
+//        timePickerDialog.getButton(TimePickerDialog.BUTTON_POSITIVE)
+//            .setBackgroundColor(Color.BLACK)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

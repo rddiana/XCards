@@ -49,12 +49,12 @@ class SettingFragment : Fragment() {
         }
 
         binding.toRemindersFragment.setOnClickListener {
-            parentFragmentManager.beginTransaction().add(R.id.mainFragmentContainer, RemindersFragment())
+            parentFragmentManager.beginTransaction().replace(R.id.mainFragmentContainer, RemindersFragment())
                 .commit()
         }
 
         binding.toHardRepetionsFragment.setOnClickListener {
-            parentFragmentManager.beginTransaction().add(R.id.mainFragmentContainer, HardRepetitionsFragment())
+            parentFragmentManager.beginTransaction().replace(R.id.mainFragmentContainer, HardRepetitionsFragment())
                 .commit()
         }
 

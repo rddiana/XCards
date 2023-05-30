@@ -8,20 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.IntegerRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.xcards.R
-import com.example.xcards.data.CardData
+import com.example.xcards.data.CardDataLite
 import com.example.xcards.databinding.FragmentHardRepetitionsBinding
-import com.example.xcards.domain.adapters.AdapterForMiniCards
+import com.example.xcards.domain.adapters.AdapterForMiniCardsChangingColor
 import com.example.xcards.domain.useCase.FirebaseDatabaseUtils
-import java.lang.Integer.parseInt
-import java.lang.Math.round
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.math.roundToInt
 
 class HardRepetitionsFragment : Fragment() {
     private lateinit var binding: FragmentHardRepetitionsBinding
@@ -47,7 +45,7 @@ class HardRepetitionsFragment : Fragment() {
         val currentNightMode =
             requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
 
-        val switchIsChecked = binding.switchForReminders.isChecked
+        val switchIsChecked = binding.switchForHardRepetitions.isChecked
         if (switchIsChecked) {
             possibilityOfChoiceDays()
             coordinateColorBtWithSwitch(black, lilac)
@@ -55,7 +53,7 @@ class HardRepetitionsFragment : Fragment() {
             coordinateColorBtWithSwitch(darkGray, gray)
         }
 
-        binding.switchForReminders.setOnCheckedChangeListener { _, isChecked ->
+        binding.switchForHardRepetitions.setOnCheckedChangeListener { _, isChecked ->
             var newColorForText = darkGray
             var newColorForButtons = gray
             var isEnable = false
@@ -94,9 +92,20 @@ class HardRepetitionsFragment : Fragment() {
         binding.recyclerViewForMiniCards.layoutManager = staggeredGridLayoutManager
 
         database.getAllCardsInfo {
-            binding.recyclerViewForMiniCards.adapter = AdapterForMiniCards(
-                context,
-                ArrayList(it)
+            val cardDataLiteArray = arrayListOf<CardDataLite>()
+            val normalColor = Integer.toHexString(resources.getColor(R.color.pale_gray_green))
+
+            it.forEach { cardData ->
+                cardDataLiteArray.add(CardDataLite(cardData.nameModule, normalColor))
+            }
+
+            binding.recyclerViewForMiniCards.adapter = AdapterForMiniCardsChangingColor(
+                requireContext(),
+                ArrayList(it),
+                cardDataLiteArray,
+                R.layout.mini_card,
+                normalColor,
+                Integer.toHexString(resources.getColor(R.color.gray_green))
             )
         }
 

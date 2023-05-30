@@ -96,8 +96,9 @@ class RegistrationActivity : AppCompatActivity(), RegistrationRepository {
     private fun createDataBase() {
         sharedPreference.save("email", userEmail)
         sharedPreference.save("userName", fullName)
-        sharedPreference.save("time", "0")
+        sharedPreference.save("time", 0f)
         sharedPreference.save("goal", "0")
+        sharedPreference.save("isNotificationTurnOn", false)
 
         database.savePersonalData("email", userEmail)
         database.savePersonalData("name", fullName)

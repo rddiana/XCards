@@ -34,7 +34,7 @@ class ChartFragment : Fragment() {
 
         sharedPreference = SharedPreference(requireContext().applicationContext)
 
-        binding.spendingHoursText.text = ((sharedPreference.getValueInt("time").toFloat() / 60f * 10).toInt().toFloat() / 10).toString()
+//        binding.spendingHoursText.text = ((sharedPreference.getValueString("time")!!.toFloat() / 60f * 10).toInt().toFloat() / 10).toString()
 
 //        val pieChart = binding.pieChart
 //

@@ -16,6 +16,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
             <ImageView
                 android:id="@+id/miniCardsImage"
                 android:src="@drawable/image_header_landscape"
@@ -36,7 +50,7 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/miniCardsImage" />
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardView2"
                 style="@style/searchingViewStyle"
                 android:layout_width="0dp"
@@ -52,7 +66,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/searchingModules"
+                        android:id="@+id/searchEditText"
                         style="@style/editTextStyle"
                         android:layout_width="250dp"
                         android:layout_height="wrap_content"
@@ -68,7 +82,7 @@
                         tools:ignore="TouchTargetSizeCheck" />
 
                     <ImageView
-                        android:id="@+id/imageView25"
+                        android:id="@+id/searchImg"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginEnd="16dp"
@@ -80,7 +94,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/toStudyRoomCard"
@@ -98,7 +112,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView22"
+                        android:id="@+id/allCards"
                         style="@style/textStyle_h2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -116,35 +130,20 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.05" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.95" />
-
             <HorizontalScrollView
                 android:id="@+id/ScrollViewForAllCards"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/toStudyRoomCard"
                 tools:ignore="SpeakableTextPresentCheck">
 
-                <LinearLayout
-                    android:id="@+id/layoutForAllCards"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewForAllCards"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical" />
+                    android:layout_height="match_parent" />
             </HorizontalScrollView>
 
             <TextView
@@ -160,18 +159,17 @@
             <HorizontalScrollView
                 android:id="@+id/scrollViewFroRecommendation"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@id/textView25"
                 tools:ignore="SpeakableTextPresentCheck">
 
-                <LinearLayout
-                    android:id="@+id/lauoutForRecommendedCards"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewForRecommmendations"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical" />
+                    android:layout_height="match_parent" />
             </HorizontalScrollView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

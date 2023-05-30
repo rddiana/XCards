@@ -80,4 +80,6 @@
     <string name="error_collection_name_is_empty">Название коллекции не может быть пустым</string>
     <string name="russian">Русский</string>
     <string name="english">Английский</string>
+    <string name="nothing_found">Ничего не найдено</string>
+    <string name="notification_title">Напоминание от XCards</string>
 </resources>
