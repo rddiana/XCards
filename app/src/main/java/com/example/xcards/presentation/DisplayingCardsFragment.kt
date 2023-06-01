@@ -38,23 +38,13 @@ class DisplayingCardsFragment(
         binding = FragmentDisplayingCardsBinding.inflate(layoutInflater)
         database = FirebaseDatabaseUtils(requireContext().applicationContext)
 
-        swipeLayoutManager = SwipeableLayoutManager()
-        swipeLayoutManager.angle = 10
-        swipeLayoutManager.animationDuratuion = 1000
-        swipeLayoutManager.maxShowCount = 3
-        swipeLayoutManager.scaleGap = 0.5f
-        swipeLayoutManager.transYGap = 0
-
-        binding.displayingCardRecyclerView.layoutManager = swipeLayoutManager
-
         adapter = DisplayingCardsAdapter(
             requireContext(),
-            ArrayList(listCardDataContent)
+            ArrayList(listCardDataContent),
+            resources
         )
 
-        binding.displayingCardRecyclerView.adapter = adapter
-
-        swipeTouchHelper = SwipeableTouchHelperCallback(object :  OnItemSwiped {
+        swipeTouchHelper = SwipeableTouchHelperCallback(object : OnItemSwiped {
             override fun onItemSwiped() {
                 adapter.removeSwipedItem()
             }
@@ -78,6 +68,17 @@ class DisplayingCardsFragment(
 
         itemTouchHelper = ItemTouchHelper(swipeTouchHelper)
         itemTouchHelper.attachToRecyclerView(binding.displayingCardRecyclerView)
+
+        swipeLayoutManager = SwipeableLayoutManager()
+        swipeLayoutManager.angle = 10
+        swipeLayoutManager.animationDuratuion = 1000
+        swipeLayoutManager.maxShowCount = 3
+        swipeLayoutManager.scaleGap = 0.5f
+        swipeLayoutManager.transYGap = 0
+
+        binding.displayingCardRecyclerView.layoutManager = swipeLayoutManager
+
+        binding.displayingCardRecyclerView.adapter = adapter
 
         binding.backArrow.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(

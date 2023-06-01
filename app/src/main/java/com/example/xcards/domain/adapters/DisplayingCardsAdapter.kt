@@ -3,6 +3,7 @@ package com.example.xcards.domain.adapters
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
 import android.content.Context
+import android.content.res.Resources
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,13 +14,15 @@ import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xcards.R
 import com.example.xcards.data.CardContentData
+import com.google.android.material.card.MaterialCardView
 
 class DisplayingCardsAdapter(
     val context: Context,
-    val cardContentList: ArrayList<CardContentData>
+    val cardContentList: ArrayList<CardContentData>,
+    val resources: Resources
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisplayingCardHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
         return DisplayingCardHolder(view)
     }
@@ -30,13 +33,16 @@ class DisplayingCardsAdapter(
         (holder as DisplayingCardHolder).textQuestion.text = cardContentData.question
         holder.textAnswer.text = cardContentData.answer
 
-        holder.viewAnswer.setOnClickListener {
-            flipCard(context, holder.viewQuestion, it)
-        }
-
-        holder.viewQuestion.setOnClickListener {
-            flipCard(context, holder.viewAnswer, it)
-        }
+        holder.viewQuestion.setCardBackgroundColor(resources.getColor(R.color.light_gray))
+        holder.viewAnswer.setCardBackgroundColor(resources.getColor(R.color.light_gray))
+//
+//        holder.viewAnswer.setOnClickListener {
+//            flipCard(context, holder.viewQuestion, it)
+//        }
+//
+//        holder.viewQuestion.setOnClickListener {
+//            flipCard(context, holder.viewAnswer, it)
+//        }
     }
 
     override fun getItemCount(): Int {
@@ -44,9 +50,9 @@ class DisplayingCardsAdapter(
     }
 
     inner class DisplayingCardHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var viewQuestion: ViewGroup
+        var viewQuestion: MaterialCardView
         var textQuestion: TextView
-        var viewAnswer: ViewGroup
+        var viewAnswer: MaterialCardView
         var textAnswer: TextView
 
         init {
@@ -62,37 +68,37 @@ class DisplayingCardsAdapter(
         notifyDataSetChanged()
     }
 
-    private fun flipCard(context: Context, visibleView: View, inVisibleView: View) {
-        try {
-            visibleView.visibility = View.VISIBLE
-
-            val scale = context.resources.displayMetrics.density
-            val cameraDist = 8000 * scale
-            visibleView.cameraDistance = cameraDist
-            inVisibleView.cameraDistance = cameraDist
-
-            val flipOutAnimatorSet =
-                AnimatorInflater.loadAnimator(
-                    context,
-                    R.animator.flip_out
-                ) as AnimatorSet
-
-            flipOutAnimatorSet.setTarget(inVisibleView)
-
-            val flipInAnimationSet =
-                AnimatorInflater.loadAnimator(
-                    context,
-                    R.animator.flip_in
-                ) as AnimatorSet
-
-            flipInAnimationSet.setTarget(visibleView)
-            flipOutAnimatorSet.start()
-            flipInAnimationSet.start()
-            flipInAnimationSet.doOnEnd {
-                inVisibleView.isGone = true
-            }
-        } catch (e: Exception) {
-            Log.d("animator exception", e.message.toString())
-        }
-    }
+//    private fun flipCard(context: Context, visibleView: View, inVisibleView: View) {
+//        try {
+//            visibleView.visibility = View.VISIBLE
+//
+//            val scale = context.resources.displayMetrics.density
+//            val cameraDist = 8000 * scale
+//            visibleView.cameraDistance = cameraDist
+//            inVisibleView.cameraDistance = cameraDist
+//
+//            val flipOutAnimatorSet =
+//                AnimatorInflater.loadAnimator(
+//                    context,
+//                    R.animator.flip_out
+//                ) as AnimatorSet
+//
+//            flipOutAnimatorSet.setTarget(inVisibleView)
+//
+//            val flipInAnimationSet =
+//                AnimatorInflater.loadAnimator(
+//                    context,
+//                    R.animator.flip_in
+//                ) as AnimatorSet
+//
+//            flipInAnimationSet.setTarget(visibleView)
+//            flipOutAnimatorSet.start()
+//            flipInAnimationSet.start()
+//            flipInAnimationSet.doOnEnd {
+//                inVisibleView.isGone = true
+//            }
+//        } catch (e: Exception) {
+//            Log.d("animator exception", e.message.toString())
+//        }
+//    }
 }

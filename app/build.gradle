@@ -85,4 +85,5 @@ dependencies {
     implementation "androidx.preference:preference-ktx:1.2.0"
 
     implementation "com.github.nihad92:SwipeableCards:1.0.19"
+    implementation 'com.lorentzos.swipecards:library:1.0.9@aar'
 }

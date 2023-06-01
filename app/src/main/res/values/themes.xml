@@ -15,30 +15,6 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="roundedUpperLeftEdgeCard" parent="@style/Widget.MaterialComponents.CardView">
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialCardView.UpperLeftRoundEdge</item>
-    </style>
-
-    <style name="ShapeAppearanceOverlay.MaterialCardView.UpperLeftRoundEdge" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopRight">0dp</item>
-        <item name="cornerSizeTopLeft">190dp</item>
-        <item name="cornerSizeBottomRight">0dp</item>
-        <item name="cornerSizeBottomLeft">0dp</item>
-    </style>
-
-    <style name="roundedUpperRightEdgeCard" parent="@style/Widget.MaterialComponents.CardView">
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialCardView.UpperRightRoundEdge</item>
-    </style>
-
-    <style name="ShapeAppearanceOverlay.MaterialCardView.UpperRightRoundEdge" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopRight">190dp</item>
-        <item name="cornerSizeTopLeft">0dp</item>
-        <item name="cornerSizeBottomRight">0dp</item>
-        <item name="cornerSizeBottomLeft">0dp</item>
-    </style>
-
     <style name="timePickerStyle" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/sky_blue</item>
         <item name="colorControlActivated">@color/sky_blue</item>

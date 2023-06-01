@@ -70,34 +70,31 @@
             android:src="@drawable/icon_back_arrow_immutable" />
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.card.MaterialCardView
+    <View
         android:id="@+id/dontRememberCardView"
-        style="@style/roundedUpperRightEdgeCard"
+        android:background="@drawable/pink_ellipse"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="0dp"
         android:layout_marginEnd="16dp"
-        app:cardBackgroundColor="@color/pink"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guidelineV50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineH78" >
 
-    </com.google.android.material.card.MaterialCardView>
+    </View>
 
-    <com.google.android.material.card.MaterialCardView
+    <View
         android:id="@+id/rememberCardView"
-        style="@style/roundedUpperLeftEdgeCard"
+        android:background="@drawable/green_ellipse"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        app:cardBackgroundColor="@color/gray_green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guidelineV50"
         app:layout_constraintTop_toTopOf="@+id/guidelineH78" >
 
-    </com.google.android.material.card.MaterialCardView>
+    </View>
 
     <TextView
         android:id="@+id/textView47"
