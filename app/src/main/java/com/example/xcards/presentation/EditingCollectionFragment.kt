@@ -11,7 +11,9 @@ import com.example.xcards.data.CardData
 import com.example.xcards.databinding.FragmentEditingCollectionBinding
 import java.lang.Long.parseLong
 
-class EditingCollectionFragment(private val cardData: CardData) : Fragment() {
+class EditingCollectionFragment(
+    private val cardData: CardData
+) : Fragment() {
     private lateinit var binding: FragmentEditingCollectionBinding
 
 //    companion object {
@@ -29,7 +31,9 @@ class EditingCollectionFragment(private val cardData: CardData) : Fragment() {
         binding.mainCard.setCardBackgroundColor(cardData.color.toLong(radix = 16).toInt())
 
         binding.backArrow.setOnClickListener {
-            parentFragmentManager.beginTransaction().remove(this).commit()
+            parentFragmentManager.beginTransaction().replace(
+                R.id.mainFragmentContainer, StudyRoomFragment()
+            ).commit()
         }
 
         binding.deleteButton.setOnClickListener {

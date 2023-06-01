@@ -78,7 +78,9 @@ class HomeFragment : Fragment() {
                 context,
                 ArrayList(displayingCards),
                 R.layout.mini_cards_2
-            )
+            ) { cardData ->
+                onCardClick(cardData)
+            }
         }
 
         binding.toStudyRoomCard.setOnClickListener {
@@ -96,4 +98,9 @@ class HomeFragment : Fragment() {
         // TODO: Use the ViewModel
     }
 
+    private fun onCardClick(cardData: CardData) {
+        parentFragmentManager.beginTransaction().replace(
+            R.id.mainFragmentContainer, EditingCollectionFragment(cardData)
+        ).commit()
+    }
 }

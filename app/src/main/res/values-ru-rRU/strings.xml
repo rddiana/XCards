@@ -82,4 +82,6 @@
     <string name="english">Английский</string>
     <string name="nothing_found">Ничего не найдено</string>
     <string name="notification_title">Напоминание от XCards</string>
+    <string name="dont_remember">Не помню</string>
+    <string name="remember">Помню</string>
 </resources>

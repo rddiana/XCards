@@ -7,26 +7,31 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.xcards.R
 import com.example.xcards.databinding.FragmentDisplayingCardsPreviewBinding
+import com.example.xcards.domain.useCase.FirebaseDatabaseUtils
 
 class DisplayingCardsPreviewFragment(
-    nameModule: String
+    val nameModule: String
 ) : Fragment() {
     private lateinit var binding: FragmentDisplayingCardsPreviewBinding
+    private lateinit var database: FirebaseDatabaseUtils
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDisplayingCardsPreviewBinding.inflate(layoutInflater)
+        database = FirebaseDatabaseUtils(requireContext().applicationContext)
+
+        database.getCardsCollection(nameModule) { list ->
+            binding.continueButton.setOnClickListener {
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.mainFragmentContainer, DisplayingCardsFragment(list))
+                    .commit()
+            }
+        }
 
         binding.toEditingCollection.setOnClickListener {
             parentFragmentManager.beginTransaction().remove(this).commit()
-        }
-
-        binding.continueButton.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .add(R.id.mainFragmentContainer, DisplayingCardsFragment())
-                .commit()
         }
 
         return binding.root

@@ -14,7 +14,8 @@ import kotlin.math.roundToInt
 class AdapterForMiniCards(
     var context: Context?,
     var data: ArrayList<CardData>,
-    var resources: Int
+    var resources: Int,
+    val onCardClick: (CardData) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(resources, parent, false)
@@ -30,6 +31,10 @@ class AdapterForMiniCards(
 
         val card = holder.itemView as MaterialCardView
         card.setCardBackgroundColor((data[position].color).toLong(radix = 16).toInt())
+
+        card.setOnClickListener {
+            onCardClick(data[position])
+        }
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
