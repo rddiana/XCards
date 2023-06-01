@@ -41,39 +41,16 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.78" />
 
-    <FrameLayout
-        android:id="@+id/view_answer"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/displayingCardRecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH78"
         app:layout_constraintEnd_toStartOf="@+id/guidelineV88"
         app:layout_constraintStart_toStartOf="@+id/guidelineV12"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/guideline28">
 
-        <include
-            layout="@layout/card_with_answer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/view_question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV88"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV12"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <include
-            layout="@layout/card_with_question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </FrameLayout>
+    </androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/backArrow"
@@ -99,7 +76,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="0dp"
-        app:cardElevation="0dp"
         android:layout_marginEnd="16dp"
         app:cardBackgroundColor="@color/pink"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -2,6 +2,7 @@ package com.example.xcards.presentation
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,10 @@ import com.example.xcards.data.CardContentData
 import com.example.xcards.databinding.FragmentDisplayingCardsBinding
 import com.example.xcards.domain.adapters.DisplayingCardsAdapter
 import com.example.xcards.domain.useCase.FirebaseDatabaseUtils
+import swipeable.com.layoutmanager.OnItemSwiped
+import swipeable.com.layoutmanager.SwipeableLayoutManager
+import swipeable.com.layoutmanager.SwipeableTouchHelperCallback
+import swipeable.com.layoutmanager.touchelper.ItemTouchHelper
 
 class DisplayingCardsFragment(
     private val listCardDataContent: List<CardContentData>
@@ -20,6 +25,9 @@ class DisplayingCardsFragment(
     private lateinit var database: FirebaseDatabaseUtils
 
     private lateinit var adapter: DisplayingCardsAdapter
+    private lateinit var swipeLayoutManager: SwipeableLayoutManager
+    private lateinit var swipeTouchHelper: SwipeableTouchHelperCallback
+    private lateinit var itemTouchHelper: ItemTouchHelper
 
     private var position = 0
 
@@ -30,11 +38,46 @@ class DisplayingCardsFragment(
         binding = FragmentDisplayingCardsBinding.inflate(layoutInflater)
         database = FirebaseDatabaseUtils(requireContext().applicationContext)
 
+        swipeLayoutManager = SwipeableLayoutManager()
+        swipeLayoutManager.angle = 10
+        swipeLayoutManager.animationDuratuion = 1000
+        swipeLayoutManager.maxShowCount = 3
+        swipeLayoutManager.scaleGap = 0.5f
+        swipeLayoutManager.transYGap = 0
+
+        binding.displayingCardRecyclerView.layoutManager = swipeLayoutManager
+
         adapter = DisplayingCardsAdapter(
             requireContext(),
             ArrayList(listCardDataContent)
         )
 
+        binding.displayingCardRecyclerView.adapter = adapter
+
+        swipeTouchHelper = SwipeableTouchHelperCallback(object :  OnItemSwiped {
+            override fun onItemSwiped() {
+                adapter.removeSwipedItem()
+            }
+
+            override fun onItemSwipedLeft() {
+                Log.e("SWIPE", "LEFT")
+            }
+
+            override fun onItemSwipedRight() {
+                Log.e("SWIPE", "RIGHT")
+            }
+
+            override fun onItemSwipedUp() {
+
+            }
+
+            override fun onItemSwipedDown() {
+
+            }
+        })
+
+        itemTouchHelper = ItemTouchHelper(swipeTouchHelper)
+        itemTouchHelper.attachToRecyclerView(binding.displayingCardRecyclerView)
 
         binding.backArrow.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(

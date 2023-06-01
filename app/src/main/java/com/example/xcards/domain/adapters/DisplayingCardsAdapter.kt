@@ -44,20 +44,20 @@ class DisplayingCardsAdapter(
     }
 
     inner class DisplayingCardHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var viewQuestion: View
+        var viewQuestion: ViewGroup
         var textQuestion: TextView
-        var viewAnswer: View
+        var viewAnswer: ViewGroup
         var textAnswer: TextView
 
         init {
-            viewQuestion = view.findViewById(R.id.view_question)
+            viewQuestion = view.findViewById(R.id.cardWithQuestion)
             textQuestion = view.findViewById(R.id.cardQuestionText)
-            viewAnswer = view.findViewById(R.id.view_answer)
+            viewAnswer = view.findViewById(R.id.cardWithAnswer)
             textAnswer = view.findViewById(R.id.cardAnswerText)
         }
     }
 
-    private fun removeSwipedItem() {
+    fun removeSwipedItem() {
         cardContentList.removeAt(0)
         notifyDataSetChanged()
     }
