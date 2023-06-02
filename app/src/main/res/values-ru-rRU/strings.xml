@@ -84,4 +84,7 @@
     <string name="notification_title">Напоминание от XCards</string>
     <string name="dont_remember">Не помню</string>
     <string name="remember">Помню</string>
+    <string name="module_is_finished">Модуль \n закончен!</string>
+    <string name="start_over_again">Начать заново</string>
+    <string name="repeat_the_forgotten">Повторить забытое</string>
 </resources>

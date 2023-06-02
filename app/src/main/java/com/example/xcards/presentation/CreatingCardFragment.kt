@@ -108,7 +108,7 @@ class CreatingCardFragment(val cardData: CardData) : Fragment() {
                 database.saveNewCardsData(
                     requireContext(),
                     newNameCollection,
-                    adapterForNewCards.newCardsArray
+                    adapterForNewCards.cardContentArray
                 )
             }
         } else {
@@ -127,7 +127,7 @@ class CreatingCardFragment(val cardData: CardData) : Fragment() {
             database.updateCardsData(
                 requireContext(),
                 newNameCollection,
-                adapterForNewCards.newCardsArray
+                adapterForNewCards.cardContentArray
             )
         }
 

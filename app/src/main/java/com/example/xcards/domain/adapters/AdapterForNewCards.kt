@@ -12,13 +12,14 @@ import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xcards.R
 import com.example.xcards.data.CardContentData
-import com.google.android.material.card.MaterialCardView
 
 class AdapterForNewCards(
     var context: Context?,
-    var newCardsArray: ArrayList<CardContentData>,
+    var cardsArray: ArrayList<CardContentData>,
     var onCardDeletion: ((CardContentData) -> Unit)? = null
 ): RecyclerView.Adapter<AdapterForNewCards.ViewHolder>() {
+    var cardContentArray = cardsArray
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterForNewCards.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_card_for_creating_card, parent, false)
         return ViewHolder(view)
@@ -26,29 +27,29 @@ class AdapterForNewCards(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: AdapterForNewCards.ViewHolder, position: Int) {
-        val displayingCard = newCardsArray[position]
+        val displayingCard = cardContentArray[position]
         holder.answer.setText(displayingCard.answer)
         holder.question.setText(displayingCard.question)
         holder.positionNumberText.text = (position + 1).toString()
 
         holder.answer.doOnTextChanged { _, _, _, _ ->
             val newText = holder.answer.text.toString()
-            newCardsArray[position] = newCardsArray[position].copy(answer = newText)
+            cardContentArray[position] = cardContentArray[position].copy(answer = newText)
         }
 
         holder.question.doOnTextChanged { _, _, _, _ ->
             val newText = holder.question.text.toString()
-            newCardsArray[position] = newCardsArray[position].copy(question = newText)
+            cardContentArray[position] = cardContentArray[position].copy(question = newText)
         }
 
         holder.deletionCard.setOnClickListener {
-            newCardsArray.removeAt(position)
+            cardContentArray.removeAt(position)
             this.notifyDataSetChanged()
         }
     }
 
     override fun getItemCount(): Int {
-        return newCardsArray.size
+        return cardContentArray.size
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
