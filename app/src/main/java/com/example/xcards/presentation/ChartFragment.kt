@@ -24,8 +24,6 @@ class ChartFragment : Fragment() {
         fun newInstance() = ChartFragment()
     }
 
-    private lateinit var viewModel: ChartViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,7 +53,6 @@ class ChartFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ChartViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

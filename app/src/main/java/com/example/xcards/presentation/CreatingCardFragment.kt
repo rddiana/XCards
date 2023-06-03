@@ -32,8 +32,6 @@ class CreatingCardFragment(val cardData: CardData) : Fragment() {
 //        fun newInstance() = CreatingCardFragment()
 //    }
 
-    private lateinit var viewModel: CreatingCardViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -193,7 +191,6 @@ class CreatingCardFragment(val cardData: CardData) : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CreatingCardViewModel::class.java)
         // TODO: Use the ViewModel
     }
 }

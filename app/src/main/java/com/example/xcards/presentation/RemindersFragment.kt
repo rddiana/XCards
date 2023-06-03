@@ -25,8 +25,6 @@ class RemindersFragment : Fragment() {
 
     private var currentNightMode: Int = 0
 
-    private lateinit var viewModel: RemindersViewModel
-
     companion object {
         fun newInstance() = RemindersFragment()
     }
@@ -229,7 +227,6 @@ class RemindersFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RemindersViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

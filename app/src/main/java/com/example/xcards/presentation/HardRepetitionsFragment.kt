@@ -25,8 +25,6 @@ class HardRepetitionsFragment : Fragment() {
     private lateinit var binding: FragmentHardRepetitionsBinding
     private lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
 
-    private lateinit var viewModel: HardRepetitionsViewModel
-
     private lateinit var database: FirebaseDatabaseUtils
 
     override fun onCreateView(
@@ -203,7 +201,6 @@ class HardRepetitionsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HardRepetitionsViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
