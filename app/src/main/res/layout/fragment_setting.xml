@@ -42,15 +42,6 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.12" />
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/spinner_background"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toTopOf="@+id/guideline5"
-            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
         <TextView
             android:id="@+id/textView20"
             style="@style/textStyle_h1"
@@ -62,30 +53,13 @@
             app:layout_constraintStart_toEndOf="@+id/toPreviousFragment"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView21"
-            style="@style/textStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/language"
-            app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toTopOf="@+id/guideline5" />
-
         <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="invisible"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toTopOf="@+id/guideline5">
-
-            <ImageView
-                android:id="@+id/searchImg"
-                android:layout_width="25dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/icon_arrow_down" />
-        </com.google.android.material.card.MaterialCardView>
+            app:layout_constraintTop_toTopOf="@+id/guideline5"/>
 
 <!--        <androidx.appcompat.widget.AppCompatSpinner-->
 <!--            android:id="@+id/spinner"-->
@@ -98,25 +72,14 @@
 <!--            app:layout_constraintEnd_toStartOf="@+id/guideline3"-->
 <!--            app:layout_constraintTop_toTopOf="@+id/guideline5" />-->
 
-        <View
-            android:id="@+id/view4"
-            style="@style/linedView"
-            android:layout_width="330dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toBottomOf="@+id/textView21" />
-
         <TextView
             android:id="@+id/allCards"
             style="@style/textStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:text="@string/themes"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toBottomOf="@+id/view4" />
+            app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
         <TextView
             android:id="@+id/textView24"

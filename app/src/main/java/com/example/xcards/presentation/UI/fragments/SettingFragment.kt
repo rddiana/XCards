@@ -70,19 +70,19 @@ class SettingFragment : Fragment() {
         val ru = resources.getString(R.string.russian)
         languages = arrayOf(en, ru)
 
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.spinner_right_aligned, languages)
-        binding.spinner.adapter = arrayAdapter
-
-        binding.spinner.onItemSelectedListener = object : OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                when (position) {
-                    0 -> setLocale("en")
-                    1 -> setLocale("ru")
-                }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {}
-        }
+//        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.spinner_right_aligned, languages)
+//        binding.spinner.adapter = arrayAdapter
+//
+//        binding.spinner.onItemSelectedListener = object : OnItemSelectedListener {
+//            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+//                when (position) {
+//                    0 -> setLocale("en")
+//                    1 -> setLocale("ru")
+//                }
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>) {}
+//        }
 
 //        ArrayAdapter.createFromResource(
 //            requireContext(),
