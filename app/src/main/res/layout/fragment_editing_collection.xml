@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/background"
-    tools:context=".presentation.EditingCollectionFragment">
+    tools:context=".presentation.UI.fragments.EditingCollectionFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/backArrow"

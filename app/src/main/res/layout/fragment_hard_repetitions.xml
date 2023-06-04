@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/background"
-    tools:context=".presentation.HardRepetitionsFragment">
+    tools:context=".presentation.UI.fragments.HardRepetitionsFragment">
 
     <ScrollView
         android:layout_width="0dp"
@@ -73,7 +73,7 @@
                 style="@style/textStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/activate_hard_repetitions"
                 app:layout_constraintEnd_toStartOf="@+id/switchForHardRepetitions"
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
@@ -83,6 +83,7 @@
                 android:id="@+id/switchForHardRepetitions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:minWidth="48dp"
                 android:minHeight="48dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -111,210 +112,210 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
                 app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
-            <TextView
-                android:id="@+id/settingTime"
-                style="@style/grayTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/set_time_for_hard_repetitions"
-                app:layout_constraintStart_toStartOf="@+id/guideline1"
-                app:layout_constraintTop_toBottomOf="@+id/viewLine1" />
+<!--            <TextView-->
+<!--                android:id="@+id/settingTime"-->
+<!--                style="@style/grayTextStyle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:text="@string/set_time_for_hard_repetitions"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/guideline1"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/viewLine1" />-->
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonViewHours"
-                style="@style/bigImmutableTextStyle"
-                android:layout_width="90dp"
-                android:layout_height="70dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="4dp"
-                android:elevation="0dp"
-                android:enabled="false"
-                android:text="20"
-                app:cornerRadius="12dp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline9"
-                app:layout_constraintTop_toBottomOf="@+id/settingTime" />
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/buttonViewHours"-->
+<!--                style="@style/bigImmutableTextStyle"-->
+<!--                android:layout_width="90dp"-->
+<!--                android:layout_height="70dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginEnd="4dp"-->
+<!--                android:elevation="0dp"-->
+<!--                android:enabled="false"-->
+<!--                android:text="20"-->
+<!--                app:cornerRadius="12dp"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/guideline9"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/settingTime" />-->
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonViewMinutes"
-                style="@style/bigImmutableTextStyle"
-                android:layout_width="90dp"
-                android:layout_height="70dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
-                android:elevation="0dp"
-                android:enabled="false"
-                android:text="00"
-                app:cornerRadius="12dp"
-                app:layout_constraintStart_toStartOf="@+id/guideline9"
-                app:layout_constraintTop_toBottomOf="@+id/settingTime" />
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/buttonViewMinutes"-->
+<!--                style="@style/bigImmutableTextStyle"-->
+<!--                android:layout_width="90dp"-->
+<!--                android:layout_height="70dp"-->
+<!--                android:layout_marginStart="4dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:elevation="0dp"-->
+<!--                android:enabled="false"-->
+<!--                android:text="00"-->
+<!--                app:cornerRadius="12dp"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/guideline9"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/settingTime" />-->
 
-            <View
-                android:id="@+id/viewLine2"
-                android:layout_width="330dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/gray"
-                app:layout_constraintEnd_toStartOf="@+id/guideline"
-                app:layout_constraintStart_toStartOf="@+id/guideline1"
-                app:layout_constraintTop_toBottomOf="@+id/buttonViewHours" />
+<!--            <View-->
+<!--                android:id="@+id/viewLine2"-->
+<!--                android:layout_width="330dp"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:background="@color/gray"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/guideline"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/guideline1"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/buttonViewHours" />-->
 
-            <TextView
-                android:id="@+id/settingDaysOfWeek"
-                style="@style/grayTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/set_day_for_hard_repetitions"
-                app:layout_constraintStart_toStartOf="@+id/guideline1"
-                app:layout_constraintTop_toBottomOf="@+id/viewLine2" />
+<!--            <TextView-->
+<!--                android:id="@+id/settingDaysOfWeek"-->
+<!--                style="@style/grayTextStyle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:text="@string/set_day_for_hard_repetitions"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/guideline1"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/viewLine2" />-->
 
-            <TextView
-                android:id="@+id/settingDaysOfWeekAdvise"
-                style="@style/miniGrayTextStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/set_day_advice"
-                app:layout_constraintEnd_toStartOf="@+id/guideline"
-                app:layout_constraintStart_toStartOf="@+id/guideline1"
-                app:layout_constraintTop_toBottomOf="@+id/settingDaysOfWeek" />
+<!--            <TextView-->
+<!--                android:id="@+id/settingDaysOfWeekAdvise"-->
+<!--                style="@style/miniGrayTextStyle"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:text="@string/set_day_advice"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/guideline"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/guideline1"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/settingDaysOfWeek" />-->
 
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@color/transparent"
-                android:elevation="0dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/settingDaysOfWeekAdvise">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/linearLayout3"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:backgroundTint="@color/transparent"-->
+<!--                android:elevation="0dp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="horizontal"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/settingDaysOfWeekAdvise">-->
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/MondayCardView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp">
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:id="@+id/MondayCardView"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="5dp">-->
 
-                    <TextView
-                        android:id="@+id/textMonday"
-                        style="@style/immutableTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/lilac"
-                        android:padding="5dp"
-                        android:text="@string/monday" />
-                </com.google.android.material.card.MaterialCardView>
+<!--                    <TextView-->
+<!--                        android:id="@+id/textMonday"-->
+<!--                        style="@style/immutableTextStyle"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@color/lilac"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:text="@string/monday" />-->
+<!--                </com.google.android.material.card.MaterialCardView>-->
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/TuesdayCardView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp">
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:id="@+id/TuesdayCardView"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="5dp">-->
 
-                    <TextView
-                        android:id="@+id/textTuesday"
-                        style="@style/immutableTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/lilac"
-                        android:padding="5dp"
-                        android:text="@string/tuesday" />
-                </com.google.android.material.card.MaterialCardView>
+<!--                    <TextView-->
+<!--                        android:id="@+id/textTuesday"-->
+<!--                        style="@style/immutableTextStyle"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@color/lilac"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:text="@string/tuesday" />-->
+<!--                </com.google.android.material.card.MaterialCardView>-->
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/WednesdayCardView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp">
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:id="@+id/WednesdayCardView"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="5dp">-->
 
-                    <TextView
-                        android:id="@+id/textWednesday"
-                        style="@style/immutableTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/lilac"
-                        android:padding="5dp"
-                        android:text="@string/wednesday" />
-                </com.google.android.material.card.MaterialCardView>
+<!--                    <TextView-->
+<!--                        android:id="@+id/textWednesday"-->
+<!--                        style="@style/immutableTextStyle"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@color/lilac"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:text="@string/wednesday" />-->
+<!--                </com.google.android.material.card.MaterialCardView>-->
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/ThursdayCardView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp">
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:id="@+id/ThursdayCardView"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="5dp">-->
 
-                    <TextView
-                        android:id="@+id/textThursday"
-                        style="@style/immutableTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/lilac"
-                        android:padding="5dp"
-                        android:text="@string/thursday" />
-                </com.google.android.material.card.MaterialCardView>
+<!--                    <TextView-->
+<!--                        android:id="@+id/textThursday"-->
+<!--                        style="@style/immutableTextStyle"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@color/lilac"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:text="@string/thursday" />-->
+<!--                </com.google.android.material.card.MaterialCardView>-->
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/FridayCardView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp">
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:id="@+id/FridayCardView"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="5dp">-->
 
-                    <TextView
-                        android:id="@+id/textFriday"
-                        style="@style/immutableTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/lilac"
-                        android:padding="5dp"
-                        android:text="@string/friday" />
-                </com.google.android.material.card.MaterialCardView>
+<!--                    <TextView-->
+<!--                        android:id="@+id/textFriday"-->
+<!--                        style="@style/immutableTextStyle"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@color/lilac"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:text="@string/friday" />-->
+<!--                </com.google.android.material.card.MaterialCardView>-->
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/SaturdayCardView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp">
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:id="@+id/SaturdayCardView"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="5dp">-->
 
-                    <TextView
-                        android:id="@+id/textSaturday"
-                        style="@style/immutableTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/lilac"
-                        android:padding="5dp"
-                        android:text="@string/saturday" />
-                </com.google.android.material.card.MaterialCardView>
+<!--                    <TextView-->
+<!--                        android:id="@+id/textSaturday"-->
+<!--                        style="@style/immutableTextStyle"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@color/lilac"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:text="@string/saturday" />-->
+<!--                </com.google.android.material.card.MaterialCardView>-->
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/SundayCardView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp">
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:id="@+id/SundayCardView"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="5dp">-->
 
-                    <TextView
-                        android:id="@+id/textSunday"
-                        style="@style/immutableTextStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/lilac"
-                        android:padding="5dp"
-                        android:text="@string/sunday" />
-                </com.google.android.material.card.MaterialCardView>
-            </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:id="@+id/textSunday"-->
+<!--                        style="@style/immutableTextStyle"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@color/lilac"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:text="@string/sunday" />-->
+<!--                </com.google.android.material.card.MaterialCardView>-->
+<!--            </LinearLayout>-->
 
-            <View
-                android:id="@+id/viewLine3"
-                android:layout_width="330dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/gray"
-                app:layout_constraintEnd_toStartOf="@+id/guideline"
-                app:layout_constraintStart_toStartOf="@+id/guideline1"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+<!--            <View-->
+<!--                android:id="@+id/viewLine3"-->
+<!--                android:layout_width="330dp"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:background="@color/gray"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/guideline"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/guideline1"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />-->
 
             <TextView
                 android:id="@+id/choiceTrainingModule"
@@ -324,7 +325,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/choose_training_module"
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
-                app:layout_constraintTop_toBottomOf="@+id/viewLine3" />
+                app:layout_constraintTop_toBottomOf="@+id/viewLine1" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewForMiniCards"

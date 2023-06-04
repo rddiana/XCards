@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/main_activity"
     style="@style/background"
-    tools:context=".presentation.activities.MainActivity">
+    tools:context=".presentation.UI.activities.MainActivity">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/navigationBottomBar"
@@ -145,7 +145,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mainFragmentContainer"
-        android:name="com.example.xcards.presentation.HomeFragment"
+        android:name="com.example.xcards.presentation.UI.fragments.HomeFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/view2"
