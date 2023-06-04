@@ -80,7 +80,7 @@ class AdapterForMiniCardsChangingColor(
             cardDataLites[position].color = darkerColor
             chosenTest = data[position].nameModule
 
-            sharedPreference.updateStringValue("chosenTestForHR", chosenTest)
+            sharedPreference.save("chosenTestForHR", chosenTest)
 
             this.notifyItemChanged(position)
         }

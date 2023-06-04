@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var firebaseAuth: FirebaseAuth
@@ -47,27 +48,33 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        firebaseAuth = FirebaseAuth.getInstance()
-
         fragmentManager = supportFragmentManager
         sharedPreference = SharedPreference(applicationContext)
         database = FirebaseDatabaseUtils(applicationContext)
 
-        checkUser()
+        val isHardRepetitionTurnOn =
+            sharedPreference.getValueBoolean("isHardRepetitionTurnOn", false)
 
-        val intent = intent
-        message = intent.getStringExtra(Constants.MESSAGE_LAUNCH_INTENT).toString()
-        val testName = sharedPreference.getValueString("chosenTestForHR")
+        if (isHardRepetitionTurnOn) {
+            val testName = sharedPreference.getValueString("chosenTestForHR")
 
-        if (message.equals(Constants.MESSAGE_LAUNCH_INTENT) && !testName.isNullOrEmpty()) {
-            database.getCardsCollection(testName) {
-                fragmentManager.beginTransaction().replace(
-                    R.id.mainFragmentContainer, DisplayingCardsFragment(it)
-                ).commit()
+            if (intent.getBooleanExtra("isHardRepetitionRequired", false)) {
+                if (testName != null) {
+                    database.getCardsCollection(testName) {
+                        fragmentManager.beginTransaction().replace(
+                            R.id.mainFragmentContainer, DisplayingCardsFragment(it)
+                        ).commit()
+                    }
+                }
             }
         }
+
+        setContentView(binding.root)
+
+        firebaseAuth = FirebaseAuth.getInstance()
+
+
+        checkUser()
 
         turnButtonNavOn(binding.toHomeFragment)
 
@@ -165,7 +172,7 @@ class MainActivity : AppCompatActivity() {
         val name = "Notif channel"
         val desc = "A Description of the channel"
         val importance = NotificationManager.IMPORTANCE_DEFAULT
-        val channel = NotificationChannel(CHANNEL_ID, name,importance)
+        val channel = NotificationChannel(CHANNEL_ID, name, importance)
         channel.description = desc
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
