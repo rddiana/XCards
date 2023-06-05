@@ -45,12 +45,8 @@ class MainActivity : AppCompatActivity() {
         startTime = System.currentTimeMillis()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        fragmentManager = supportFragmentManager
-        sharedPreference = SharedPreference(applicationContext)
-        database = FirebaseDatabaseUtils(applicationContext)
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
 
         val isHardRepetitionTurnOn =
             sharedPreference.getValueBoolean("isHardRepetitionTurnOn", false)
@@ -58,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         if (isHardRepetitionTurnOn) {
             val testName = sharedPreference.getValueString("chosenTestForHR")
 
-            if (intent.getBooleanExtra("isHardRepetitionRequired", false)) {
+            if (intent?.getBooleanExtra("isHardRepetitionRequired", false) == true) {
                 if (testName != null) {
                     database.getCardsCollection(testName) {
                         fragmentManager.beginTransaction().replace(
@@ -68,6 +64,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        fragmentManager = supportFragmentManager
+        sharedPreference = SharedPreference(applicationContext)
+        database = FirebaseDatabaseUtils(applicationContext)
 
         setContentView(binding.root)
 
